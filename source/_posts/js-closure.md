@@ -34,7 +34,10 @@ function init() {
 init();
 ```
 
- `init()` 创建了一个局部变量 `name` 和一个名为 `displayName()` 的函数。`displayName()` 是定义在 `init()` 里的内部函数，并且仅在 `init()` 函数体内可用。请注意，`displayName()` 没有自己的局部变量。然而，因为它可以访问到外部函数的变量，所以 `displayName()` 可以使用父函数 `init()` 中声明的变量 `name` 。
+ `init()` 创建了一个局部变量 `name` 和一个名为 `displayName()` 的函数。
+ `displayName()` 是定义在 `init()` 里的内部函数，并且仅在 `init()` 函数体内可用。
+ 请注意，`displayName()` 没有自己的局部变量。
+ 然而，因为它可以访问到外部函数的变量，所以 `displayName()` 可以使用父函数 `init()` 中声明的变量 `name` 。
 
 一个有意思的示例 — 一个 `makeAdder` 函数：
 

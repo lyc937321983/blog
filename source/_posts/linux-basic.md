@@ -4,7 +4,7 @@ date: 2022-03-16 11:38:22
 tags: linux
 comment: 'valine'
 categories: 
-- linux
+- common
 ---
 
 # Linux常用命令
