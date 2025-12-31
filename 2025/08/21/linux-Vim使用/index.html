@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
-  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="Linux 必学：Vim工具使用方法在 Linux 江湖里，Vim 堪称 “编辑器之神”。它不仅能让你双手不离键盘完成所有操作，更能通过代码高亮、智能补全、多窗口编辑等黑科技，把敲代码变成一场指尖舞蹈。  🚀基础操作：三招解锁 Vim 世界Vim 有三个核心模式 命令模式（启动即进入）： 1i切换输入模式（Insert）  1x删除光标字符  1:wq保存并退出（经典组合键）  输入模式：尽情打">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 必学：Vim工具使用方法">
-<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2025/08/21/linux-Vim%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2025/08/21/linux-Vim%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="liyongci">
 <meta property="og:description" content="Linux 必学：Vim工具使用方法在 Linux 江湖里，Vim 堪称 “编辑器之神”。它不仅能让你双手不离键盘完成所有操作，更能通过代码高亮、智能补全、多窗口编辑等黑科技，把敲代码变成一场指尖舞蹈。  🚀基础操作：三招解锁 Vim 世界Vim 有三个核心模式 命令模式（启动即进入）： 1i切换输入模式（Insert）  1x删除光标字符  1:wq保存并退出（经典组合键）  输入模式：尽情打">
 <meta property="og:locale" content="zh_CN">
@@ -57,12 +57,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
@@ -71,15 +71,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
 
   
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -94,7 +94,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+    <a class="navbar-brand" href="/blog/">
       <strong>Li Yongci</strong>
     </a>
 
@@ -113,7 +113,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+              <a class="nav-link" href="/blog/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -190,7 +190,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -273,7 +273,7 @@
             <div class="markdown-body">
               
               <h1 id="Linux-必学：Vim工具使用方法"><a href="#Linux-必学：Vim工具使用方法" class="headerlink" title="Linux 必学：Vim工具使用方法"></a>Linux 必学：Vim工具使用方法</h1><p>在 Linux 江湖里，Vim 堪称 “编辑器之神”。它不仅能让你双手不离键盘完成所有操作，更能通过代码高亮、智能补全、多窗口编辑等黑科技，把敲代码变成一场指尖舞蹈。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aP5o5iaj0QUr83fll7rQOicFibOGGmHArRehBX788wjCibatXTGSc9vSkuw9tyKicbEpTiaTVdrnpp7T29ibdQr0Fd3Lg/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aP5o5iaj0QUr83fll7rQOicFibOGGmHArRehBX788wjCibatXTGSc9vSkuw9tyKicbEpTiaTVdrnpp7T29ibdQr0Fd3Lg/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/blog/img/loading.gif" lazyload alt="图片"></p>
 <h2 id="🚀基础操作：三招解锁-Vim-世界"><a href="#🚀基础操作：三招解锁-Vim-世界" class="headerlink" title="🚀基础操作：三招解锁 Vim 世界"></a>🚀基础操作：三招解锁 Vim 世界</h2><p>Vim 有三个核心模式</p>
 <p><strong>命令模式（启动即进入）：</strong></p>
 <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">i切换输入模式（<span class="hljs-built_in">Insert</span>）<br></code></pre></td></tr></table></figure>
@@ -334,7 +334,7 @@
     
       <span class="category-chain">
         
-  <a href="/a937321983/a937321983.atomgit.io.git/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/blog/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -349,7 +349,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/a937321983/a937321983.atomgit.io.git/tags/Vim/">#Vim</a>
+        <a href="/blog/tags/Vim/">#Vim</a>
       
     </div>
   
@@ -362,7 +362,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Linux 必学：Vim工具使用方法</div>
-      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2025/08/21/linux-Vim使用/</div>
+      <div>https://lyc937321983.github.io/blog/2025/08/21/linux-Vim使用/</div>
     </div>
     <div class="license-meta">
       
@@ -404,7 +404,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/a937321983/a937321983.atomgit.io.git/2025/08/21/js-foreachNotStopReason/" title="forEach 为什么不能被中断">
+                      <a href="/blog/2025/08/21/js-foreachNotStopReason/" title="forEach 为什么不能被中断">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">forEach 为什么不能被中断</span>
                         <span class="visible-mobile">上一篇</span>
@@ -414,7 +414,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/a937321983/a937321983.atomgit.io.git/2025/01/09/css-fitter/" title="rem适配PC端和移动端">
+                      <a href="/blog/2025/01/09/css-fitter/" title="rem适配PC端和移动端">
                         <span class="hidden-mobile">rem适配PC端和移动端</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -568,8 +568,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
-<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -593,7 +593,7 @@
 
 
   
-    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+    <script  src="/blog/js/img-lazyload.js" ></script>
   
 
 
@@ -730,7 +730,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
 
 
@@ -738,7 +738,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   

@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
-  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="输入 URL 后到页面渲染的过程前言 当我们在浏览器中输入一串 URL 后，比如 [百度一下，你就知道 (baidu.com)，很快百度的页面就能加载出来。那在这个过程中，浏览器都进行了哪些操作呢？ 面试官经常会问到这个过程，今天我们就来把这个完整的过程给它探究明白。  输入 URL 后到页面渲染在浏览器中输入 URL 到页面渲染的整个过程可以分为多个步骤。这个过程涉及浏览器、操作系统、网络以及服">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器的渲染过程">
-<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2025/08/21/browser-render/index.html">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2025/08/21/browser-render/index.html">
 <meta property="og:site_name" content="liyongci">
 <meta property="og:description" content="输入 URL 后到页面渲染的过程前言 当我们在浏览器中输入一串 URL 后，比如 [百度一下，你就知道 (baidu.com)，很快百度的页面就能加载出来。那在这个过程中，浏览器都进行了哪些操作呢？ 面试官经常会问到这个过程，今天我们就来把这个完整的过程给它探究明白。  输入 URL 后到页面渲染在浏览器中输入 URL 到页面渲染的整个过程可以分为多个步骤。这个过程涉及浏览器、操作系统、网络以及服">
 <meta property="og:locale" content="zh_CN">
@@ -55,12 +55,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
@@ -69,15 +69,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
 
   
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -92,7 +92,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+    <a class="navbar-brand" href="/blog/">
       <strong>Li Yongci</strong>
     </a>
 
@@ -111,7 +111,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -123,7 +123,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -135,7 +135,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+              <a class="nav-link" href="/blog/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -147,7 +147,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -159,7 +159,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -188,7 +188,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -436,7 +436,7 @@
     
       <span class="category-chain">
         
-  <a href="/a937321983/a937321983.atomgit.io.git/categories/browser/" class="category-chain-item">browser</a>
+  <a href="/blog/categories/browser/" class="category-chain-item">browser</a>
   
   
 
@@ -451,7 +451,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/">#渲染过程</a>
+        <a href="/blog/tags/%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/">#渲染过程</a>
       
     </div>
   
@@ -464,7 +464,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>浏览器的渲染过程</div>
-      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2025/08/21/browser-render/</div>
+      <div>https://lyc937321983.github.io/blog/2025/08/21/browser-render/</div>
     </div>
     <div class="license-meta">
       
@@ -510,7 +510,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/a937321983/a937321983.atomgit.io.git/2025/08/21/js-foreachNotStopReason/" title="forEach 为什么不能被中断">
+                      <a href="/blog/2025/08/21/js-foreachNotStopReason/" title="forEach 为什么不能被中断">
                         <span class="hidden-mobile">forEach 为什么不能被中断</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -664,8 +664,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
-<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -689,7 +689,7 @@
 
 
   
-    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+    <script  src="/blog/js/img-lazyload.js" ></script>
   
 
 
@@ -826,7 +826,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
 
 
@@ -834,7 +834,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   

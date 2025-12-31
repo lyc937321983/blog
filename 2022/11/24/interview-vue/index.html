@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
-  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="三十七个常见Vue面试题一、谈谈你对MVVM的理解？映射关系简化，隐藏controller MVVM在MVC的基础上，把控制层隐藏掉了。  Vue不是一个MVVM框架，它是一个视图层框架。 ViewModal是一个桥梁，将数据和视图进行关联。 二、谈谈你对Vue中响应式数据的理解？数组和对象类型的值变化的时候，通过 defineReactive方法，借助了 defineProperty，将所有的属">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VUE前端面试题">
-<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/11/24/interview-vue/index.html">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2022/11/24/interview-vue/index.html">
 <meta property="og:site_name" content="liyongci">
 <meta property="og:description" content="三十七个常见Vue面试题一、谈谈你对MVVM的理解？映射关系简化，隐藏controller MVVM在MVC的基础上，把控制层隐藏掉了。  Vue不是一个MVVM框架，它是一个视图层框架。 ViewModal是一个桥梁，将数据和视图进行关联。 二、谈谈你对Vue中响应式数据的理解？数组和对象类型的值变化的时候，通过 defineReactive方法，借助了 defineProperty，将所有的属">
 <meta property="og:locale" content="zh_CN">
@@ -65,12 +65,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+<link  rel="stylesheet" href="/blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
   
 
 
@@ -79,15 +79,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
 
   
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -102,7 +102,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+    <a class="navbar-brand" href="/blog/">
       <strong>Li Yongci</strong>
     </a>
 
@@ -121,7 +121,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+              <a class="nav-link" href="/blog/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -133,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+              <a class="nav-link" href="/blog/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -145,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+              <a class="nav-link" href="/blog/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -157,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+              <a class="nav-link" href="/blog/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -169,7 +169,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+              <a class="nav-link" href="/blog/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -198,7 +198,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -281,7 +281,7 @@
             <div class="markdown-body">
               
               <h1 id="三十七个常见Vue面试题"><a href="#三十七个常见Vue面试题" class="headerlink" title="三十七个常见Vue面试题"></a>三十七个常见Vue面试题</h1><h2 id="一、谈谈你对MVVM的理解？"><a href="#一、谈谈你对MVVM的理解？" class="headerlink" title="一、谈谈你对MVVM的理解？"></a>一、谈谈你对MVVM的理解？</h2><p>映射关系简化，隐藏controller MVVM在MVC的基础上，把控制层隐藏掉了。</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/ce6512d090a56abe.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/ce6512d090a56abe.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>Vue不是一个MVVM框架，它是一个视图层框架。</p>
 <p>ViewModal是一个桥梁，将数据和视图进行关联。</p>
 <h2 id="二、谈谈你对Vue中响应式数据的理解？"><a href="#二、谈谈你对Vue中响应式数据的理解？" class="headerlink" title="二、谈谈你对Vue中响应式数据的理解？"></a>二、谈谈你对Vue中响应式数据的理解？</h2><p>数组和对象类型的值变化的时候，通过 <code>defineReactive</code>方法，借助了 <code>defineProperty</code>，将所有的属性添加了 <code>getter</code>和 <code>setter</code>。用户在取值和设置的时候，可以进行一些操作。</p>
@@ -299,7 +299,7 @@
 </ul>
 <p>因为这些方法都会改变数组本身。</p>
 <p>数组里的索引和长度是无法被监控的。</p>
-<h2 id="四、Vue中如何进行依赖收集的？"><a href="#四、Vue中如何进行依赖收集的？" class="headerlink" title="四、Vue中如何进行依赖收集的？"></a>四、Vue中如何进行依赖收集的？</h2><p><img src="https://s3.uuu.ovh/imgs/2022/11/24/1702b130260c3529.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<h2 id="四、Vue中如何进行依赖收集的？"><a href="#四、Vue中如何进行依赖收集的？" class="headerlink" title="四、Vue中如何进行依赖收集的？"></a>四、Vue中如何进行依赖收集的？</h2><p><img src="https://s3.uuu.ovh/imgs/2022/11/24/1702b130260c3529.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>Vue初始化的时候，挂载之后会进行编译。生成renderFunction。</p>
 <p>当取值的时候，就会搜集watcher，放到dep里面。</p>
 <p>当用户更改值的时候，就会通知watcher，去更新视图。</p>
@@ -378,7 +378,7 @@
 <li>没有key会导致更新的时候出问题</li>
 <li>尽量不要采用索引作为key</li>
 </ul>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/3fc0c4b383b9ccd0.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/3fc0c4b383b9ccd0.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="十七、谈谈对组件的理解"><a href="#十七、谈谈对组件的理解" class="headerlink" title="十七、谈谈对组件的理解"></a>十七、谈谈对组件的理解</h2><ul>
 <li>组件化开发能大幅提高应用开发效率、测试性、复用性</li>
 <li>常用的组件化技术：属性、自定义事件、插槽</li>
@@ -386,9 +386,9 @@
 <li>高内聚、低耦合、单向数据流</li>
 </ul>
 <h2 id="十八、请描述组件的渲染流程"><a href="#十八、请描述组件的渲染流程" class="headerlink" title="十八、请描述组件的渲染流程"></a>十八、请描述组件的渲染流程</h2><p>产生组件虚拟节点 -&gt; 创建组件的真实节点 -&gt; 插入到页面</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/875fb72e04f47f43.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/875fb72e04f47f43.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="十九、请描述组件的更新流程"><a href="#十九、请描述组件的更新流程" class="headerlink" title="十九、请描述组件的更新流程"></a>十九、请描述组件的更新流程</h2><p>属性更新会触发patchVnode方法，组件的虚拟节点会调用prepatch钩子，然后更新属性，更新组件。</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/f81d83c811e12b4d.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/f81d83c811e12b4d.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="二十、异步组件原理"><a href="#二十、异步组件原理" class="headerlink" title="二十、异步组件原理"></a>二十、异步组件原理</h2><p>先渲染异步占位符节点 -&gt; 组件加载完毕后调用forceUpdate强制更新。</p>
 <h2 id="二十一、函数组件的优势和原理"><a href="#二十一、函数组件的优势和原理" class="headerlink" title="二十一、函数组件的优势和原理"></a>二十一、函数组件的优势和原理</h2><ul>
 <li>函数式组件的特性：无状态、无生命周期、无this。因此性能会高一点。</li>
@@ -421,9 +421,9 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">with</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span></span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-title function_">_c</span>(<span class="hljs-string">&#x27;input&#x27;</span>,&#123;<span class="hljs-attr">directives</span>:[&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&quot;model&quot;</span>,<span class="hljs-attr">rawName</span>:<span class="hljs-string">&quot;v-model&quot;</span>,<span class="hljs-attr">value</span>:(xxx),<span class="hljs-attr">expression</span>:<span class="hljs-string">&quot;xxx&quot;</span>&#125;],<span class="hljs-attr">domProps</span>:&#123;<span class="hljs-string">&quot;value&quot;</span>:(xxx)&#125;,<span class="hljs-attr">on</span>:&#123;<span class="hljs-string">&quot;input&quot;</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params">$event</span>)&#123;<span class="hljs-keyword">if</span>($event.<span class="hljs-property">target</span>.<span class="hljs-property">composing</span>)<span class="hljs-keyword">return</span>;xxx=$event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>&#125;&#125;&#125;)&#125;<br></code></pre></td></tr></table></figure>
 
 <p>指令在什么时候会调用？</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/c901f8b9cbbec7a6.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/c901f8b9cbbec7a6.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>源码：</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/25/b122004dd6c1dde3.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/25/b122004dd6c1dde3.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="二十六、Vue的普通Slot以及作用域Slot的区别"><a href="#二十六、Vue的普通Slot以及作用域Slot的区别" class="headerlink" title="二十六、Vue的普通Slot以及作用域Slot的区别"></a>二十六、Vue的普通Slot以及作用域Slot的区别</h2><h3 id="普通插槽"><a href="#普通插槽" class="headerlink" title="普通插槽"></a>普通插槽</h3><p>普通插槽是渲染后做替换的工作。父组件渲染完毕后，替换子组件的内容。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-string">`&lt;div&gt;</span><br><span class="hljs-string">	&lt;slot name=&quot;title&quot;&gt;&lt;/slot&gt;</span><br><span class="hljs-string">	&lt;slot name=&quot;content&quot;&gt;&lt;/slot&gt;</span><br><span class="hljs-string">&lt;/div&gt;`</span>);<br><span class="hljs-comment">// with(this)&#123;return _c(&#x27;div&#x27;,[_t(&quot;title&quot;),_v(&quot; &quot;),_t(&quot;content&quot;)],2)&#125;</span><br></code></pre></td></tr></table></figure>
 
@@ -431,7 +431,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div id=&quot;app&quot;&gt;<br>    &lt;my&gt;<br>        &lt;h1 slot=&quot;tit1e&quot;&gt;标题&lt;/h1&gt;<br>        &lt;div slot=&quot;content&quot;&gt;内容&lt;/div&gt;<br>    &lt;/my&gt;<br>&lt;/div&gt;<br>&lt;script&gt;<br>    Vue.component(&#x27;my&#x27;,&#123;<br>        template: `&lt;div&gt;<br>        	&lt;slot name=&quot;title&quot;&gt;&lt;/slot&gt;<br>			&lt;slot name=&quot;content&quot;&gt;&lt;/slot&gt;<br>        &lt;/div&gt;`<br>    &#125;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
 <p>在创建元素的时候，用_t()方法方法来替换_v()的内容。</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/9978507b1f505a3d.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/9978507b1f505a3d.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h3><p>作用域插槽可以拿到子组件里面的属性。在子组件中传入属性然后渲染。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div id=&quot;app&quot;&gt;<br>    &lt;my&gt;<br>        &lt;template slot-scope=&quot;&#123;article)&quot;&gt;<br>            &lt;h1 slot=&quot;article.tit1e&quot;&gt;标题&lt;/h1&gt;<br>            &lt;div slot=&quot;article.content&quot;&gt;内容&lt;/div&gt;<br>        &lt;/template&gt;<br>    &lt;/my&gt;<br>&lt;/div&gt;<br>&lt;script&gt;<br>    Vue.component(&#x27;my&#x27;,&#123;<br>        template: `&lt;div&gt;<br>        	&lt;slot:article=&quot;&#123;title:&#x27;标题&#x27;,content:&#x27;内容&#x27;&#125;&quot;&gt;&lt;/slot&gt;<br>        &lt;/div&gt;`<br>    &#125;)<br>    const vm new Vue(&#123;<br>    	el:&#x27;#app<br>    &#125;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
@@ -514,7 +514,7 @@
 </ul>
 <h2 id="三十六、谈谈你对Vuex的理解？"><a href="#三十六、谈谈你对Vuex的理解？" class="headerlink" title="三十六、谈谈你对Vuex的理解？"></a>三十六、谈谈你对Vuex的理解？</h2><p>Vuex是专门为vue提供的全局状态管理系统，用于多个组件中的数据共享、数据缓存。</p>
 <p>问题：无法持久化。</p>
-<p><img src="https://s3.uuu.ovh/imgs/2022/11/25/f58979101b7d029d.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/25/f58979101b7d029d.png" srcset="/blog/img/loading.gif" lazyload></p>
 <ul>
 <li>mutation 主要修改状态，同步执行</li>
 <li>action 执行业务代码，方便复用，逻辑可以为异步。不能直接修改状态。</li>
@@ -550,7 +550,7 @@
     
       <span class="category-chain">
         
-  <a href="/a937321983/a937321983.atomgit.io.git/categories/interview/" class="category-chain-item">interview</a>
+  <a href="/blog/categories/interview/" class="category-chain-item">interview</a>
   
   
 
@@ -565,7 +565,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
+        <a href="/blog/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
       
     </div>
   
@@ -578,7 +578,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>VUE前端面试题</div>
-      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/11/24/interview-vue/</div>
+      <div>https://lyc937321983.github.io/blog/2022/11/24/interview-vue/</div>
     </div>
     <div class="license-meta">
       
@@ -620,7 +620,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/a937321983/a937321983.atomgit.io.git/2023/10/18/interview-js/" title="JavaScript前端面试题">
+                      <a href="/blog/2023/10/18/interview-js/" title="JavaScript前端面试题">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JavaScript前端面试题</span>
                         <span class="visible-mobile">上一篇</span>
@@ -630,7 +630,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/a937321983/a937321983.atomgit.io.git/2022/11/24/webpack-optimization/" title="Webpack优化">
+                      <a href="/blog/2022/11/24/webpack-optimization/" title="Webpack优化">
                         <span class="hidden-mobile">Webpack优化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -784,8 +784,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
-<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -809,7 +809,7 @@
 
 
   
-    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+    <script  src="/blog/js/img-lazyload.js" ></script>
   
 
 
@@ -946,7 +946,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+  <script  src="/blog/js/local-search.js" ></script>
 
 
 
@@ -954,7 +954,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+<script  src="/blog/js/boot.js" ></script>
 
 
   
