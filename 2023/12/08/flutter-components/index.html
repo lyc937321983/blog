@@ -1,0 +1,825 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="flutter 组件和路由1.路由实际的项目，是有多个不同的页面的，页面之间的跳转，就要用到路由了。 我们增加一个list页面，点击Home页的“Click Me”按钮，跳转到列表页list。 1.1 单个页面的跳转增加list.dart 1234567891011121314151617181920212223242526272829303132333435363738394041import">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter组件和路由">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2023/12/08/flutter-components/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="flutter 组件和路由1.路由实际的项目，是有多个不同的页面的，页面之间的跳转，就要用到路由了。 我们增加一个list页面，点击Home页的“Click Me”按钮，跳转到列表页list。 1.1 单个页面的跳转增加list.dart 1234567891011121314151617181920212223242526272829303132333435363738394041import">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-08T02:30:23.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.261Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="组件">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Flutter组件和路由 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Flutter组件和路由"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-08 10:30" pubdate>
+          2023年12月8日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          113 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Flutter组件和路由</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="flutter-组件和路由"><a href="#flutter-组件和路由" class="headerlink" title="flutter 组件和路由"></a>flutter 组件和路由</h1><h3 id="1-路由"><a href="#1-路由" class="headerlink" title="1.路由"></a>1.路由</h3><p>实际的项目，是有多个不同的页面的，页面之间的跳转，就要用到路由了。 我们增加一个list页面，点击Home页的“Click Me”按钮，跳转到列表页list。</p>
+<h4 id="1-1-单个页面的跳转"><a href="#1-1-单个页面的跳转" class="headerlink" title="1.1 单个页面的跳转"></a>1.1 单个页面的跳转</h4><p>增加list.dart</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ListPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>    <span class="hljs-comment">//定义列表widget的list</span><br>    <span class="hljs-built_in">List</span>&lt;Widget&gt; list=&lt;Widget&gt;[];<br><br>    <span class="hljs-comment">//Demo数据定义</span><br>    <span class="hljs-keyword">var</span> data=[<br>      &#123;<span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;测试数据AAA&quot;</span>,<span class="hljs-string">&quot;subtitle&quot;</span>:<span class="hljs-string">&quot;ASDFASDFASDF&quot;</span>&#125;,<br>      &#123;<span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;测试数据bbb&quot;</span>,<span class="hljs-string">&quot;subtitle&quot;</span>:<span class="hljs-string">&quot;ASDFASDFASDF&quot;</span>&#125;,<br>      &#123;<span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-number">3</span>,<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;测试数据ccc&quot;</span>,<span class="hljs-string">&quot;subtitle&quot;</span>:<span class="hljs-string">&quot;ASDFASDFASDF&quot;</span>&#125;,<br>      &#123;<span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-number">4</span>,<span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;测试数据eee&quot;</span>,<span class="hljs-string">&quot;subtitle&quot;</span>:<span class="hljs-string">&quot;ASDFASDFASDF&quot;</span>&#125;,<br>    ];<br><br>    <span class="hljs-comment">//根据Demo数据，构造列表ListTile组件list</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> item <span class="hljs-keyword">in</span> data) &#123;<br>      <span class="hljs-built_in">print</span>(item[<span class="hljs-string">&quot;title&quot;</span>]);<br><br>      list.add( ListTile( <br>          title: Text(item[<span class="hljs-string">&quot;title&quot;</span>],style: TextStyle(fontSize: <span class="hljs-number">18.0</span>) ),<br>          subtitle: Text(item[<span class="hljs-string">&quot;subtitle&quot;</span>]),<br>          leading:  Icon( Icons.fastfood, color:Colors.orange ),<br>          trailing: Icon(Icons.keyboard_arrow_right)<br>      ));<br>    &#125;<br><br>    <span class="hljs-comment">//返回整个页面</span><br>    <span class="hljs-keyword">return</span> Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&quot;List Page&quot;</span>),<br>      ),<br>      body: Center(<br>        child: ListView(<br>          children: list,<br>        )<br>      ),<br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在main.dart增加list页面的引入</p>
+<p>import ‘list.dart’;</p>
+<p>修改Home页的按钮事件，增加Navigator.push跳转</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart">FlatButton(<br>  color: Colors.blue,textColor: Colors.white,<br>  onPressed: () &#123;    <br>      Navigator.push(context, MaterialPageRoute(builder:(context) &#123;<br>        <span class="hljs-keyword">return</span>  ListPage();<br>      &#125;));<br>    &#125;,<br>    child: Text(<span class="hljs-string">&quot;Click ME&quot;</span>,style: TextStyle(fontSize: <span class="hljs-number">20.0</span>) ),<br>)<br></code></pre></td></tr></table></figure>
+<p>核心方法就是： Navigator.push(context,MaterialPageRoute)</p>
+<p>跳转示例：</p>
+<h4 id="1-2-更多页面跳转使用路由表"><a href="#1-2-更多页面跳转使用路由表" class="headerlink" title="1.2 更多页面跳转使用路由表"></a>1.2 更多页面跳转使用路由表</h4><p>在MaterialApp中，有一个属性是routes，我们可以对路由进行命名，这样跳转的时候，只需要使用对应的路由名字即可，如： Navigator.pushNamed(context, RouterName) 。点击两个不同的按钮，分别跳转到ListPage，和Page2去。</p>
+<p>Main.dart修改一下如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;list.dart&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;page2.dart&#x27;</span>;<br><br><span class="hljs-keyword">void</span> main() =&gt; runApp(MyApp());<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>    <span class="hljs-keyword">return</span> MaterialApp(<br>      title: <span class="hljs-string">&#x27;Flutter Demo&#x27;</span>,<br>      <span class="hljs-comment">//路由表定义</span><br>      routes:&#123;<br>        <span class="hljs-string">&quot;ListPage&quot;</span>:(context)=&gt; ListPage(),<br>        <span class="hljs-string">&quot;Page2&quot;</span>:(context)=&gt; Page2(),<br>      &#125;,<br>      home: MyHomePage(),<br>    );<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHomePage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span></span>&#123;<br>  <span class="hljs-meta">@override</span><br>  MyHomePageState createState() =&gt; MyHomePageState();<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyHomePageState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">MyHomePage</span>&gt;</span>&#123;<br>   <span class="hljs-meta">@override</span><br>   Widget build(BuildContext context) &#123;<br>       <span class="hljs-keyword">return</span> Scaffold(<br>          appBar: AppBar(<br>            title: Text(<span class="hljs-string">&quot;我是Title&quot;</span>),<br>          ),<br>          body: Center(<br>            child:Column(<br>              children:&lt;Widget&gt;[<br>                RaisedButton(<br>                  child: Text(<span class="hljs-string">&quot;Clikc to ListPage&quot;</span> ),<br>                  onPressed: () &#123;<br>                    <span class="hljs-comment">//根据命名路由做跳转</span><br>                    Navigator.pushNamed(context, <span class="hljs-string">&quot;ListPage&quot;</span>);<br>                  &#125;,<br>                ),<br>                RaisedButton(<br>                  child: Text(<span class="hljs-string">&quot;Click to Page2&quot;</span> ),<br>                  onPressed: () &#123;<br>                    <span class="hljs-comment">//根据命名路由做跳转</span><br>                    Navigator.pushNamed(context, <span class="hljs-string">&quot;Page2&quot;</span>);<br>                  &#125;,<br>                )<br>              ]<br>            )<br>          )<br>      );<br>  &#125;  <br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>示例：</p>
+<p>当我们有了路由以后，就可以开始在一个项目里用不同的页面，去学习不同的功能了。</p>
+<h4 id="1-3-路由传参"><a href="#1-3-路由传参" class="headerlink" title="1.3 路由传参"></a>1.3 路由传参</h4><p>列表页跳转到详情页，需要路由传参，这个在flutter体系里，又是怎么做的呢？</p>
+<p>首先，在main.dart里，增加详情页DedailPage的路由配置</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">//路由表定义</span><br>  routes:&#123;<br>    <span class="hljs-string">&quot;ListPage&quot;</span>:(context)=&gt; ListPage(),<br>    <span class="hljs-string">&quot;Page2&quot;</span>:(context)=&gt; Page2(),<br>    <span class="hljs-string">&quot;DetailPage&quot;</span>:(context)=&gt; DetailPage(), <span class="hljs-comment">//增加详情页的路由配置</span><br>  &#125;,<br></code></pre></td></tr></table></figure>
+<p>并修改ListPage里ListTile的点击事件，增加路由跳转传参，这里是将整个item数据对象传递</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dart">ListTile( <br>  title: Text(item[<span class="hljs-string">&quot;title&quot;</span>],style: TextStyle(fontSize: <span class="hljs-number">18.0</span>) ),<br>  subtitle: Text(item[<span class="hljs-string">&quot;subtitle&quot;</span>]),<br>  leading:  Icon( Icons.fastfood, color:Colors.orange ),<br>  trailing: Icon(Icons.keyboard_arrow_right),<br>  onTap:()&#123;<br>    <span class="hljs-comment">//点击的时候，进行路由跳转传参</span><br>      Navigator.pushNamed(context, <span class="hljs-string">&quot;DetailPage&quot;</span>, arguments:item);<br>  &#125;,<br>)<br></code></pre></td></tr></table></figure>
+<p>详情页DetailPage里，获取传参并显示</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DetailPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>     <span class="hljs-comment">//获取路由传参</span><br>     <span class="hljs-keyword">final</span> <span class="hljs-built_in">Map</span> args = ModalRoute.of(context).settings.arguments;<br><br>    <span class="hljs-keyword">return</span> Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&quot;Detail Page&quot;</span>),<br>      ),<br>      body: <br>        <span class="hljs-keyword">new</span> Column(<br>          children: &lt;Widget&gt;[<br>             Text(<span class="hljs-string">&quot;我是Detail页面&quot;</span>),<br>             Text(<span class="hljs-string">&quot;id:<span class="hljs-subst">$&#123;args[<span class="hljs-string">&#x27;id&#x27;</span>]&#125;</span>&quot;</span> ),<br>             Text(<span class="hljs-string">&quot;id:<span class="hljs-subst">$&#123;args[<span class="hljs-string">&#x27;title&#x27;</span>]&#125;</span>&quot;</span>),<br>             Text(<span class="hljs-string">&quot;id:<span class="hljs-subst">$&#123;args[<span class="hljs-string">&#x27;subtitle&#x27;</span>]&#125;</span>&quot;</span>)<br>          ],<br>        )<br>      );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Demo效果：</p>
+<h3 id="2-widget"><a href="#2-widget" class="headerlink" title="2.widget"></a>2.widget</h3><p>Flutter提供了很多默认的组件，而每个组件的都继承自widget 。 在Flutter眼里： 一切都是widget 。 这句看起来是不是很熟悉？ 还记得在webpack里，一切都是module吗？ 类似的还有java的一切都是对象。貌似任何一个技术，最后都是用哲学作为指导思想。</p>
+<p>widget，作为可视化的UI组件，包含了显示UI、功能交互两部分。大的widget，也可以由多个小的widget组合而成。</p>
+<p>常用的widget组件：</p>
+<h4 id="2-1-Text"><a href="#2-1-Text" class="headerlink" title="2.1 Text"></a>2.1 Text</h4><p>Demo:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dart">Text(<br>  <span class="hljs-string">&quot;Hello world&quot;</span>,<br>  style: TextStyle(<br>      fontSize: <span class="hljs-number">50</span>,<br>      fontWeight: FontWeight.bold,<br>      color:Color(<span class="hljs-number">0xFF0000ff</span>)<br>    )<br>  ),<br></code></pre></td></tr></table></figure>
+<p>Text的样式，来自另一个widget：TextStyle。 而TextStyle里的color，又是另一个widget Color的实例。</p>
+<p>如果用flutter的缩进的方法，看起来确实有点丑陋，习惯写CSS的前端同学，可以看看下面的风格：</p>
+<p>Text( “Hello world”, style: TextStyle( fontSize: 50,fontWeight: FontWeight.bold,color:Color(0xFF0000ff) ) )<br>写成一行，是不是就顺眼多了？这算前端恶习吗？ _</p>
+<h4 id="2-2-Button"><a href="#2-2-Button" class="headerlink" title="2.2 Button"></a>2.2 Button</h4><p>对于flutter来说，Button就提供了很多种，我们来看看他们的区别：</p>
+<p>RaisedButton: 凸起的按钮</p>
+<p>FlatButton：扁平化按钮</p>
+<p>OutlineButton：带边框按钮</p>
+<p>IconButton：带图标按钮</p>
+<p>按钮测试页dart:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ButtonPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br><br>    <span class="hljs-keyword">return</span> Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&quot;Button Page&quot;</span>),<br>      ),<br>      body: Column(<br>        children: &lt;Widget&gt;[<br>          RaisedButton(<br>              child: Text(<span class="hljs-string">&quot;我是 RaiseButton&quot;</span> ),<br>              onPressed: () &#123;&#125;,<br>          ),<br>            FlatButton(<br>              child: Text(<span class="hljs-string">&quot;我是 FlatButton&quot;</span> ),<br>              color: Colors.blue,<br>              onPressed: () &#123;&#125;,<br>          ),<br>          OutlineButton(<br>              child: Text(<span class="hljs-string">&quot;我是 OutlineButton&quot;</span> ),<br>              textColor: Colors.blue,<br>              onPressed: () &#123;&#125;,<br>          ),<br>          IconButton(<br>              icon: Icon(Icons.add),<br>              onPressed: () &#123;&#125;,<br>          )  <br>        ]<br>      )<br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Demo:</p>
+<p>项目中要用哪个，就各取所需吧~</p>
+<h4 id="2-3-Container"><a href="#2-3-Container" class="headerlink" title="2.3 Container"></a>2.3 Container</h4><p>Container是非常常用的一个widget，他一般是用作一个容器。我们先来看看他的基础属性，顺便可以想想他像HTML里的啥？</p>
+<p>基础属性：width，height，color，child</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dart">body: Center(<br>  child: Container(<br>      color: Colors.blue,<br>      width: <span class="hljs-number">200</span>,<br>      height: <span class="hljs-number">200</span>,<br>      child: Text(<span class="hljs-string">&quot;Hello Container &quot;</span>,style:TextStyle(fontSize: <span class="hljs-number">20</span>,color: Colors.white)),<br>  )<br>)<br></code></pre></td></tr></table></figure>
+
+<p>Padding</p>
+<p>我们也可以不设置宽高，用 padding 在内部撑开增加留白：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart">Container(<br>  color: Colors.blue,<br>  padding: EdgeInsets.all(<span class="hljs-number">30</span>),<br>  child: Text(<span class="hljs-string">&quot;Hello Container &quot;</span>,style:TextStyle(fontSize: <span class="hljs-number">20</span>,color: Colors.white)),<br>)<br></code></pre></td></tr></table></figure>
+
+<p>Margin</p>
+<p>我们还可以使用 margin ，在容器的外部撑开增加偏移量，</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart">Container(<br>  color: Colors.blue,<br>  padding: EdgeInsets.all(<span class="hljs-number">30</span>),<br>  margin: EdgeInsets.only(left: <span class="hljs-number">150</span>,top: <span class="hljs-number">0</span>,right: <span class="hljs-number">0</span>,bottom: <span class="hljs-number">0</span>),<br>  child: Text(<span class="hljs-string">&quot;Hello Container &quot;</span>,style:TextStyle(fontSize: <span class="hljs-number">20</span>,color: Colors.white)),<br>)<br></code></pre></td></tr></table></figure>
+
+<p>Transform</p>
+<p>我们还可以给这个矩形，使用tansform做一些变化，比如，旋转一个角度</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart">Container(<br>  color: Colors.blue,<br>  padding: EdgeInsets.all(<span class="hljs-number">30</span>),<br>  child: Text(<span class="hljs-string">&quot;Hello Container &quot;</span>,style:TextStyle(fontSize: <span class="hljs-number">20</span>,color: Colors.white)),<br>  transform: Matrix4.rotationZ(<span class="hljs-number">0.5</span>)<br>)<br></code></pre></td></tr></table></figure>
+
+<p>看到这里，好多前端同学要说了，好熟悉啊。 对，他就是很像Html里的一个东西： DIV ，你确实可以对应的去加强理解。</p>
+<h4 id="2-4-Image"><a href="#2-4-Image" class="headerlink" title="2.4 Image"></a>2.4 Image</h4><h5 id="2-4-1-网络图片加载"><a href="#2-4-1-网络图片加载" class="headerlink" title="2.4.1 网络图片加载"></a>2.4.1 网络图片加载</h5><p>使用NetworkImage，可以做网络图片的加载：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart">child:Image(<br>  image: NetworkImage(<span class="hljs-string">&quot;https://mat1.gtimg.com/pingjs/ext2020/qqindex2018/dist/img/qq_logo_2x.png&quot;</span>),<br>  width: <span class="hljs-number">200.0</span>,<br>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-4-2-本地图片加载"><a href="#2-4-2-本地图片加载" class="headerlink" title="2.4.2 本地图片加载"></a>2.4.2 本地图片加载</h5><p>加载本地图片，就稍微复杂一些，首先要把图片的路径配置，加入到之前说过的pubspec.yaml配置文件里去:</p>
+<p>image</p>
+<p>加载本地图片时使用AssetImage：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart">child:Image(<br>  image: AssetImage(<span class="hljs-string">&quot;assets/images/logo.png&quot;</span>),<br>  width: <span class="hljs-number">200.0</span>,<br>)<br></code></pre></td></tr></table></figure>
+<p>也可以使用简写：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">Image.asset(<span class="hljs-string">&quot;assets/images/logo.png&quot;</span>,width:<span class="hljs-number">200.0</span>)<br></code></pre></td></tr></table></figure>
+<p>flutter提供的组件很多，这里就不一一举例说明，有兴趣的还是建议大家去看API： <a target="_blank" rel="noopener" href="https://api.flutter.dev/">https://api.flutter.dev/</a></p>
+<h3 id="3-布局"><a href="#3-布局" class="headerlink" title="3.布局"></a>3.布局</h3><p>我们已经了解了这么多组件，那么怎么绘制一个完整的页面呢？ 这就到了页面布局的部分了。</p>
+<h4 id="3-1-Row-Column-Center-行列轴布局"><a href="#3-1-Row-Column-Center-行列轴布局" class="headerlink" title="3.1 Row &amp; Column &amp; Center 行列轴布局"></a>3.1 Row &amp; Column &amp; Center 行列轴布局</h4><p>字面意义也很好理解，行布局、列布局、居中布局，这些布局对于Flutter来说，也都是一个个的widget。</p>
+<p>区别在于，row、column 是有多个children的widget， 而Center是只有 1个child的 widget。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs dart">Row(<br>  children:&lt;Widget&gt;[]<br>) <br><br>Column(<br>  children:&lt;Widget&gt;[]<br>)    <br><br>Center(<br>  child:Text(<span class="hljs-string">&quot;Hello&quot;</span>)<br>）<br></code></pre></td></tr></table></figure>
+<h4 id="3-2-Align-角定位布局"><a href="#3-2-Align-角定位布局" class="headerlink" title="3.2 Align 角定位布局"></a>3.2 Align 角定位布局</h4><p>我们常常在Container里，需要显示的内容在左上角，左下角，右上角，右下角。 在html时代，使用CSS可以很容易的实现，但是flutter里，必须依赖Align 这个定位的Widget</p>
+<p>右下角定位示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart">child: Container(<br>  color: Colors.blue,<br>  width: <span class="hljs-number">300</span>,<br>  height: <span class="hljs-number">200</span>,<br>  child: Align(<br>    alignment: Alignment.bottomRight,<br>    child:Text(<span class="hljs-string">&quot;Hello Align &quot;</span>,style:TextStyle(fontSize: <span class="hljs-number">20</span>,color: Colors.white)),<br>  )<br>)<br></code></pre></td></tr></table></figure>
+<p>显示效果：</p>
+<p>Alignment提供了多种定位供选择，还算是很贴心的。</p>
+<h4 id="3-3-Stack-Positioned-绝对定位"><a href="#3-3-Stack-Positioned-绝对定位" class="headerlink" title="3.3 Stack &amp; Positioned 绝对定位"></a>3.3 Stack &amp; Positioned 绝对定位</h4><p>当然还有绝对定位的需求，这在css里，使用position：absolute就搞定了，但是在flutter里，需要借助stack+ positioned两个widget一起组合使用。</p>
+<p>Stack: 支持元素堆叠</p>
+<p>Positioned：支持绝对定位</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dart">child:Stack(<br>  children: &lt;Widget&gt;[<br>      Image.network(<span class="hljs-string">&quot;https://ossweb-img.qq.com/upload/adw/image/20191022/627bdf586e0de8a29d5a48b86700a790.jpeg&quot;</span>),<br>      Positioned(<br>        top: <span class="hljs-number">20</span>,<br>        right: <span class="hljs-number">10</span>,<br>        child:Image.asset(<span class="hljs-string">&quot;assets/images/logo.png&quot;</span>,width:<span class="hljs-number">200.0</span>)<br>      )<br>  ],<br>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-4-Flex-Expanded-流式布局"><a href="#3-4-Flex-Expanded-流式布局" class="headerlink" title="3.4 Flex &amp; Expanded 流式布局"></a>3.4 Flex &amp; Expanded 流式布局</h4><p>Flex流式布局作为前端同学都熟悉，之前讲过的Row，Column，其实都是继承自Flex，也属于流式布局。</p>
+<p>如果轴向不确定，使用Flex，通过修改 direction的值设定轴向<br>如果轴向已确定，使用Row，Column，布局更简洁，更有语义化</p>
+<p>Flex测试页：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlexPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br><br>    <span class="hljs-keyword">return</span> Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&quot;Flex Page&quot;</span>),<br>      ),<br>      body:  Flex(<br>          direction: Axis.horizontal,<br>          children: &lt;Widget&gt;[<br>            Container(<br>              width: <span class="hljs-number">30</span>,<br>              height: <span class="hljs-number">100</span>,<br>              color: Colors.blue,<br>            ),<br>            Expanded(<br>              flex: <span class="hljs-number">1</span>,<br>              child: Container(<br>                height: <span class="hljs-number">100.0</span>,<br>                color: Colors.red,<br>              ),<br>            ),<br>            Expanded(<br>              flex: <span class="hljs-number">1</span>,<br>              child: Container(<br>                height: <span class="hljs-number">100.0</span>,<br>                color: Colors.green,<br>              ),<br>            ),<br>          ],<br>        ),<br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>示例中，轴向横向排列，最左边一个固定宽度的Container，右边两个Expanded，各自占剩下的宽度的一半。</p>
+<h3 id="4-动画"><a href="#4-动画" class="headerlink" title="4.动画"></a>4.动画</h3><p>Flutter既然说了，一切都是Widget，包括动画实现，也是一个Widget。 我们还是看一个示例</p>
+<h4 id="4-1-简单动画：淡入淡出："><a href="#4-1-简单动画：淡入淡出：" class="headerlink" title="4.1 简单动画：淡入淡出："></a>4.1 简单动画：淡入淡出：</h4><p>使用flutter提供的现成的Widget：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AnimatePage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span> </span>&#123;<br>  _AnimatePage  createState()=&gt; _AnimatePage();<br>&#125; <br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_AnimatePage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">AnimatePage</span>&gt; </span>&#123;<br>  <span class="hljs-built_in">bool</span> _visible=<span class="hljs-keyword">true</span>;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br><br>    <span class="hljs-keyword">return</span> Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&quot;Animate Page&quot;</span>),<br>      ),<br>      body: <br>        Center(<br>          child: Column(<br>            children: &lt;Widget&gt;[<br>              AnimatedOpacity(<br>                opacity: _visible ? <span class="hljs-number">1.0</span>:<span class="hljs-number">0.0</span>,<br>                duration: <span class="hljs-built_in">Duration</span>(milliseconds: <span class="hljs-number">1000</span>),<br>                child: Image.asset(<span class="hljs-string">&quot;assets/images/logo.png&quot;</span>),<br>              ),<br>              RaisedButton(<br>                child: Text(<span class="hljs-string">&quot;显示隐藏&quot;</span>),<br>                onPressed: ()&#123;<br>                  setState(() &#123;<br>                    _visible=!_visible;<br>                  &#125;);<br>                &#125;,<br>              ),<br>            ],<br>          ),<br>        )    <br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其中的AnimatedOpacity就是动画透明度变化的的Widget，而被透明度控制变化的Image则是AnimatedOpacity的子元素。这个和以往前端写动画的方式，就完全不一样了，需要改变一下思维方式。</p>
+<p>Demo效果</p>
+<h4 id="4-2-复杂一些的动画：放大缩小"><a href="#4-2-复杂一些的动画：放大缩小" class="headerlink" title="4.2 复杂一些的动画：放大缩小"></a>4.2 复杂一些的动画：放大缩小</h4><p>当写复杂一些动画的时候，没有对应的widget组件，就需要自己使用Animation，和AnimationController，以及Tween来组合。</p>
+<p>Animation: 保存动画的值和状态</p>
+<p>AnimationController: 控制动画，包含：启动forward()、停止stop()、反向播放reverse()等方法</p>
+<p>Tween: 提供begin，end作为动画变化的取值范围</p>
+<p>Curve：设置动画使用曲线变化，如非匀速动画，先加速，后减速等的设定。</p>
+<p>动画示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AnimatePage2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span> </span>&#123;<br>  _AnimatePage  createState()=&gt; _AnimatePage();<br>&#125; <br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_AnimatePage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">AnimatePage2</span>&gt;  <span class="hljs-title">with</span> <span class="hljs-title">SingleTickerProviderStateMixin</span> </span>&#123;<br><br>  Animation&lt;<span class="hljs-built_in">double</span>&gt; animation;<br>  AnimationController controller;<br><br>  initState() &#123;<br>    <span class="hljs-keyword">super</span>.initState();<br>    controller =  AnimationController(duration:  <span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">3</span>), vsync: <span class="hljs-keyword">this</span>);<br><br>     <span class="hljs-comment">//使用弹性曲线，数据变化从0到300</span><br>     animation = CurvedAnimation(parent: controller, curve: Curves.bounceIn);<br>     animation = Tween(begin: <span class="hljs-number">0.0</span>, end: <span class="hljs-number">300.0</span>).animate(animation)<br>      ..addListener(() &#123;<br>        setState(() &#123;<br>        &#125;);<br>      &#125;);<br><br>    <span class="hljs-comment">//启动动画(正向执行)</span><br>    controller.forward();<br>  &#125;<br><br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br><br>    <span class="hljs-keyword">return</span> Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&quot;Animate Page&quot;</span>),<br>      ),<br>      body: <br>        Center(<br>          child: Image.asset(<br>            <span class="hljs-string">&quot;assets/images/logo.png&quot;</span>,<br>            width: animation.value, <br>            height: animation.value<br>          ),<br>        )  <br>      );   <br>  &#125;<br><br>  dispose() &#123;<br>    <span class="hljs-comment">//路由销毁时需要释放动画资源</span><br>    controller.dispose();<br>    <span class="hljs-keyword">super</span>.dispose();<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>很重要的一点， 在路由销毁的时候，需要释放动画资源，否则容易导致内存泄漏 。</p>
+<h3 id="5-http请求"><a href="#5-http请求" class="headerlink" title="5.http请求"></a>5.http请求</h3><p>做业务逻辑，总离不开http请求，接下来，就来看下flutter的http请求是如何做的。</p>
+<h4 id="5-1-HttpClient"><a href="#5-1-HttpClient" class="headerlink" title="5.1 HttpClient"></a>5.1 HttpClient</h4><p>httpClient在 dart:io库中，不需要引入第三方库就可以使用，示例代码如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;dart:convert&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;dart:io&#x27;</span>;<br><br>Future _getByHttpClient() <span class="hljs-keyword">async</span>&#123;<br>    <span class="hljs-comment">//接口地址</span><br>    <span class="hljs-keyword">const</span> url=<span class="hljs-string">&quot;https://www.demo.com/api&quot;</span>;<br><br>    <span class="hljs-comment">//定义httpClient</span><br>    HttpClient client = <span class="hljs-keyword">new</span> HttpClient();<br>    <span class="hljs-comment">//定义request</span><br>    HttpClientRequest request = <span class="hljs-keyword">await</span> client.getUrl(<span class="hljs-built_in">Uri</span>.parse(url));<br>    <span class="hljs-comment">//定义reponse</span><br>    HttpClientResponse response = <span class="hljs-keyword">await</span> request.close();<br>    <span class="hljs-comment">//respinse返回的数据，是字符串</span><br>    <span class="hljs-built_in">String</span> responseBody = <span class="hljs-keyword">await</span> response.transform(utf8.decoder).join();<br>    <span class="hljs-comment">//关闭httpClient</span><br>    client.close();<br>    <span class="hljs-comment">//字符串需要转化为JSON</span><br>    <span class="hljs-keyword">var</span> json= jsonDecode(responseBody);<br>    <span class="hljs-keyword">return</span> json;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>总的看起来，代码还是挺繁琐的，使用起来并不方便。</p>
+<h4 id="5-2-http"><a href="#5-2-http" class="headerlink" title="5.2 http"></a>5.2 http</h4><p>这是Dart.dev提供的第三方类库，地址： <a target="_blank" rel="noopener" href="https://pub.dev/packages/http">https://pub.dev/packages/http</a></p>
+<p>需要先在pubspec.yaml里添加类库应用</p>
+<p>dependencies:<br>  flutter:<br>    sdk: flutter<br>  json_annotation: ^2.0.0<br>  http: ^0.12.0+2<br>使用示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future _getByDartHttp() <span class="hljs-keyword">async</span> &#123;<br>  <span class="hljs-comment">// 接口地址</span><br> <span class="hljs-keyword">const</span> url=<span class="hljs-string">&quot;https://www.demo.com/api&quot;</span>;<span class="hljs-comment">//获取接口的返回值</span><br> <span class="hljs-keyword">final</span> response = <span class="hljs-keyword">await</span> http.<span class="hljs-keyword">get</span>(url);<br> <span class="hljs-comment">//接口的返回值转化为JSON</span><br> <span class="hljs-keyword">var</span> json = jsonDecode(response.body); <br> <span class="hljs-keyword">return</span> json;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这种写法，比上面的httpClient简洁了许多。</p>
+<p>Dio<br>国内使用最广泛的，还是flutterchina在github上提供的Dio第三方库，目前Star达到了5800多个。</p>
+<p>官网地址： <a target="_blank" rel="noopener" href="https://github.com/flutterchina/dio">https://github.com/flutterchina/dio</a></p>
+<p>使用Dio，因为是第三方库，所以同样要先在 pubspec.yaml 添加第三方库引用。</p>
+<p>dependencies:<br>  flutter:<br>    sdk: flutter<br>  json_annotation: ^2.0.0<br>  dio: 2.1.16<br>使用示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:dio/dio.dart&#x27;</span>;<br><br>Future _getByDio() <span class="hljs-keyword">async</span>&#123;<br><br>      <span class="hljs-comment">// 接口地址</span><br>      <span class="hljs-keyword">const</span> url=<span class="hljs-string">&quot;https://www.demo.com/api&quot;</span>;<br><br>      <span class="hljs-comment">//定义 Dio实例</span><br>      Dio dio = <span class="hljs-keyword">new</span> Dio();<br>      <span class="hljs-comment">//获取dio返回的Response</span><br>      Response response = <span class="hljs-keyword">await</span> dio.<span class="hljs-keyword">get</span>(url);<br>      <span class="hljs-comment">//返回值转化为JSON</span><br>      <span class="hljs-keyword">var</span> json=jsonDecode(response.data);<br>      <span class="hljs-keyword">return</span> json;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接口调用也是比httpclient简单很多，可能由于fluterchina在他的官方教程里，极力推荐这个dio库，所以目前这个第三方库的使用情况最为广泛。和Dart.dev的http不同的是，他需要new一个Dio的实例，在创建实例的时候，还可以传入更多的扩展配置参数。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart">BaseOptions options = <span class="hljs-keyword">new</span> BaseOptions(<br>    baseUrl: <span class="hljs-string">&quot;https://www.xx.com/api&quot;</span>,<br>    connectTimeout: <span class="hljs-number">5000</span>,<br>    receiveTimeout: <span class="hljs-number">3000</span>,<br>);<br>Dio dio = <span class="hljs-keyword">new</span> Dio(options);<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-缺点"><a href="#6-缺点" class="headerlink" title="6.缺点"></a>6.缺点</h3><p>学习Flutter的过程中，其实还是有很多坎坷和需要吐槽的地方。</p>
+<h4 id="6-1-墙"><a href="#6-1-墙" class="headerlink" title="6.1 墙"></a>6.1 墙</h4><p>因为有墙在，所以在配置flutter，或者下载flutter插件和第三方库的时候，需要墙内外来回切换。</p>
+<h4 id="6-2-组件过度设计"><a href="#6-2-组件过度设计" class="headerlink" title="6.2 组件过度设计"></a>6.2 组件过度设计</h4><p>提供的各种widget组件很多，但是真正核心的组件、常用的组件，也就哪些。 比如Flex 和column、row的关系，比如，Tween 与IntTween，ColorTween，SizeTween等20多个Tween子类之间的关系，你需要花很大的精力，去看每个具体子类的实现差别。</p>
+<h4 id="6-3-嵌套太多不适应"><a href="#6-3-嵌套太多不适应" class="headerlink" title="6.3 嵌套太多不适应"></a>6.3 嵌套太多不适应</h4><p>因为嵌套层级很多，而且布局、动画、功能都在一起，第一次上手Flutter和Dart，这种嵌套关系让人很晕菜，这个只能去慢慢克服。 另外，多开发自定义的组件，可以让嵌套关系看起来清晰一些。</p>
+<h4 id="6-4-布局修改会导致嵌套关系修改"><a href="#6-4-布局修改会导致嵌套关系修改" class="headerlink" title="6.4 布局修改会导致嵌套关系修改"></a>6.4 布局修改会导致嵌套关系修改</h4><p>前端的html+css分离世界里，不改变嵌套关系，修改CSS就可以调整布局。 但是在Flutter里因为布局也是嵌套关系，这就导致必须去改变嵌套关系。 要让嵌套更简单变动影响更小，页面拆分成子组件变得尤为重要。</p>
+<h4 id="6-5-Dart语言升级"><a href="#6-5-Dart语言升级" class="headerlink" title="6.5 Dart语言升级"></a>6.5 Dart语言升级</h4><p>没错，语言升级也会导致学习的困扰，外面的资料新旧都有，比如有些是 new Text() ,有些直接是Text() ，新手上路会很晕菜。 其实这都是Dart语言升级导致的，记住Dart升级2.X以后，都不使用new了。感兴趣的可以自己去看下Dart的升级变更说明。</p>
+<h4 id="6-6-不能热更新"><a href="#6-6-不能热更新" class="headerlink" title="6.6 不能热更新"></a>6.6 不能热更新</h4><p>年中的时候，Google官方宣布flutter暂不官方支持热更新，但是闲鱼团队已经有了自己的热更新方案。 关于热更新，只能静观其变了。 性能、开发效率、热更新，总是要有取舍的。即使是闲鱼团队，热更新也是付出了一点点性能下降的代价的，这是你选择flutter的初衷吗？还是那句话：权衡得失</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/Flutter/" class="category-chain-item">Flutter</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E7%BB%84%E4%BB%B6/">#组件</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Flutter组件和路由</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2023/12/08/flutter-components/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月8日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2023/12/13/vue-components/" title="vue2 组件通信方式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue2 组件通信方式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2023/12/08/flutter-configuration/" title="Flutter开发环境搭建">
+                        <span class="hidden-mobile">Flutter开发环境搭建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

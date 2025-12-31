@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Vue3-TS项目开发使用笔记概述Vue3出来已经有一段时间了，在团队中，也进行了大量的业务实践，也有了一些自己的思考。 总的来说，Vue3无论是在底层的原理上，还是在业务的实际开发中，都有了长足的进步。 使用 proxy 代替之前的 Object.defineProperty 的API，性能更加优异，也解决了之前vue在处理对象、数组上的缺陷；在diff算法上，使用了静态标记的方式，大大提升了V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue3+TS项目开发使用笔记">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/01/07/vue3.0-mark/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="Vue3-TS项目开发使用笔记概述Vue3出来已经有一段时间了，在团队中，也进行了大量的业务实践，也有了一些自己的思考。 总的来说，Vue3无论是在底层的原理上，还是在业务的实际开发中，都有了长足的进步。 使用 proxy 代替之前的 Object.defineProperty 的API，性能更加优异，也解决了之前vue在处理对象、数组上的缺陷；在diff算法上，使用了静态标记的方式，大大提升了V">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-07T08:00:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.277Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="Vue3">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Vue3+TS项目开发使用笔记 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Vue3+TS项目开发使用笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-07 16:00" pubdate>
+          2022年1月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue3+TS项目开发使用笔记</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Vue3-TS项目开发使用笔记"><a href="#Vue3-TS项目开发使用笔记" class="headerlink" title="Vue3-TS项目开发使用笔记"></a>Vue3-TS项目开发使用笔记</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Vue3出来已经有一段时间了，在团队中，也进行了大量的业务实践，也有了一些自己的思考。</p>
+<p>总的来说，Vue3无论是在底层的原理上，还是在业务的实际开发中，都有了长足的进步。</p>
+<p>使用 proxy 代替之前的 Object.defineProperty 的API，性能更加优异，也解决了之前vue在处理对象、数组上的缺陷；在diff算法上，使用了静态标记的方式，大大提升了Vue的执行效率。</p>
+<p>在使用的层面，我们从options Api，变成了composition Api，慢慢的在实际的业务中，我们抛弃了原本的data、methods、computed那种隔离式的写法。compositon Api，它更加聚焦，它讲究的是相关业务的聚合性。同时，在composition Api中，为了防止过于重的业务逻辑，它提供了一种关注点分离的方式，大大的提升了我们代码的可读性。</p>
+<p>完全良好的支持了TypeScript，类型校验也成为了以后Vue3进行大型项目开发的质量保障，同时这也是面向了趋势 – 前端的未来就是TypeScript！</p>
+<h2 id="1、compositon-Api"><a href="#1、compositon-Api" class="headerlink" title="1、compositon Api"></a>1、compositon Api</h2><p>compositon Api的本质，体现在代码里面，也就是一个setup函数，在这个setup函数中，返回的数据，会用到该组件的模板中。return的这个对象，一定程度上，代表了之前vue2中的data属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; defineComponent, ref &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineComponent</span>(&#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Gift&#x27;</span>,<br>    <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">const</span> counter = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> &#123;<br>            counter<br>        &#125;<br>    &#125;<br>&#125;)<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<p>这时候，对于大多数初学者来说，可能存在的疑惑就是，那么我能不能定义options Api的写法，比如data、computed、watch、methods等等。</p>
+<p>这里我需要明确的是，Vue3是完全兼容Vue2的这种options Api的写法，但是从理念上来说，更加推荐setup的方式，来写我们的组件。原因如下：Vue3的存在，本身是为了解决Vue2的问题的，Vue2的问题就是在于，聚合性不足，会导致代码越来越臃肿！setup的方式，能够让data、方法逻辑、依赖关系等聚合在一块，更方便维护。</p>
+<p>也就是说，以后我们尽量不要写单独的data、computed、watch、methods等等，不是Vue3不支持，而是和Vue3的理念违背。</p>
+<p>components属性，也就是一个组件的子组件，这个配置在Vue2和3的差异不大，Vue2怎么用，Vue3依然那么用。</p>
+<h3 id="1、ref-和-reactive的区别？"><a href="#1、ref-和-reactive的区别？" class="headerlink" title="1、ref 和 reactive的区别？"></a>1、ref 和 reactive的区别？</h3><p>在功能方面，ref 和 reactive，都是可以实现响应式数据！</p>
+<p>在语法层面，两个有差异。ref定义的响应式数据需要用[data].value的方式进行更改数据；reactive定义的数据需要[data].[prpoerty]的方式更改数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-attr">actTitle</span>: <span class="hljs-title class_">Ref</span>&lt;string&gt; = <span class="hljs-title function_">ref</span>(<span class="hljs-string">&#x27;活动名称&#x27;</span>);<br><br><span class="hljs-keyword">const</span> actData = <span class="hljs-title function_">reactive</span>(&#123;<br>    <span class="hljs-attr">list</span>: [],<br>    <span class="hljs-attr">total</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">curentPage</span>: <span class="hljs-number">1</span>,<br>    <span class="hljs-attr">pageSize</span>: <span class="hljs-number">10</span><br>&#125;);<br><br>actTitle.<span class="hljs-property">value</span> = <span class="hljs-string">&#x27;活动名称2&#x27;</span>;<br><br>actData.<span class="hljs-property">total</span> = <span class="hljs-number">100</span>;<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<p>但是在应用的层面，还是有差异的，通常来说：单个的普通类型的数据，我们使用ref来定义响应式。表单场景中，描述一个表单的key:value这种对象的场景，使用reactive；在一些场景下，某一个模块的一组数据，通常也使用reactive的方式，定义数据。</p>
+<p>那么，对象是不是非要使用reactive来定义呢？其实不是的，都可以，根据自己的业务场景，具体问题具体分析！ref他强调的是一个数据的value的更改，reactive强调的是定义的对象的某一个属性的更改。</p>
+<h3 id="2、周期函数"><a href="#2、周期函数" class="headerlink" title="2、周期函数"></a>2、周期函数</h3><p>周期函数，在Vue3中，是被单独使用的，使用方式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; defineComponent, ref, onMounted &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineComponent</span>(&#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Gift&#x27;</span>,<br>    <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">const</span> counter = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-comment">// 处理业务，一般进行数据请求</span><br>        &#125;)<br>        <span class="hljs-keyword">return</span> &#123;<br>            counter<br>        &#125;<br>    &#125;<br>&#125;)<br><br>复制代码<br></code></pre></td></tr></table></figure>
+
+<h3 id="3、store使用"><a href="#3、store使用" class="headerlink" title="3、store使用"></a>3、store使用</h3><p>在Vue2中，其实可以直接通过this.$store进行获取，但是在Vue3中，其实没有this这个概念，使用方式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; useStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vuex&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; defineComponent, ref, computed &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineComponent</span>(&#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Gift&#x27;</span>,<br>    <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">const</span> counter = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">const</span> store = <span class="hljs-title function_">useStore</span>();<br>        <span class="hljs-keyword">const</span> storeData = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> store); <span class="hljs-comment">// 配合computed，获取store的值。</span><br>        <span class="hljs-keyword">return</span> &#123;<br>            counter,<br>            storeData<br>        &#125;<br>    &#125;<br>&#125;)<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<h3 id="4、router的使用"><a href="#4、router的使用" class="headerlink" title="4、router的使用"></a>4、router的使用</h3><p>在Vue2中，是通过this.$router的方式，进行路由的函数式编程，但是Vue3中，是这么使用的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; useStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vuex&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; useRouter &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-router&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; defineComponent, ref, computed &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineComponent</span>(&#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Gift&#x27;</span>,<br>    <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">const</span> counter = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">const</span> router = <span class="hljs-title function_">useRouter</span>();<br>        <span class="hljs-keyword">const</span> <span class="hljs-title function_">onClick</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>            router.<span class="hljs-title function_">push</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;AddGift&quot;</span> &#125;);<br>        &#125;<br>        <span class="hljs-keyword">return</span> &#123;<br>            counter,<br>            onClick<br>        &#125;<br>    &#125;<br>&#125;)<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<h2 id="2、关注点分离"><a href="#2、关注点分离" class="headerlink" title="2、关注点分离"></a>2、关注点分离</h2><p>关注点分离，应该分两层意思：第一层意思就是，Vue3的setup，本身就把相关的数据，处理逻辑放到一起，这就是一种关注点的聚合，更方便我们看业务代码。</p>
+<p>第二层意思，就是当setup变的更大的时候，我们可以在setup内部，提取相关的一块业务，做到第二层的关注点分离。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; useStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vuex&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; useRouter &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-router&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; defineComponent, ref, computed &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">import</span> useMerchantList <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./merchant.js&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineComponent</span>(&#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Gift&#x27;</span>,<br>    <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">const</span> counter = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">const</span> router = <span class="hljs-title function_">useRouter</span>();<br>        <span class="hljs-keyword">const</span> <span class="hljs-title function_">onClick</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>            router.<span class="hljs-title function_">push</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;AddGift&quot;</span> &#125;);<br>        &#125;<br>        <span class="hljs-comment">// 在该示例中，我们把获取商家列表的相关业务分离出去。也就是下面的merchant.ts</span><br>        <span class="hljs-keyword">const</span> &#123;merchantList&#125; = <span class="hljs-title function_">useMerchantList</span>();<br>        <span class="hljs-keyword">return</span> &#123;<br>            counter,<br>            onClick,<br>            merchantList<br>        &#125;<br>    &#125;<br>&#125;)<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<p>merchant.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; getMerchantlist &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/api/rights/gift&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; ref, onMounted &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">useMerchantList</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">any</span>&gt; &#123;<br>  <span class="hljs-keyword">const</span> merchantList = <span class="hljs-title function_">ref</span>([]);<br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchMerchantList</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getMerchantlist</span>(&#123;&#125;);<br>    merchantList.<span class="hljs-property">value</span> = res?.<span class="hljs-property">data</span>?.<span class="hljs-property">child</span>;<br>  &#125;;<br><br>  <span class="hljs-title function_">onMounted</span>(fetchMerchantList);<br><br>  <span class="hljs-keyword">return</span> &#123;<br>    merchantList<br>  &#125;;<br>&#125;<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<h2 id="3、TypeScript支持"><a href="#3、TypeScript支持" class="headerlink" title="3、TypeScript支持"></a>3、TypeScript支持</h2><p>这一部分内容，准确的来说，是TS的内容，不过它与Vue3项目开发，息息相关，所以真的想用Vue3，我们还是得了解TS的使用。</p>
+<p>不过这一部分，我不会介绍TS的基础语法，主要是在业务场景中，如何组织TS。</p>
+<p>使用TS进行业务开发，一个核心的思维是，先关注数据结构，再根据数据结构进行页面开发。以前的前端开发模式是，先写页面，后关注数据。</p>
+<p>比如要写一个礼品列表的页面，我们可能要定义这么一些interface。总而言之，我们需要关注的是：页面数据的interface、接口返回的数据类型、接口的入参类型等等。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 礼品创建、编辑、列表中的每一项，都会是这个数据类型。</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">IGiftItem</span> &#123;<br>  <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>;<br>  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-attr">desc</span>: <span class="hljs-built_in">string</span>;<br>  [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>;<br>&#125;<br><br><span class="hljs-comment">// 全局相应的类型定义</span><br><span class="hljs-comment">// 而且一般来说，我们不确认，接口返回的类型到底是什么（可能是null、可能是对象、也可能是数组），所以使用范型来定义interface</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">IRes</span>&lt;T&gt; &#123;<br>    <span class="hljs-attr">code</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">msg</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-attr">data</span>: T<br>&#125;<br><span class="hljs-comment">// 接口返回数据类型定义</span><br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">IGiftInfo</span> &#123;<br>    <span class="hljs-attr">list</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">IGiftItem</span>&gt;;<br>    <span class="hljs-attr">pageNum</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">pageSize</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">total</span>: <span class="hljs-built_in">number</span>;<br>&#125;<br>复制代码<br></code></pre></td></tr></table></figure>
+
+<p>在一个常见的接口请求中，我们一般使用TS这么定义一个数据请求，数据请求的req类型，数据请求的res类型。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getGiftlist = (<br>  <span class="hljs-attr">params</span>: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">any</span>&gt;<br>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">IRes</span>&lt;<span class="hljs-title class_">IGiftInfo</span>&gt;&gt; =&gt; &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Http</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/apis/gift/list&quot;</span>, params);<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/vue/" class="category-chain-item">vue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/Vue3/">#Vue3</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Vue3+TS项目开发使用笔记</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/01/07/vue3.0-mark/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年1月7日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/01/07/vue-v-model/" title="vue2和vue3的双向数据绑定">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue2和vue3的双向数据绑定</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/01/07/js-sort/" title="javascript sort方法排序">
+                        <span class="hidden-mobile">javascript sort方法排序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

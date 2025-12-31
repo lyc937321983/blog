@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="运行 npm run xxx 的时候发生了什么？1.npm run serve的时候，发生了什么？​		首先会去项目的package.json文件里找scripts 里找对应的xxx，然后执行 xxx的命令，例如启动vue项目 npm run serve的时候，实际上就是执行了vue-cli-service serve 这条命令 12345678&#123;  &quot;name&quot;:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm run xxx 的时候发生了什么？">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/07/08/js-npmRunTime/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="运行 npm run xxx 的时候发生了什么？1.npm run serve的时候，发生了什么？​		首先会去项目的package.json文件里找scripts 里找对应的xxx，然后执行 xxx的命令，例如启动vue项目 npm run serve的时候，实际上就是执行了vue-cli-service serve 这条命令 12345678&#123;  &quot;name&quot;:">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-08T01:38:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.267Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="npm run serve">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>npm run xxx 的时候发生了什么？ - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="npm run xxx 的时候发生了什么？"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-08 09:38" pubdate>
+          2022年7月8日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">npm run xxx 的时候发生了什么？</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="运行-npm-run-xxx-的时候发生了什么？"><a href="#运行-npm-run-xxx-的时候发生了什么？" class="headerlink" title="运行 npm run xxx 的时候发生了什么？"></a>运行 npm run xxx 的时候发生了什么？</h1><h3 id="1-npm-run-serve的时候，发生了什么？"><a href="#1-npm-run-serve的时候，发生了什么？" class="headerlink" title="1.npm run serve的时候，发生了什么？"></a>1.npm run serve的时候，发生了什么？</h3><p>​		首先会去项目的package.json文件里找scripts 里找对应的xxx，然后执行 xxx的命令，例如启动vue项目 npm run serve的时候，实际上就是执行了vue-cli-service serve 这条命令</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;h5&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.7&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;private&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;serve&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vue-cli-service serve&quot;</span><br>   <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-为什么-不直接执行vue-cli-service-serve而要执行npm-run-serve-呢？"><a href="#2-为什么-不直接执行vue-cli-service-serve而要执行npm-run-serve-呢？" class="headerlink" title="2.为什么 不直接执行vue-cli-service serve而要执行npm run serve 呢？"></a>2.为什么 不直接执行<code>vue-cli-service serve</code>而要执行<code>npm run serve</code> 呢？</h3><p>​		因为 直接执行<code>vue-cli-service serve</code>，会报错，因为操作系统中没有存在<code>vue-cli-service</code>这一条指令</p>
+<h3 id="3-那既然vue-cli-service这条指令不存在操作系统中，为什么执行npm-run-serve的时候，也就是相当于执行了vue-cli-service-serve-，为什么这样它就能成功，而且不报指令不存在的错误呢？"><a href="#3-那既然vue-cli-service这条指令不存在操作系统中，为什么执行npm-run-serve的时候，也就是相当于执行了vue-cli-service-serve-，为什么这样它就能成功，而且不报指令不存在的错误呢？" class="headerlink" title="3.那既然vue-cli-service这条指令不存在操作系统中，为什么执行npm run serve的时候，也就是相当于执行了vue-cli-service serve ，为什么这样它就能成功，而且不报指令不存在的错误呢？"></a>3.那既然<code>vue-cli-service</code>这条指令不存在操作系统中，为什么执行<code>npm run serve</code>的时候，也就是相当于执行了<code>vue-cli-service serve</code> ，为什么这样它就能成功，而且不报指令不存在的错误呢？</h3><p>​		我们在安装依赖的时候，是通过npm i xxx 来执行的，例如 <code>npm i @vue/cli-service</code>，npm 在 安装这个依赖的时候，就会<code>node_modules/.bin/</code> 目录中创建 好<code>vue-cli-service</code> 为名的几个可执行文件了。</p>
+<p>​		.bin 目录，这个目录不是任何一个 npm 包。目录下的文件，表示这是一个个软链接，打开文件可以看到文件顶部写着 <code>#!/bin/sh</code> ，表示这是一个脚本。</p>
+<p>由此我们可以知道，当使用 <code>npm run serve</code> 执行 <code>vue-cli-service  serve</code> 时，虽然没有安装 <code>vue-cli-service</code>的全局命令，但是 npm 会到 <code>./node_modules/.bin</code> 中找到 <code>vue-cli-service</code> 文件作为  脚本来执行，则相当于执行了 <code>./node_modules/.bin/vue-cli-service serve</code>（最后的 serve 作为参数传入）</p>
+<h3 id="4-bin-目录下的文件表示软连接，那这个bin目录下的那些软连接文件是哪里来的呢？它又是怎么知道这条软连接是执行哪里的呢？"><a href="#4-bin-目录下的文件表示软连接，那这个bin目录下的那些软连接文件是哪里来的呢？它又是怎么知道这条软连接是执行哪里的呢？" class="headerlink" title="4. .&#x2F;bin 目录下的文件表示软连接，那这个bin目录下的那些软连接文件是哪里来的呢？它又是怎么知道这条软连接是执行哪里的呢？"></a>4. .&#x2F;bin 目录下的文件表示软连接，那这个bin目录下的那些软连接文件是哪里来的呢？它又是怎么知道这条软连接是执行哪里的呢？</h3><p>​		我们可以直接在新建的vue项目里面搜索vue-cli-service</p>
+<p>可以看到，它存在项目最外层的<strong>package-lock.json</strong>文件中</p>
+<p>从 package-lock.json 中可知，当我们npm i 整个新建的vue项目的时候，npm 将 bin&#x2F;vue-cli-service.js 作为 bin 声明了。</p>
+<p>所以在 npm install 时，npm 读到该配置后，就将该文件软链接到 .&#x2F;node_modules&#x2F;.bin 目录下，而 npm 还会自动把node_modules&#x2F;.bin加入$PATH，这样就可以直接作为命令运行依赖程序和开发依赖程序，不用全局安装了。</p>
+<p>假如我们在安装包时，使用 <code>npm install -g xxx</code> 来安装，那么会将其中的 bin 文件加入到全局，比如 create-react-app 和 vue-cli ，在全局安装后，就可以直接使用如 vue-cli projectName 这样的命令来创建项目了。</p>
+<p>搜噶，也就是说，npm i 的时候，npm 就帮我们把这种软连接配置好了，其实这种软连接相当于一种映射，执行npm run xxx 的时候，就会到 node_modules&#x2F;bin中找对应的映射文件，然后再找到相应的js文件来执行。</p>
+<h3 id="5-在node-modules-bin中-有三个vue-cli-service文件。为什么会有三个文件呢？"><a href="#5-在node-modules-bin中-有三个vue-cli-service文件。为什么会有三个文件呢？" class="headerlink" title="5.在node_modules&#x2F;bin中 有三个vue-cli-service文件。为什么会有三个文件呢？"></a>5.在node_modules&#x2F;bin中 有三个vue-cli-service文件。为什么会有三个文件呢？</h3><p>如果我们在 cmd 里运行的时候，windows 一般是调用了 <code>vue-cli-service.cmd</code>，这个文件，这是 windows 下的批处理脚本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sh">@ECHO off<br>GOTO start<br>:find_dp0<br>SET dp0=%~dp0<br>EXIT /b<br>:start<br>SETLOCAL<br>CALL :find_dp0<br><br>IF EXIST <span class="hljs-string">&quot;%dp0%\node.exe&quot;</span> (<br>  SET <span class="hljs-string">&quot;_prog=%dp0%\node.exe&quot;</span><br>) ELSE (<br>  SET <span class="hljs-string">&quot;_prog=node&quot;</span><br>  SET PATHEXT=%PATHEXT:;.JS;=;%<br>)<br><br>endLocal &amp; goto <span class="hljs-comment">#_undefined_# 2&gt;NUL || title %COMSPEC% &amp; &quot;%_prog%&quot;  &quot;%dp0%\..\@vue\cli-service\bin\vue-cli-service.js&quot; %*</span><br></code></pre></td></tr></table></figure>
+
+<p>所以当我们运行<code>vue-cli-service serve</code>这条命令的时候，就相当于运行 <code>node_modules/.bin/vue-cli-service.cmd serve</code>。</p>
+<p>然后这个脚本会使用 node 去运行<code> vue-cli-service.js</code>这个 js 文件</p>
+<p>由于 node 中可以使用一系列系统相关的 api ，所以在这个 js 中可以做很多事情，例如读取并分析运行这条命令的目录下的文件，根据模板生成文件等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"># unix 系默认的可执行文件，必须输入完整文件名<br>vue-cli-service<br><br># windows cmd 中默认的可执行文件，当我们不添加后缀名时，自动根据 pathext 查找文件<br>vue-cli-service.<span class="hljs-property">cmd</span><br><br># <span class="hljs-title class_">Windows</span> <span class="hljs-title class_">PowerShell</span> 中可执行文件，可以跨平台<br>vue-cli-service.<span class="hljs-property">ps1</span><br></code></pre></td></tr></table></figure>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/js/" class="category-chain-item">js</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/npm-run-serve/">#npm run serve</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>npm run xxx 的时候发生了什么？</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/07/08/js-npmRunTime/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月8日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/07/08/vue-directive/" title="Vue自定义指令">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vue自定义指令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/07/01/mock-crud/" title="Mock.js CRUD">
+                        <span class="hidden-mobile">Mock.js CRUD</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

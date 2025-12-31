@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="三十七个常见Vue面试题一、谈谈你对MVVM的理解？映射关系简化，隐藏controller MVVM在MVC的基础上，把控制层隐藏掉了。  Vue不是一个MVVM框架，它是一个视图层框架。 ViewModal是一个桥梁，将数据和视图进行关联。 二、谈谈你对Vue中响应式数据的理解？数组和对象类型的值变化的时候，通过 defineReactive方法，借助了 defineProperty，将所有的属">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE前端面试题">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/11/24/interview-vue/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="三十七个常见Vue面试题一、谈谈你对MVVM的理解？映射关系简化，隐藏controller MVVM在MVC的基础上，把控制层隐藏掉了。  Vue不是一个MVVM框架，它是一个视图层框架。 ViewModal是一个桥梁，将数据和视图进行关联。 二、谈谈你对Vue中响应式数据的理解？数组和对象类型的值变化的时候，通过 defineReactive方法，借助了 defineProperty，将所有的属">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/ce6512d090a56abe.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/1702b130260c3529.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/3fc0c4b383b9ccd0.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/875fb72e04f47f43.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/f81d83c811e12b4d.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/c901f8b9cbbec7a6.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/25/b122004dd6c1dde3.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/24/9978507b1f505a3d.png">
+<meta property="og:image" content="https://s3.uuu.ovh/imgs/2022/11/25/f58979101b7d029d.png">
+<meta property="article:published_time" content="2022-11-24T06:51:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.264Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.uuu.ovh/imgs/2022/11/24/ce6512d090a56abe.png">
+  
+  
+  
+  <title>VUE前端面试题 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="VUE前端面试题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-24 14:51" pubdate>
+          2022年11月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          83 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">VUE前端面试题</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="三十七个常见Vue面试题"><a href="#三十七个常见Vue面试题" class="headerlink" title="三十七个常见Vue面试题"></a>三十七个常见Vue面试题</h1><h2 id="一、谈谈你对MVVM的理解？"><a href="#一、谈谈你对MVVM的理解？" class="headerlink" title="一、谈谈你对MVVM的理解？"></a>一、谈谈你对MVVM的理解？</h2><p>映射关系简化，隐藏controller MVVM在MVC的基础上，把控制层隐藏掉了。</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/ce6512d090a56abe.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p>Vue不是一个MVVM框架，它是一个视图层框架。</p>
+<p>ViewModal是一个桥梁，将数据和视图进行关联。</p>
+<h2 id="二、谈谈你对Vue中响应式数据的理解？"><a href="#二、谈谈你对Vue中响应式数据的理解？" class="headerlink" title="二、谈谈你对Vue中响应式数据的理解？"></a>二、谈谈你对Vue中响应式数据的理解？</h2><p>数组和对象类型的值变化的时候，通过 <code>defineReactive</code>方法，借助了 <code>defineProperty</code>，将所有的属性添加了 <code>getter</code>和 <code>setter</code>。用户在取值和设置的时候，可以进行一些操作。</p>
+<p>缺陷：只能监控最外层的属性，如果是多层的，就要进行全量递归。</p>
+<p>get里面会做依赖搜集（dep[watcher, watcher]） set里面会做数据更新（notify，通知watcher更新）</p>
+<h2 id="三、Vue中如何检测数组的变化？"><a href="#三、Vue中如何检测数组的变化？" class="headerlink" title="三、Vue中如何检测数组的变化？"></a>三、Vue中如何检测数组的变化？</h2><p>vue中对数组没有进行defineProperty，而是重写了数组的7个方法。 分别是：</p>
+<ul>
+<li>push</li>
+<li>shift</li>
+<li>pop</li>
+<li>splice</li>
+<li>unshift</li>
+<li>sort</li>
+<li>reverse</li>
+</ul>
+<p>因为这些方法都会改变数组本身。</p>
+<p>数组里的索引和长度是无法被监控的。</p>
+<h2 id="四、Vue中如何进行依赖收集的？"><a href="#四、Vue中如何进行依赖收集的？" class="headerlink" title="四、Vue中如何进行依赖收集的？"></a>四、Vue中如何进行依赖收集的？</h2><p><img src="https://s3.uuu.ovh/imgs/2022/11/24/1702b130260c3529.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p>Vue初始化的时候，挂载之后会进行编译。生成renderFunction。</p>
+<p>当取值的时候，就会搜集watcher，放到dep里面。</p>
+<p>当用户更改值的时候，就会通知watcher，去更新视图。</p>
+<h2 id="五、如何理解Vue中的模板编译原理？"><a href="#五、如何理解Vue中的模板编译原理？" class="headerlink" title="五、如何理解Vue中的模板编译原理？"></a>五、如何理解Vue中的模板编译原理？</h2><p>这个问题的核心是如何将template转换成render函数。</p>
+<ol>
+<li>将template模块转换成ast语法书 - parserHTML</li>
+<li>对静态语法做标记（某些节点不改变）</li>
+<li>重新生成代码 - codeGen,使用with语法包裹字符串</li>
+</ol>
+<h2 id="六、Vue生命周期钩子是如何实现的"><a href="#六、Vue生命周期钩子是如何实现的" class="headerlink" title="六、Vue生命周期钩子是如何实现的?"></a>六、Vue生命周期钩子是如何实现的?</h2><p>Vue的生命周期钩子是回调函数，当创建组件实例的过程中会调用相应的钩子方法。 内部会对钩子进行处理，将钩子函数维护成数组的形式。</p>
+<h2 id="七、Vue组件生命周期有哪些？"><a href="#七、Vue组件生命周期有哪些？" class="headerlink" title="七、Vue组件生命周期有哪些？"></a>七、Vue组件生命周期有哪些？</h2><ul>
+<li><p>beforeCreate 在实例初始化之后，数据观测observer 和event、watcher事件配置之前被调用</p>
+</li>
+<li><p>created 实例已经创建完成，在这一步，以下配置被完成</p>
+<ul>
+<li>数据观测</li>
+<li>属性和方法的运算</li>
+<li>watch&#x2F;event时间回调</li>
+<li>$el尚未生成</li>
+</ul>
+</li>
+<li><p>beforeMount 在挂载之前被调用，render尚未被调用</p>
+</li>
+<li><p>mounted el被新创建的vm.$el替换，并挂载到实例上去之后调用</p>
+</li>
+<li><p>beforeUpdate 数据更新时，被调用，发生在虚拟Dom重新渲染和打补丁之前</p>
+</li>
+<li><p>update 由于数据更改导致的虚拟Dom重新渲染和打补丁，在这之后调用</p>
+</li>
+<li><p>beforeDestroy 实例销毁之前调用</p>
+</li>
+<li><p>destroyed 实例销毁之后调用，调用后Vue实例的所有东西都会被解绑，所有的事件监听会被移除，子实例被销毁，该钩子在服务端渲染期间不被调用</p>
+</li>
+<li><p>keep-alive（activated &amp; deactivated）</p>
+</li>
+</ul>
+<h2 id="八、vue-mixin的使用场景和原理"><a href="#八、vue-mixin的使用场景和原理" class="headerlink" title="八、vue.mixin的使用场景和原理?"></a>八、vue.mixin的使用场景和原理?</h2><p>Vue的mixin的作用就是抽离公共的业务逻辑，原理类似对象的继承，当组件初始化的时候，会调用mergeOptions方法进行合并，采用策略模式针对不同的属性进行合并。 如果混入的数据和本身组件的数据有冲突，采用本身的数据为准。</p>
+<p>缺点：命名冲突、数据来源不清晰</p>
+<h2 id="九、Vue的组件data为什么必须是一个函数"><a href="#九、Vue的组件data为什么必须是一个函数" class="headerlink" title="九、Vue的组件data为什么必须是一个函数?"></a>九、Vue的组件data为什么必须是一个函数?</h2><p><code>new Vue</code>是一个单例模式，不会有任何的合并操作，所以根实例不必校验data一定是一个函数。 组件的data必须是一个函数，是为了防止两个组件的数据产生污染。 如果都是对象的话，会在合并的时候，指向同一个地址。 而如果是函数的时候，合并的时候调用，会产生两个空间。</p>
+<h2 id="十、请说明nextTick的原理。"><a href="#十、请说明nextTick的原理。" class="headerlink" title="十、请说明nextTick的原理。"></a>十、请说明nextTick的原理。</h2><p>nextTick是一个微任务。</p>
+<ul>
+<li>nextTick中的回调是在下次Dom更新循环结束之后执行的延迟回调</li>
+<li>可以用于获取更新后的Dom</li>
+<li>Vue中的数据更新是异步的，使用nextTick可以保证用户定义的逻辑在更新之后执行</li>
+</ul>
+<h2 id="十一、computed和watch的区别是什么？"><a href="#十一、computed和watch的区别是什么？" class="headerlink" title="十一、computed和watch的区别是什么？"></a>十一、computed和watch的区别是什么？</h2><ul>
+<li>computed和watch都基于watcher来实现的。</li>
+<li>computed的属性是具备缓存的，依赖的值不发生变化，对其取值时计算属性方法不会重复执行</li>
+<li>watch是监控值的变化，当值发生改变的时候，会调用回调函数</li>
+</ul>
+<h2 id="十二、Vue-set方法是如何实现的？"><a href="#十二、Vue-set方法是如何实现的？" class="headerlink" title="十二、Vue.set方法是如何实现的？"></a>十二、Vue.set方法是如何实现的？</h2><ul>
+<li>vue给对象和数组本身都增加了dep属性</li>
+<li>当给对象新增不存在的属性的时候，就会触发对象依赖的watcher去更新</li>
+<li>当修改数组索引的时候，就调用数组本身的splice方法去更新数组</li>
+</ul>
+<h2 id="十三、Vue为什么要用虚拟Dom"><a href="#十三、Vue为什么要用虚拟Dom" class="headerlink" title="十三、Vue为什么要用虚拟Dom"></a>十三、Vue为什么要用虚拟Dom</h2><ul>
+<li>虚拟dom就是用js对象来描述真实Dom，是对真实Dom的抽象</li>
+<li>由于直接操作Dom性能低，但是js层的操作效率高，可以将Dom操作转化成对象操作。最终通过diff算法比对差异进行更新Dom</li>
+<li>虚拟Dom不依赖真实平台环境，可以实现跨平台</li>
+</ul>
+<h2 id="十四、Vue的diff算法原理是什么？"><a href="#十四、Vue的diff算法原理是什么？" class="headerlink" title="十四、Vue的diff算法原理是什么？"></a>十四、Vue的diff算法原理是什么？</h2><p>Vue的diff算法是平级比较，不考虑跨级比较的情况。内部采用深度递归的方式+双指针方式比较</p>
+<ul>
+<li>先比较两个节点是不是相同节点</li>
+<li>相同节点比较属性，复用老节点</li>
+<li>先比较儿子节点，考虑老节点和新节点儿子的情况</li>
+<li>优化比较：头头、尾尾、头尾、尾头</li>
+<li>比对查找，进行复用</li>
+</ul>
+<h2 id="十五、既然vue通过数据劫持可以精准的探测数据变化，为什么还要进行diff检测差异？"><a href="#十五、既然vue通过数据劫持可以精准的探测数据变化，为什么还要进行diff检测差异？" class="headerlink" title="十五、既然vue通过数据劫持可以精准的探测数据变化，为什么还要进行diff检测差异？"></a>十五、既然vue通过数据劫持可以精准的探测数据变化，为什么还要进行diff检测差异？</h2><ul>
+<li>响应式数据变化，Vue确实可以在数据变化的时候，响应式系统可以立刻得知。但是如何每个属性都添加watcher的话，性能会非常的差。</li>
+<li>粒度过细，会导致更新不精准</li>
+</ul>
+<p>所以采用watcher + Diff算法来检测差异。</p>
+<h2 id="十六、请说明key的作用和原理"><a href="#十六、请说明key的作用和原理" class="headerlink" title="十六、请说明key的作用和原理"></a>十六、请说明key的作用和原理</h2><ul>
+<li>Vue在patch过程中，通过key可以判断两个虚拟节点是否是相同节点。</li>
+<li>没有key会导致更新的时候出问题</li>
+<li>尽量不要采用索引作为key</li>
+</ul>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/3fc0c4b383b9ccd0.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<h2 id="十七、谈谈对组件的理解"><a href="#十七、谈谈对组件的理解" class="headerlink" title="十七、谈谈对组件的理解"></a>十七、谈谈对组件的理解</h2><ul>
+<li>组件化开发能大幅提高应用开发效率、测试性、复用性</li>
+<li>常用的组件化技术：属性、自定义事件、插槽</li>
+<li>降低更新范围，值重新渲染变化的组件</li>
+<li>高内聚、低耦合、单向数据流</li>
+</ul>
+<h2 id="十八、请描述组件的渲染流程"><a href="#十八、请描述组件的渲染流程" class="headerlink" title="十八、请描述组件的渲染流程"></a>十八、请描述组件的渲染流程</h2><p>产生组件虚拟节点 -&gt; 创建组件的真实节点 -&gt; 插入到页面</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/875fb72e04f47f43.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<h2 id="十九、请描述组件的更新流程"><a href="#十九、请描述组件的更新流程" class="headerlink" title="十九、请描述组件的更新流程"></a>十九、请描述组件的更新流程</h2><p>属性更新会触发patchVnode方法，组件的虚拟节点会调用prepatch钩子，然后更新属性，更新组件。</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/f81d83c811e12b4d.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<h2 id="二十、异步组件原理"><a href="#二十、异步组件原理" class="headerlink" title="二十、异步组件原理"></a>二十、异步组件原理</h2><p>先渲染异步占位符节点 -&gt; 组件加载完毕后调用forceUpdate强制更新。</p>
+<h2 id="二十一、函数组件的优势和原理"><a href="#二十一、函数组件的优势和原理" class="headerlink" title="二十一、函数组件的优势和原理"></a>二十一、函数组件的优势和原理</h2><ul>
+<li>函数式组件的特性：无状态、无生命周期、无this。因此性能会高一点。</li>
+</ul>
+<p>正常的一个组件是一个类继承了Vue。</p>
+<p>函数式组件，就是一个普通的函数。</p>
+<h2 id="二十二、组件的传值方式有哪些？"><a href="#二十二、组件的传值方式有哪些？" class="headerlink" title="二十二、组件的传值方式有哪些？"></a>二十二、组件的传值方式有哪些？</h2><ol>
+<li>props和emit: 父组件向子组件传递数据，通过prop传递。子组件传递数据给父组件是通过<em>e<strong>m</strong>i**t</em>:父组件向子组件传递数据，通过<em>p<strong>r</strong>o**p</em>传递。子组件传递数据给父组件是通过emit事件</li>
+<li>parent,<em>p<strong>a</strong>r<strong>e</strong>n**t</em>,children获取当前组件的父组件和当前组件的子组件</li>
+<li>attrs和<em>a<strong>t</strong>t<strong>r</strong>s</em>和listeners 。</li>
+<li>父组件通过provide提供，子组件通过inject注入变量</li>
+<li>$ref获取实例</li>
+<li>eventBus平级组件数据传递</li>
+<li>Vuex</li>
+</ol>
+<h2 id="二十三、-attrs是为了解决什么问题出现的？"><a href="#二十三、-attrs是为了解决什么问题出现的？" class="headerlink" title="二十三、$attrs是为了解决什么问题出现的？"></a>二十三、$attrs是为了解决什么问题出现的？</h2><p>主要作用是为了实现批量传递数据。</p>
+<p>provide&#x2F;inject更适合应用在插件中，主要实现跨级数据传递。</p>
+<h2 id="二十四、v-for和v-if哪个优先级更高？"><a href="#二十四、v-for和v-if哪个优先级更高？" class="headerlink" title="二十四、v-for和v-if哪个优先级更高？"></a>二十四、v-for和v-if哪个优先级更高？</h2><p>首先，v-for和v-if 不能在同一个标签中使用。</p>
+<p>先处理v-for，再处理v-if。</p>
+<p>如果同时遇到的时候，应该考虑先用计算属性处理数据，在进行v-for，可以减少循环次数。</p>
+<h2 id="二十五、v-mode是如何实现的？"><a href="#二十五、v-mode是如何实现的？" class="headerlink" title="二十五、v-mode是如何实现的？"></a>二十五、v-mode是如何实现的？</h2><p>在组件上用的v-model，是model和callback</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">with</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span></span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-title function_">_c</span>(<span class="hljs-string">&#x27;my&#x27;</span>,&#123;<span class="hljs-attr">model</span>:&#123;<span class="hljs-attr">value</span>:(xxx),<span class="hljs-attr">callback</span>:<span class="hljs-keyword">function</span> (<span class="hljs-params">$$v</span>) &#123;xxx=$$v&#125;,<span class="hljs-attr">expression</span>:<span class="hljs-string">&quot;xxx&quot;</span>&#125;&#125;)&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在普通元素上用v-model，会生成指令，还可能因为不同的元素：</p>
+<ul>
+<li>生成value和input</li>
+<li>生成change和radio</li>
+<li>生成change和checked</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">with</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span></span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-title function_">_c</span>(<span class="hljs-string">&#x27;input&#x27;</span>,&#123;<span class="hljs-attr">directives</span>:[&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&quot;model&quot;</span>,<span class="hljs-attr">rawName</span>:<span class="hljs-string">&quot;v-model&quot;</span>,<span class="hljs-attr">value</span>:(xxx),<span class="hljs-attr">expression</span>:<span class="hljs-string">&quot;xxx&quot;</span>&#125;],<span class="hljs-attr">domProps</span>:&#123;<span class="hljs-string">&quot;value&quot;</span>:(xxx)&#125;,<span class="hljs-attr">on</span>:&#123;<span class="hljs-string">&quot;input&quot;</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params">$event</span>)&#123;<span class="hljs-keyword">if</span>($event.<span class="hljs-property">target</span>.<span class="hljs-property">composing</span>)<span class="hljs-keyword">return</span>;xxx=$event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>&#125;&#125;&#125;)&#125;<br></code></pre></td></tr></table></figure>
+
+<p>指令在什么时候会调用？</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/c901f8b9cbbec7a6.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<p>源码：</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/25/b122004dd6c1dde3.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<h2 id="二十六、Vue的普通Slot以及作用域Slot的区别"><a href="#二十六、Vue的普通Slot以及作用域Slot的区别" class="headerlink" title="二十六、Vue的普通Slot以及作用域Slot的区别"></a>二十六、Vue的普通Slot以及作用域Slot的区别</h2><h3 id="普通插槽"><a href="#普通插槽" class="headerlink" title="普通插槽"></a>普通插槽</h3><p>普通插槽是渲染后做替换的工作。父组件渲染完毕后，替换子组件的内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-string">`&lt;div&gt;</span><br><span class="hljs-string">	&lt;slot name=&quot;title&quot;&gt;&lt;/slot&gt;</span><br><span class="hljs-string">	&lt;slot name=&quot;content&quot;&gt;&lt;/slot&gt;</span><br><span class="hljs-string">&lt;/div&gt;`</span>);<br><span class="hljs-comment">// with(this)&#123;return _c(&#x27;div&#x27;,[_t(&quot;title&quot;),_v(&quot; &quot;),_t(&quot;content&quot;)],2)&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>在模板编译的时候，处理组件中的子节点和slot标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div id=&quot;app&quot;&gt;<br>    &lt;my&gt;<br>        &lt;h1 slot=&quot;tit1e&quot;&gt;标题&lt;/h1&gt;<br>        &lt;div slot=&quot;content&quot;&gt;内容&lt;/div&gt;<br>    &lt;/my&gt;<br>&lt;/div&gt;<br>&lt;script&gt;<br>    Vue.component(&#x27;my&#x27;,&#123;<br>        template: `&lt;div&gt;<br>        	&lt;slot name=&quot;title&quot;&gt;&lt;/slot&gt;<br>			&lt;slot name=&quot;content&quot;&gt;&lt;/slot&gt;<br>        &lt;/div&gt;`<br>    &#125;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在创建元素的时候，用_t()方法方法来替换_v()的内容。</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/24/9978507b1f505a3d.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<h3 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h3><p>作用域插槽可以拿到子组件里面的属性。在子组件中传入属性然后渲染。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div id=&quot;app&quot;&gt;<br>    &lt;my&gt;<br>        &lt;template slot-scope=&quot;&#123;article)&quot;&gt;<br>            &lt;h1 slot=&quot;article.tit1e&quot;&gt;标题&lt;/h1&gt;<br>            &lt;div slot=&quot;article.content&quot;&gt;内容&lt;/div&gt;<br>        &lt;/template&gt;<br>    &lt;/my&gt;<br>&lt;/div&gt;<br>&lt;script&gt;<br>    Vue.component(&#x27;my&#x27;,&#123;<br>        template: `&lt;div&gt;<br>        	&lt;slot:article=&quot;&#123;title:&#x27;标题&#x27;,content:&#x27;内容&#x27;&#125;&quot;&gt;&lt;/slot&gt;<br>        &lt;/div&gt;`<br>    &#125;)<br>    const vm new Vue(&#123;<br>    	el:&#x27;#app<br>    &#125;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-string">`&lt;my&gt;</span><br><span class="hljs-string">    &lt;h1 slot=”title&quot;&gt;标题&lt;h1/&gt;</span><br><span class="hljs-string">    &lt;div slot=&quot;content&quot;&gt;内容&lt;/div&gt;</span><br><span class="hljs-string">&lt;/my&gt;`</span>)<br><span class="hljs-comment">/**</span><br><span class="hljs-comment">with(this)&#123;</span><br><span class="hljs-comment">    return _c(&#x27;my&#x27;,[</span><br><span class="hljs-comment">    _c(&#x27;h1&#x27;,&#123;attrs:&#123;&quot;slot&quot;:&quot;title&#x27;&quot;&#125;,slot:&quot;title&quot;&#125;,[_v(&quot;标题&quot;)]),_v(&quot; &quot;),</span><br><span class="hljs-comment">    _c(&#x27;div&#x27;,&#123;attrs:&#123;&quot;slot&quot;:&quot;content&quot;,slot:&quot;content&quot;&#125;,[_v(&quot;内容&quot;)])</span><br><span class="hljs-comment">    ])</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">**/</span><br></code></pre></td></tr></table></figure>
+
+<p>作用域插槽的编译结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> r3 = templateCompiler.<span class="hljs-title function_">compile</span>(<span class="hljs-string">`</span><br><span class="hljs-string">&lt;div&gt;</span><br><span class="hljs-string">	&lt;slot :article=&quot;&#123;title:&#x27;标题&#x27;,content:&#x27;内容&#x27;&#125;&quot;&gt;&lt;/slot&gt;</span><br><span class="hljs-string">&lt;/div&gt;`</span>)<br><span class="hljs-comment">// with(this)&#123;return _c(&#x27;div&#x27;,[_t(&quot;default&quot;,null,&#123;&quot;article&quot;:&#123;title:&#x27;标题&#x27;,</span><br><span class="hljs-comment">// content:&#x27;内容&#x27;&#125;&#125;)],2)&#125;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(r3.<span class="hljs-property">render</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-string">`&lt;my&gt;</span><br><span class="hljs-string">    &lt;template slot-scope=&quot;&#123;article&#125;&quot;&gt;</span><br><span class="hljs-string">        &lt;h1 slot=&quot;article.tit1e&quot;&gt;标题&lt;/h1&gt;</span><br><span class="hljs-string">        &lt;div slot=&quot;article.content&quot;&gt;内容&lt;/div&gt;</span><br><span class="hljs-string">    &lt;/template&gt;</span><br><span class="hljs-string">&lt;/my&gt;`</span>)<br><span class="hljs-comment">/**</span><br><span class="hljs-comment">with(this)&#123;return _c(&#x27;my&#x27;,</span><br><span class="hljs-comment">    &#123;scopedslofs:_u([</span><br><span class="hljs-comment">        &#123;key:&quot;default&quot;,fn:function(&#123;article&#125;)&#123;</span><br><span class="hljs-comment">            return [</span><br><span class="hljs-comment">                _c(&#x27;h1&#x27;,&#123;attrs:&#123;&quot;slot&quot;:&quot;article.title&quot;),slot:&quot;article.</span><br><span class="hljs-comment">                tit1e&quot;&#125;,[_v(&quot;标题&quot;)]),</span><br><span class="hljs-comment">                _v(&quot; &quot;),</span><br><span class="hljs-comment">                _c(&#x27;div&#x27;,&#123;attrs:&#123;&quot;slot&quot;:&quot;article.content&quot;&#125;,slot:&quot;article.</span><br><span class="hljs-comment">                content&quot;&#125;,[_v(&quot;内容&quot;)])</span><br><span class="hljs-comment">            ]</span><br><span class="hljs-comment">    	&#125;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">])</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="二十八、Vue-use是干什么的？"><a href="#二十八、Vue-use是干什么的？" class="headerlink" title="二十八、Vue.use是干什么的？"></a>二十八、Vue.use是干什么的？</h2><p><code>Vue.use</code>是用来使用插件的。我们可以在插件中扩展全局组件、指令、原型方法等。 会调用 <code>install</code>方法将Vue的构建函数默认传入，在插件中可以使用vue，无需依赖vue库</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title class_">Vue</span>.<span class="hljs-property">use</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">plugin: <span class="hljs-built_in">Function</span> | <span class="hljs-built_in">Object</span></span>) &#123;<br>    <span class="hljs-comment">// 插件缓存</span><br>    <span class="hljs-keyword">const</span> installedPlugins = (<span class="hljs-variable language_">this</span>.<span class="hljs-property">_installedPlugins</span> || (<span class="hljs-variable language_">this</span>.<span class="hljs-property">_installedP1ugins</span> =<br>    []))<br>    <span class="hljs-keyword">if</span> (installedPlugins.<span class="hljs-title function_">indexof</span>(plugin) &gt; -<span class="hljs-number">1</span>) &#123; V<span class="hljs-comment">// 如果已经有插件 直接返回</span><br>    	<span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span><br>    &#125;<br>  <br>    <span class="hljs-comment">// additional parameters</span><br>    <span class="hljs-keyword">const</span> args = <span class="hljs-title function_">toArray</span>(<span class="hljs-variable language_">arguments</span>,<span class="hljs-number">1</span>) <span class="hljs-comment">// 除了第一项其他的参数整合成数组</span><br>    args.<span class="hljs-title function_">unshift</span>(<span class="hljs-variable language_">this</span>) <span class="hljs-comment">// 将Vue 放信到数组中</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> plugin.<span class="hljs-property">install</span> ===“<span class="hljs-string">&#x27;function&#x27;</span>) &#123; <span class="hljs-comment">// 调用install方法</span><br>    	plugin.<span class="hljs-property">instal11</span>.<span class="hljs-title function_">apply</span>(<span class="hljs-title class_">Cplugin</span>,args)<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> plugin ===“<span class="hljs-string">&#x27;function&#x27;</span>) &#123; <span class="hljs-comment">// 直接调用方法</span><br>    	plugin.<span class="hljs-title function_">app1y</span>(<span class="hljs-literal">null</span>,args)<br>    了<br>    installedPlugins.<span class="hljs-title function_">push</span>(plugin) <span class="hljs-comment">// 缓存插件</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span><br>&#125;                                                      <br><br></code></pre></td></tr></table></figure>
+
+<h2 id="二十九、组件写name有啥好处？"><a href="#二十九、组件写name有啥好处？" class="headerlink" title="二十九、组件写name有啥好处？"></a>二十九、组件写name有啥好处？</h2><ul>
+<li>增加name属性，会在components属性中增加组件本身，实现组件的递归调用。</li>
+<li>可以表示组件的具体名称，方便调试和查找对应的组件。</li>
+</ul>
+<h2 id="三十、vue的修饰符有哪些？"><a href="#三十、vue的修饰符有哪些？" class="headerlink" title="三十、vue的修饰符有哪些？"></a>三十、vue的修饰符有哪些？</h2><ul>
+<li>.stop</li>
+<li>.prevent</li>
+<li>.capture</li>
+<li>.self</li>
+<li>.once</li>
+<li>.passive</li>
+<li>.right</li>
+<li>.center</li>
+<li>.middle</li>
+<li>.alt</li>
+</ul>
+<h2 id="三十一、如何理解自定义指令？"><a href="#三十一、如何理解自定义指令？" class="headerlink" title="三十一、如何理解自定义指令？"></a>三十一、如何理解自定义指令？</h2><ul>
+<li>在生成ast语法树时，遇到指令会给当前元素添加directives属性</li>
+<li>通过genDirectives生成指令代码</li>
+<li>在patch前，将指令的钩子提取到cbs中，在patch过程中调用对应的钩子</li>
+<li>当执行cbs对应的钩子时，调用对应指令定义方法</li>
+</ul>
+<h2 id="三十二、keep-alive平时在哪里使用？原理是什么？"><a href="#三十二、keep-alive平时在哪里使用？原理是什么？" class="headerlink" title="三十二、keep-alive平时在哪里使用？原理是什么？"></a>三十二、keep-alive平时在哪里使用？原理是什么？</h2><ul>
+<li>使用keep-alive包裹动态组件时，会对组件进行缓存，避免组件重新创建</li>
+</ul>
+<p>使用有两个场景，一个是动态组件，一个是router-view</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;keep-alive :include=&quot;whiteList&quot; :exclude=&quot;blackList&quot; :max=&quot;count&quot;&gt;<br>    &lt;component :is=&quot;component&quot;&gt;&lt;/component&gt;<br>&lt;/keep-alive&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;keep-alive :include=&quot;whiteList&quot; :exclude=&quot;blackList&quot; :max=&quot;count&quot;&gt;<br>    &lt;router-view&gt;&lt;/router-view&gt;<br>&lt;/keep-alive&gt;<br></code></pre></td></tr></table></figure>
+
+<p>这里创建了一个白名单和一个黑名单。表明哪些需要需要做缓存，哪些不需要做缓存。以及最大的缓存个数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;keep-alive&#x27;</span>,<br>    <span class="hljs-attr">abstract</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 不会放到对应的lifecycle</span><br>  <br>    <span class="hljs-attr">props</span>: &#123;<br>        <span class="hljs-attr">include</span>: patternTypes,<span class="hljs-comment">//白名单</span><br>        <span class="hljs-attr">exclude</span>: patternTypes,<span class="hljs-comment">//黑名单</span><br>        <span class="hljs-attr">max</span>: [<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Number</span>] <span class="hljs-comment">//缓存的最大个数</span><br>    &#125;,<br>  <br>    <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">cache</span> = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">create</span>(<span class="hljs-literal">null</span>) <span class="hljs-comment">//缓存列表</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">keys</span> = [] <span class="hljs-comment">//缓存的key列表</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>缓存的是组件的实例，用key和value对象保存。</p>
+<p>加载的时候，监控include和exclude。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>)&#123; <span class="hljs-comment">//监控缓存列表</span><br>	<span class="hljs-variable language_">this</span>.$watch(<span class="hljs-string">&#x27;include&#x27;</span>,<span class="hljs-function"><span class="hljs-params">val</span> =&gt;</span> &#123; <span class="hljs-comment">//缓存列表可以是动态的</span><br>		<span class="hljs-title function_">pruneCache</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-function"><span class="hljs-params">name</span> =&gt;</span> <span class="hljs-title function_">matches</span>(val,name))<br>	&#125;)<br>    <span class="hljs-variable language_">this</span>.$watch(<span class="hljs-string">&#x27;exclude&#x27;</span>,<span class="hljs-function"><span class="hljs-params">val</span> =&gt;</span> &#123;<br>		<span class="hljs-title function_">pruneCache</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-function"><span class="hljs-params">name</span> =&gt;</span> !<span class="hljs-title function_">matches</span>(val,name))<br>	&#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果不需要缓存，直接返回虚拟节点。</p>
+<p>如果需要缓存，就用组件的id和标签名，生成一个key，把当前vnode的instance作为value，存成一个对象。这就是缓存列表</p>
+<p>如果设置了最大的缓存数，就删除第0个缓存。新增最新的缓存。</p>
+<p>并且给组件添加一个keepAlive变量为true，当组件初始化的时候，不再初始化。</p>
+<h2 id="三十三、vue-router有几种钩子函数？执行流程如何？"><a href="#三十三、vue-router有几种钩子函数？执行流程如何？" class="headerlink" title="三十三、vue-router有几种钩子函数？执行流程如何？"></a>三十三、vue-router有几种钩子函数？执行流程如何？</h2><p>钩子函数有三种：</p>
+<ul>
+<li>全局守卫</li>
+<li>路由守卫</li>
+<li>组件守卫</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs tex">1.导航被触发。<br>2.在失活的组件里调用beforeRouteLeave守卫<br>3.调用全局的beforeEach守卫。<br>4.在重用的组件里调用beforeRouteUpdate守卫（2.2+）。<br>5.在路由配置里调用beforeEnter。<br>6.解析异步路由组件。<br>7.在被激活的组件里调用beforeRouteEnter。<br>8.调用全局的beforeResolve守卫（2.5+）。<br>9.导航被确认。<br>10.调用全局的afertEach钩子。<br>11.触发DOM更新。<br>12.调用beforeRouteEnter守卫中传给next的回调函数，创建好的组件实例会作为回调函数的参数传入。<br></code></pre></td></tr></table></figure>
+
+<h2 id="三十四、vuerouter的两种模式的区别"><a href="#三十四、vuerouter的两种模式的区别" class="headerlink" title="三十四、vuerouter的两种模式的区别"></a>三十四、vuerouter的两种模式的区别</h2><ul>
+<li>vue-router中有三种模式，分别是hash、history、abstract</li>
+<li>abstract在不支持浏览器的API换景使用</li>
+<li>hash模式兼容性好，但是不美观，不利于SEO</li>
+<li>history美观，historyAPI+popState，但是刷新会出现404</li>
+</ul>
+<h2 id="三十五、谈谈Vue的性能优化有哪些？"><a href="#三十五、谈谈Vue的性能优化有哪些？" class="headerlink" title="三十五、谈谈Vue的性能优化有哪些？"></a>三十五、谈谈Vue的性能优化有哪些？</h2><ul>
+<li>数据层级不要过深，合理的设置响应式数据</li>
+<li>使用数据时，缓存值的结果，不频繁取值</li>
+<li>合理设置key</li>
+<li>v-show(频繁切换性能高)和v-if的合理使用</li>
+<li>控制组件的粒度 -&gt; Vue采用组件级别更新</li>
+<li>采用函数式组件 -&gt; 函数式组价开销低</li>
+<li>采用异步组件 -&gt; 借助webpack的分包策略</li>
+<li>使用keep-alive来缓存组件</li>
+<li>虚拟滚动、时间分片等策略</li>
+<li>打包优化</li>
+</ul>
+<h2 id="三十六、谈谈你对Vuex的理解？"><a href="#三十六、谈谈你对Vuex的理解？" class="headerlink" title="三十六、谈谈你对Vuex的理解？"></a>三十六、谈谈你对Vuex的理解？</h2><p>Vuex是专门为vue提供的全局状态管理系统，用于多个组件中的数据共享、数据缓存。</p>
+<p>问题：无法持久化。</p>
+<p><img src="https://s3.uuu.ovh/imgs/2022/11/25/f58979101b7d029d.png" srcset="/a937321983/a937321983.atomgit.io.git/img/loading.gif" lazyload></p>
+<ul>
+<li>mutation 主要修改状态，同步执行</li>
+<li>action 执行业务代码，方便复用，逻辑可以为异步。不能直接修改状态。</li>
+</ul>
+<h2 id="三十七、vue中使用了哪些设计模式？"><a href="#三十七、vue中使用了哪些设计模式？" class="headerlink" title="三十七、vue中使用了哪些设计模式？"></a>三十七、vue中使用了哪些设计模式？</h2><ul>
+<li>单例模式：new多次，只有一个实例</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">install</span> (<span class="hljs-params">_Vue</span>) &#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title class_">Vue</span> &amp;&amp; _Vue === <span class="hljs-title class_">Vue</span>) &#123;<br>        <span class="hljs-keyword">if</span>(__DEV__)&#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<br>            	<span class="hljs-string">&#x27;[vuex] already installed. Vue.use(Vuex) should be called only once.&#x27;</span><br>            )<br>        &#125;<br>        <span class="hljs-keyword">return</span><br>    &#125;<br>    <span class="hljs-title class_">Vue</span> = _Vue<br>    <span class="hljs-title function_">applyMixin</span>(<span class="hljs-title class_">Vue</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>工场模式：传入参数就可以创建实例（虚拟节点的创建）</li>
+<li>发布订阅模式：eventBus</li>
+<li>观察者模式：watch和dep</li>
+<li>代理模式：_data属性、proxy、防抖、节流</li>
+<li>中介者模式：vuex</li>
+<li>策略模式</li>
+<li>外观模式</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/interview/" class="category-chain-item">interview</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>VUE前端面试题</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/11/24/interview-vue/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月24日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2023/10/18/interview-js/" title="JavaScript前端面试题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript前端面试题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/11/24/webpack-optimization/" title="Webpack优化">
+                        <span class="hidden-mobile">Webpack优化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

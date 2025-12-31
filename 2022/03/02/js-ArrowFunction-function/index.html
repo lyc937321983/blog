@@ -1,0 +1,813 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="箭头函数与普通函数的区别一.介绍箭头函数(Arrow Function) ES6中允许使用“箭头”（&#x3D;&gt;） 来定义函数。箭头函数相当于匿名函数，并且简化了函数定义。  我们来看一下如何使用 （&#x3D;&gt;） 来声明一个函数： 12345678&#x2F;&#x2F; 箭头函数let foo &#x3D; (name) &#x3D;&gt; &#96;我是$&#123;name&#125;&#96;foo(&#x27;南玖&amp;#x2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript箭头函数与普通函数的区别">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/03/02/js-ArrowFunction-function/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="箭头函数与普通函数的区别一.介绍箭头函数(Arrow Function) ES6中允许使用“箭头”（&#x3D;&gt;） 来定义函数。箭头函数相当于匿名函数，并且简化了函数定义。  我们来看一下如何使用 （&#x3D;&gt;） 来声明一个函数： 12345678&#x2F;&#x2F; 箭头函数let foo &#x3D; (name) &#x3D;&gt; &#96;我是$&#123;name&#125;&#96;foo(&#x27;南玖&amp;#x2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-02T02:38:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.265Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="箭头函数">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>javascript箭头函数与普通函数的区别 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="javascript箭头函数与普通函数的区别"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-02 10:38" pubdate>
+          2022年3月2日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          72 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">javascript箭头函数与普通函数的区别</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="箭头函数与普通函数的区别"><a href="#箭头函数与普通函数的区别" class="headerlink" title="箭头函数与普通函数的区别"></a>箭头函数与普通函数的区别</h1><h2 id="一-介绍箭头函数-Arrow-Function"><a href="#一-介绍箭头函数-Arrow-Function" class="headerlink" title="一.介绍箭头函数(Arrow Function)"></a>一.介绍箭头函数(Arrow Function)</h2><blockquote>
+<p>ES6中允许使用“箭头”<strong>（&#x3D;&gt;）</strong> 来定义函数。箭头函数相当于匿名函数，并且简化了函数定义。</p>
+</blockquote>
+<p>我们来看一下如何使用 <strong>（&#x3D;&gt;）</strong> 来声明一个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 箭头函数</span><br><span class="hljs-keyword">let</span> <span class="hljs-title function_">foo</span> = (<span class="hljs-params">name</span>) =&gt; <span class="hljs-string">`我是<span class="hljs-subst">$&#123;name&#125;</span>`</span><br><span class="hljs-title function_">foo</span>(<span class="hljs-string">&#x27;南玖&#x27;</span>) <span class="hljs-comment">// 我是南玖</span><br><br><span class="hljs-comment">// 等同于下面这个普通函数</span><br><span class="hljs-keyword">let</span> foo2 = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`我是<span class="hljs-subst">$&#123;name&#125;</span>`</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>箭头函数有两种格式，一种像上面的，只包含一个表达式，连<code>{ ... }</code>和<code>return</code>都省略掉了。还有一种可以包含多条语句，这时候就不能省略<code>{ ... }</code>和<code>return</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">foo</span> = (<span class="hljs-params">name</span>) =&gt; &#123;<br>    <span class="hljs-keyword">if</span>(name)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">`我是<span class="hljs-subst">$&#123;name&#125;</span>`</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;前端南玖&#x27;</span><br>&#125;<br><span class="hljs-title function_">foo</span>(<span class="hljs-string">&#x27;南玖&#x27;</span>) <span class="hljs-comment">// 我是南玖</span><br></code></pre></td></tr></table></figure>
+
+<p>如果箭头函数返回的是一个字面量对象，则需要用括号包裹该字面量对象返回</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">foo</span> = (<span class="hljs-params">name</span>) =&gt; (&#123;<br>    name,<br>    <span class="hljs-attr">job</span>: <span class="hljs-string">&#x27;front end&#x27;</span><br>&#125;)<br><span class="hljs-comment">// 等同于</span><br><span class="hljs-keyword">let</span> foo2 = <span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    name,<br>    <span class="hljs-attr">job</span>: <span class="hljs-string">&#x27;front end&#x27;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="二-箭头函数与普通函数的区别"><a href="#二-箭头函数与普通函数的区别" class="headerlink" title="二.箭头函数与普通函数的区别"></a>二.箭头函数与普通函数的区别</h2><p>我们可以通过打印箭头函数和普通函数来看看两者到底有什么区别：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span> = name =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;<br><span class="hljs-keyword">let</span> fn2 = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">dir</span>(fn) <span class="hljs-comment">// </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">dir</span>(fn2) <span class="hljs-comment">// </span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//  fn</span><br><span class="hljs-title function_">fn</span>()<br><span class="hljs-attr">length</span>: <span class="hljs-number">1</span><br><span class="hljs-attr">name</span>: <span class="hljs-string">&quot;fn&quot;</span><br><span class="hljs-attr">arguments</span>: (...)<br><span class="hljs-attr">caller</span>: (...)<br>[[<span class="hljs-title class_">FunctionLocation</span>]]: <span class="hljs-title class_">VM62</span>:<span class="hljs-number">1</span><br>[[<span class="hljs-title class_">Prototype</span>]]: ƒ ()<br><br><span class="hljs-comment">//  fn2</span><br><br>ƒ <span class="hljs-title function_">fn2</span>(name)<br><span class="hljs-attr">arguments</span>: <span class="hljs-literal">null</span><br><span class="hljs-attr">caller</span>: <span class="hljs-literal">null</span><br><span class="hljs-attr">length</span>: <span class="hljs-number">1</span><br><span class="hljs-attr">name</span>: <span class="hljs-string">&quot;fn2&quot;</span><br><span class="hljs-attr">prototype</span>: &#123;<span class="hljs-attr">constructor</span>: ƒ&#125;<br>[[<span class="hljs-title class_">FunctionLocation</span>]]: <span class="hljs-title class_">VM62</span>:<span class="hljs-number">4</span><br>[[<span class="hljs-title class_">Prototype</span>]]: ƒ ()<br></code></pre></td></tr></table></figure>
+
+<p>从打印结果来看，箭头函数与普通函数相比，缺少了<code>caller，arguments，prototype</code></p>
+<h3 id="1-声明方式不同，匿名函数"><a href="#1-声明方式不同，匿名函数" class="headerlink" title="1.声明方式不同，匿名函数"></a>1.声明方式不同，匿名函数</h3><ul>
+<li>声明一个普通函数需要使用关键字<code>function</code>来完成，并且使用<code>function</code>既可以声明成一个<strong>具名函数</strong>也可以声明成一个<strong>匿名函数</strong></li>
+<li>声明一个箭头函数则只需要使用箭头就可以，无需使用关键字<code>function</code>，比普通函数声明更简洁。</li>
+<li>箭头函数只能声明成<strong>匿名函数</strong>，但可以通过表达式的方式让箭头函数具名</li>
+</ul>
+<h3 id="2-this指向不同"><a href="#2-this指向不同" class="headerlink" title="2.this指向不同"></a>2.this指向不同</h3><p>对于普通函数来说，内部的<code>this</code>指向函数运行时所在的对象，但是这一点对箭头函数不成立。它没有自己的<code>this</code>对象，内部的<code>this</code>就是定义时上层作用域中的<code>this</code>。也就是说，箭头函数内部的<code>this</code>指向是固定的，相比之下，普通函数的<code>this</code>指向是可变的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;南玖&#x27;</span><br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;nanjiu&#x27;</span>,<br>    <span class="hljs-attr">say</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;say:&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;,<br>    <span class="hljs-attr">say2</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;say2:&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;<br>&#125;<br>person.<span class="hljs-title function_">say</span>() <span class="hljs-comment">// say: nanjiu</span><br>person.<span class="hljs-title function_">say2</span>() <span class="hljs-comment">// say2: 南玖</span><br></code></pre></td></tr></table></figure>
+
+<p>这里第一个<code>say</code>定义的是一个普通函数，并且它是作为对象<code>person</code>的方法来进行调用的，所以它的<code>this</code>指向的就是<code>person</code>，所以它应该会输出<code>say: nanjiu</code></p>
+<p>而第二个<code>say2</code>定义的是一个箭头函数，我们知道箭头函数本身没有<code>this</code>，它的<code>this</code>永远指向它定义时所在的上层作用域，所以<code>say2</code>的<code>this</code>应该指向的是全局window，所以它会输出<code>say2: 南玖</code></p>
+<p><strong>我们也可以通过<code>Babel</code> 转箭头函数产生的 <code>ES5</code> 代码来证明箭头函数没有自己的<code>this</code>，而是引用的上层作用域中<code>this</code>。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// ES6</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;id:&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span>);<br>  &#125;, <span class="hljs-number">100</span>);<br>&#125;<br><br><span class="hljs-comment">// ES5</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">var</span> _this = <span class="hljs-variable language_">this</span>;<br><br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;id:&#x27;</span>, _this.<span class="hljs-property">id</span>);<br>  &#125;, <span class="hljs-number">100</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>转换后的 ES5 版本清楚地说明了，箭头函数里面根本没有自己的<code>this</code>，而是引用的上层作用域中<code>this</code>。</p>
+<h3 id="3-箭头函数的this永远不会变，call、apply、bind也无法改变"><a href="#3-箭头函数的this永远不会变，call、apply、bind也无法改变" class="headerlink" title="3.箭头函数的this永远不会变，call、apply、bind也无法改变"></a>3.箭头函数的this永远不会变，call、apply、bind也无法改变</h3><p>我们可以用call、apply、bind来改变普通函数的this指向，但是由于箭头函数的this指向在它定义时就已经确定了，永远指向它定义时的上层作用域中的this，所以使用这些方法永远也改变不了箭头函数<code>this</code>的指向。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;南玖&#x27;</span><br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;nanjiu&#x27;</span>,<br>    <span class="hljs-attr">say</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;say:&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;,<br>    <span class="hljs-attr">say2</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;say2:&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;<br>&#125;<br><br>person.<span class="hljs-property">say</span>.<span class="hljs-title function_">call</span>(&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;小明&#x27;</span>&#125;) <span class="hljs-comment">// say: 小明</span><br>person.<span class="hljs-property">say2</span>.<span class="hljs-title function_">call</span>(&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;小红&#x27;</span>&#125;) <span class="hljs-comment">// say2: 南玖</span><br></code></pre></td></tr></table></figure>
+
+<p>还是上面那个例子，只不过我们在调用的时候使用<code>call</code>试图改变<code>this</code>指向，第一个<code>say</code>是一个普通函数，它经过call调用，打印出的是<code>say: 小明</code>，这说明普通函数的this已经改变了，第二个<code>say2</code>是一个箭头函数，它也经过call调用，但它打印出的仍然是<code>say2: 南玖</code>，这就能够证明<strong>箭头函数的this永远不会变，即使使用call、apply、bind也无法改变</strong></p>
+<h3 id="4-箭头函数没有原型prototype"><a href="#4-箭头函数没有原型prototype" class="headerlink" title="4.箭头函数没有原型prototype"></a>4.箭头函数没有原型prototype</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span> = name =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;<br><span class="hljs-keyword">let</span> fn2 = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fn.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>) <span class="hljs-comment">// undefined</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">dir</span>(fn2.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>) <span class="hljs-comment">// &#123;constructor: ƒ&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-箭头函数不能当成一个构造函数"><a href="#5-箭头函数不能当成一个构造函数" class="headerlink" title="5.箭头函数不能当成一个构造函数"></a>5.箭头函数不能当成一个构造函数</h3><p>为什么箭头函数不能当成一个构造函数呢？我们先来用<code>new</code>调用一下看看会发生什么：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span> = name =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name)<br>&#125;<br><br><span class="hljs-keyword">const</span> f = <span class="hljs-keyword">new</span> <span class="hljs-title function_">fn</span>(<span class="hljs-string">&#x27;nanjiu&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>结果符合我们的预期，这样调用会报错。</p>
+<p>我们知道new内部实现其实是分为以下四步：</p>
+<ul>
+<li>新建一个空对象</li>
+<li>链接到原型</li>
+<li>绑定this，执行构造函数</li>
+<li>返回新对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myNew</span>(<span class="hljs-params"></span>) &#123;<br><span class="hljs-comment">// 1.新建一个空对象</span><br><span class="hljs-keyword">let</span> obj = &#123;&#125;<br><span class="hljs-comment">// 2.获得构造函数</span><br><span class="hljs-keyword">let</span> con = <span class="hljs-variable language_">arguments</span>.<span class="hljs-property">__proto__</span>.<span class="hljs-property">constructor</span><br><span class="hljs-comment">// 3.链接原型</span><br>obj.<span class="hljs-property">__proto__</span> = con.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span><br><span class="hljs-comment">// 4.绑定this，执行构造函数</span><br><span class="hljs-keyword">let</span> res = con.<span class="hljs-title function_">apply</span>(obj, <span class="hljs-variable language_">arguments</span>)<br><span class="hljs-comment">// 5.返回新对象</span><br><span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> res === <span class="hljs-string">&#x27;object&#x27;</span> ? res : obj<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>因为箭头函数没有自己的<code>this</code>，它的<code>this</code>其实是继承了外层执行环境中的<code>this</code>，且<code>this</code>指向永远不会变，并且箭头函数没有原型<code>prototype</code>，没法让他的实例的<code>__proto__</code>属性指向，所以箭头函数也就无法作为构造函数，否则用<code>new</code>调用时会报错！</p>
+<h4 id="没有new-target"><a href="#没有new-target" class="headerlink" title="没有new.target"></a>没有new.target</h4><p><code>new</code>是从构造函数生成实例对象的命令。ES6 为<code>new</code>命令引入了一个<code>new.target</code>属性，这个属性一般用在构造函数中，返回<code>new</code>调用的那个构造函数。如果构造函数不是通过<code>new</code>命令或<code>Reflect.construct()</code>调用的，<code>new.target</code>会返回<code>undefined</code>，所以这个属性可以用来确定构造函数是怎么调用的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;fn:&#x27;</span>,<span class="hljs-keyword">new</span>.<span class="hljs-property">target</span>)<br>&#125;<br><br><span class="hljs-title function_">fn</span>(<span class="hljs-string">&#x27;nanjiu&#x27;</span>) <span class="hljs-comment">// undefined</span><br><span class="hljs-keyword">new</span> <span class="hljs-title function_">fn</span>(<span class="hljs-string">&#x27;nanjiu&#x27;</span>) <br><span class="hljs-comment">/*</span><br><span class="hljs-comment">fn: ƒ fn(name) &#123;</span><br><span class="hljs-comment">    console.log(&#x27;fn:&#x27;,new.target)</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn2</span> = (<span class="hljs-params">name</span>) =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;fn2&#x27;</span>,<span class="hljs-keyword">new</span>.<span class="hljs-property">target</span>)<br>&#125;<br><span class="hljs-title function_">fn2</span>(<span class="hljs-string">&#x27;nan&#x27;</span>) <span class="hljs-comment">// 报错 Uncaught SyntaxError: new.target expression is not allowed here</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>new.target</code>属性一般用在构造函数中，返回<code>new</code>调用的那个构造函数</li>
+<li>箭头函数的this指向全局对象，在箭头函数中使用<code>new.target</code>会报错</li>
+<li>箭头函数的this指向普通函数，它的<code>new.target</code>就是指向该普通函数的引用</li>
+</ul>
+<h3 id="6-箭头函数没有自己的arguments"><a href="#6-箭头函数没有自己的arguments" class="headerlink" title="6.箭头函数没有自己的arguments"></a>6.箭头函数没有自己的arguments</h3><h4 id="箭头函数处于全局作用域中，则没有arguments"><a href="#箭头函数处于全局作用域中，则没有arguments" class="headerlink" title="箭头函数处于全局作用域中，则没有arguments"></a>箭头函数处于全局作用域中，则没有arguments</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span> = name =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">arguments</span>)<br>&#125;<br><span class="hljs-keyword">let</span> fn2 = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">arguments</span>)<br>&#125;<br><span class="hljs-title function_">fn2</span>() <span class="hljs-comment">// Arguments [callee: ƒ, Symbol(Symbol.iterator): ƒ]</span><br><span class="hljs-title function_">fn</span>()  <span class="hljs-comment">// 报错 Uncaught ReferenceError: arguments is not defined</span><br></code></pre></td></tr></table></figure>
+
+<p>还是用这两个函数来比较，普通函数能够打印出<code>arguments</code>，箭头函数使用<code>arguments</code>则会报错，因为箭头函数自身是没有arguments的，然后它会往上层作用域中去查找<code>arguments</code>，由于全局作用域中并没有定义<code>arguments</code>，所以会报错。</p>
+<h4 id="箭头函数处于普通函数的函数作用域中，arguments则是上层普通函数的arguments"><a href="#箭头函数处于普通函数的函数作用域中，arguments则是上层普通函数的arguments" class="headerlink" title="箭头函数处于普通函数的函数作用域中，arguments则是上层普通函数的arguments"></a>箭头函数处于普通函数的函数作用域中，arguments则是上层普通函数的arguments</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> fn2 = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;fn2:&#x27;</span>,<span class="hljs-variable language_">arguments</span>)<br>    <span class="hljs-keyword">let</span> <span class="hljs-title function_">fn</span> = name =&gt; &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;fn:&#x27;</span>,<span class="hljs-variable language_">arguments</span>)<br>    &#125;<br>    <span class="hljs-title function_">fn</span>()<br>&#125;<br><span class="hljs-title function_">fn2</span>(<span class="hljs-string">&#x27;nanjiu&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这里两个函数打印的<code>arguments</code>相同，都是fn2函数的<code>arguments</code>。</p>
+<h4 id="可以使用rest参数代替"><a href="#可以使用rest参数代替" class="headerlink" title="可以使用rest参数代替"></a>可以使用rest参数代替</h4><p>ES6 引入 <code>rest</code> 参数，用于获取函数不定数量的参数数组，这个API是用来替代<code>arguments</code>的，形式为<code>...变量名</code>，rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn3</span> = (<span class="hljs-params">a,...arr</span>) =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a,arr) <span class="hljs-comment">//1, [2,3,4,5,6]</span><br>&#125;<br><br><span class="hljs-title function_">fn3</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>上面就是rest参数的基本用法，需要注意的是：</strong></p>
+<ul>
+<li><code>rest</code>参数只能作为函数的最后一个参数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 报错</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params">a, ...b, c</span>) &#123;<br>  <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>函数的<code>length</code>属性，不包括<code>rest</code>参数</li>
+</ul>
+<p><strong>rest参数与arguments的比较：</strong></p>
+<ul>
+<li>箭头函数和普通函数都可以使用<code>rest</code>参数，而<code>arguments</code>只能普通函数使用</li>
+<li>接受参数<code>rest</code>比<code>arguments</code>更加灵活</li>
+<li><code>rest</code>参数是一个真正的数组，而<code>arguments</code>是一个类数组对象，不能直接使用数组方法</li>
+</ul>
+<h3 id="7-箭头函数不能重复函数参数名称"><a href="#7-箭头函数不能重复函数参数名称" class="headerlink" title="7.箭头函数不能重复函数参数名称"></a>7.箭头函数不能重复函数参数名称</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">name,name</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;fn2:&#x27;</span>,name)<br>&#125;<br><span class="hljs-keyword">let</span> <span class="hljs-title function_">fn2</span> = (<span class="hljs-params">name,name</span>) =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;fn&#x27;</span>,name)<br>&#125;<br><span class="hljs-title function_">fn</span>(<span class="hljs-string">&#x27;nan&#x27;</span>,<span class="hljs-string">&#x27;jiu&#x27;</span>) <span class="hljs-comment">// &#x27;jiu&#x27;</span><br><span class="hljs-title function_">fn2</span>(<span class="hljs-string">&#x27;nan&#x27;</span>,<span class="hljs-string">&#x27;jiu&#x27;</span>) <span class="hljs-comment">// 报错</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="8-不可以使用yield命令，因此箭头函数不能用作-Generator-函数。"><a href="#8-不可以使用yield命令，因此箭头函数不能用作-Generator-函数。" class="headerlink" title="8.不可以使用yield命令，因此箭头函数不能用作 Generator 函数。"></a>8.不可以使用<code>yield</code>命令，因此箭头函数不能用作 Generator 函数。</h3><p>这个可能是由于历史原因哈，TC39 在 2013 年和 2016 年分别讨论过两次，从<code>*()</code>、<code>*=&gt;</code>、<code>=*&gt;</code>、<code>=&gt;*</code> 中选出了<code>=&gt;*</code>，勉强进入了 stage 1。而且因为有了<strong>异步生成器（async generator）</strong>，所以还得同时考虑**异步箭头生成器（async arrow generator）**的东西，之前生成器 99.999% 的用途都是拿它来实现<code>异步编程</code>，并不是真的需要生成器本来的用途，自从有了 <code>async/await</code>，<code>generator</code>生成器越来越没人用了。猜测可能是因为这个原因添加一个使用频率不高的语法，给规范带来较大的复杂度可能不值当。</p>
+<h2 id="三-箭头函数不适用场景"><a href="#三-箭头函数不适用场景" class="headerlink" title="三.箭头函数不适用场景"></a>三.箭头函数不适用场景</h2><h3 id="对象方法，且方法中使用了this"><a href="#对象方法，且方法中使用了this" class="headerlink" title="对象方法，且方法中使用了this"></a>对象方法，且方法中使用了this</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;南玖&#x27;</span><br><span class="hljs-keyword">var</span> person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;nanjiu&#x27;</span>,<br>    <span class="hljs-attr">say</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;say:&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;,<br>    <span class="hljs-attr">say2</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;say2:&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;<br>&#125;<br><br>person.<span class="hljs-title function_">say</span>() <span class="hljs-comment">// say: nanjiu</span><br>person.<span class="hljs-title function_">say2</span>() <span class="hljs-comment">//say2: 南玖</span><br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>person.say2()</code>方法是一个箭头函数，调用<code>person.say2()</code>时，使得<code>this</code>指向全局对象，因此不会得到预期结果。这是因为对象不构成单独的作用域，导致<code>say2()</code>箭头函数定义时的作用域就是全局作用域。而<code>say()</code>定义的是一个普通函数，它内部的this就指向调用它的那个对象，所以使用普通函数符合预期。</p>
+<h3 id="当函数需要动态this时"><a href="#当函数需要动态this时" class="headerlink" title="当函数需要动态this时"></a>当函数需要动态this时</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> button = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.btn&#x27;</span>);<br>button.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">classList</span>.<span class="hljs-title function_">toggle</span>(<span class="hljs-string">&#x27;on&#x27;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>这里很显然会报错，因为按钮点击的回调是一个箭头函数，而箭头函数内部的<code>this</code>永远都是指向它的上层作用域中的this，在这里就是<code>window</code>，所以会报错。这里只需要将箭头函数改成普通函数就能正常调用了！</p>
+<h2 id="四-～练习"><a href="#四-～练习" class="headerlink" title="四.～练习"></a>四.～练习</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;南玖&#x27;</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span> (<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo1</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>  &#125;,<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo2</span> = <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>),<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo3</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;<br>  &#125;,<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo4</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>    &#125;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">var</span> person1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;nan&#x27;</span>)<br><span class="hljs-keyword">var</span> person2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;jiu&#x27;</span>)<br><br>person1.<span class="hljs-title function_">foo1</span>() <span class="hljs-comment">// &#x27;nan&#x27;</span><br>person1.<span class="hljs-property">foo1</span>.<span class="hljs-title function_">call</span>(person2) <span class="hljs-comment">// &#x27;jiu&#x27;</span><br><br>person1.<span class="hljs-title function_">foo2</span>() <span class="hljs-comment">// &#x27;nan&#x27;</span><br>person1.<span class="hljs-property">foo2</span>.<span class="hljs-title function_">call</span>(person2) <span class="hljs-comment">// &#x27;nan&#x27;</span><br><br>person1.<span class="hljs-title function_">foo3</span>()() <span class="hljs-comment">// &#x27;南玖&#x27;</span><br>person1.<span class="hljs-property">foo3</span>.<span class="hljs-title function_">call</span>(person2)() <span class="hljs-comment">// &#x27;南玖&#x27;</span><br>person1.<span class="hljs-title function_">foo3</span>().<span class="hljs-title function_">call</span>(person2) <span class="hljs-comment">// &#x27;jiu&#x27;</span><br><br>person1.<span class="hljs-title function_">foo4</span>()() <span class="hljs-comment">// &#x27;nan&#x27;</span><br>person1.<span class="hljs-property">foo4</span>.<span class="hljs-title function_">call</span>(person2)() <span class="hljs-comment">// &#x27;jiu&#x27;</span><br>person1.<span class="hljs-title function_">foo4</span>().<span class="hljs-title function_">call</span>(person2) <span class="hljs-comment">// &#x27;nan&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>解析：</strong></p>
+<p>全局代码执行，<code>person1 = new Person(&#39;nan&#39;),person2 = new Person(&#39;jiu&#39;)</code>执行完，<code>person1</code>中的<code>this.name</code>为<code>nan</code>，<code>person2</code>中的<code>this.name</code>为<code>jiu</code>，OK这一点清楚后，继续往下看：</p>
+<ul>
+<li>执行<code>person1.foo1()</code>，<code>foo1</code>为普通函数，所以this应该指向<code>person1</code>，打印出<code>nan</code></li>
+<li>执行<code>person1.foo1.call(person2)</code>，<code>foo1</code>为普通函数，并且用call改变了this指向，所以它里面的this应该指向<code>person2</code>，打印出<code>jiu</code></li>
+<li>执行<code>person1.foo2()</code>，<code>foo2</code>为箭头函数，它的this指向上层作用域，也就是person1，所以打印出<code>nan</code></li>
+<li>执行<code>person1.foo2.call(person2)</code>，箭头函数的this指向无法使用call改变，所以它的this还是指向person1，打印出<code>nan</code></li>
+<li>执行<code>person1.foo3()()</code>，这里先执行<code>person1.foo3()</code>，它返回了一个<strong>普通函数</strong>，接着再执行这个函数，此时就相当于在全局作用域中执行了一个普通函数，所以它的this指向window，打印出<code>南玖</code></li>
+<li>执行<code>person1.foo3.call(person2)()</code>这个与上面类似，也是返回了一个<strong>普通函数</strong>再执行，其实前面的执行都不用关心，它也是相当于在全局作用域中执行了一个普通函数，所以它的this指向window，打印出<code>南玖</code></li>
+<li>执行<code>person1.foo3().call(person2)</code>这里就是把foo3返回的<strong>普通函数</strong>的this绑定到person2上，所以打印出<code>jiu</code></li>
+<li>执行<code>person1.foo4()()</code>，先执行<code>person1.foo4()</code>返回了一个<strong>箭头函数</strong>，再执行这个箭头函数，由于箭头函数的this始终指向它的上层作用域，所以打印出<code>nan</code></li>
+<li>执行<code>person1.foo4.call(person2)()</code>，与上面类似只不过使用call把上层作用域的this改成了person2，所以打印出<code>jiu</code></li>
+<li>执行<code>person1.foo4().call(person2)</code>，这里是先执行了<code>person1.foo4()</code>，返回了箭头函数，再试图通过call改变改变该箭头函数的this指向，上面我们说到<strong>箭头函数的this始终指向它的上层作用域</strong>，所以打印出<code>nan</code></li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/js/" class="category-chain-item">js</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">#箭头函数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>javascript箭头函数与普通函数的区别</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/03/02/js-ArrowFunction-function/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月2日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/03/02/vue-component-communication/" title="Vue3父子组件通信方式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vue3父子组件通信方式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/02/21/js-eventLoop/" title="javascript宏任务和微任务">
+                        <span class="hidden-mobile">javascript宏任务和微任务</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

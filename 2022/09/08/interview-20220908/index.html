@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="20220908前端面试题中国电信集成  vue生命周期 webpack打包机制 v-if v-show 如何实现一个深拷贝 敏捷开发的思维模式  牧原股份一面  讲一下react hooks内部实现原理 微前端中微任务注入权限如何控制 讲一下宏任务和微任务 讲一下为什么用微前端，qiankun的特性是什么，有没有看过single-spa的内部实现方式 需要去南阳出差，接受吗  数字郑州一面  浏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题常问1">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/09/08/interview-20220908/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="20220908前端面试题中国电信集成  vue生命周期 webpack打包机制 v-if v-show 如何实现一个深拷贝 敏捷开发的思维模式  牧原股份一面  讲一下react hooks内部实现原理 微前端中微任务注入权限如何控制 讲一下宏任务和微任务 讲一下为什么用微前端，qiankun的特性是什么，有没有看过single-spa的内部实现方式 需要去南阳出差，接受吗  数字郑州一面  浏">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-08T02:51:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.262Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>前端面试题常问1 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="前端面试题常问1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-08 10:51" pubdate>
+          2022年9月8日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端面试题常问1</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="20220908前端面试题"><a href="#20220908前端面试题" class="headerlink" title="20220908前端面试题"></a>20220908前端面试题</h1><p><strong>中国电信集成</strong></p>
+<ul>
+<li>vue生命周期</li>
+<li>webpack打包机制</li>
+<li>v-if v-show</li>
+<li>如何实现一个深拷贝</li>
+<li>敏捷开发的思维模式</li>
+</ul>
+<p><strong>牧原股份一面</strong></p>
+<ul>
+<li>讲一下react hooks内部实现原理</li>
+<li>微前端中微任务注入权限如何控制</li>
+<li>讲一下宏任务和微任务</li>
+<li>讲一下为什么用微前端，qiankun的特性是什么，有没有看过single-spa的内部实现方式</li>
+<li>需要去南阳出差，接受吗</li>
+</ul>
+<p><strong>数字郑州一面</strong></p>
+<ul>
+<li>浏览器协商缓存</li>
+<li>事件循环 宏任务 微任务（没回答好）</li>
+<li>react父子组件如何通信，redux通信机制</li>
+<li>父组件如何调用子组件方法</li>
+<li>react生命周期</li>
+<li>antd from表单自定义组件</li>
+<li>webpack打包原理</li>
+<li>webpack 如何分包</li>
+<li>webpack load plugin区别</li>
+<li>输入URL回车发生了啥（从发送http开始说）</li>
+<li>受控组件和非受控组件</li>
+<li>为什么要使用微前端</li>
+<li>react context</li>
+<li>ES6+用过哪些特性</li>
+<li>如何解决跨域问题（只讲项目中用到的，cors原理及如何配置）</li>
+<li>promise能取消吗</li>
+<li>如何解决移动端适配问题，rem和vw有啥区别</li>
+<li>能接受加班吗，有没有遇到压力特别大的时候</li>
+</ul>
+<p><strong>数字郑州二面</strong></p>
+<ul>
+<li>如何实现一个forEach，forEach单词循环返回的是个什么</li>
+<li>如何使用react hooks实现之前的生命周期</li>
+<li>如何实现一个ajaix，讲下原理</li>
+<li>promise内部是如何实现的，geneor函数内部是如何实现的，如何通过gene实现一个async await方法</li>
+<li>讲讲你都加班和出差的看法</li>
+<li>vue3 有哪些特性</li>
+<li>讲一下redux的数据运转及原理，讲一下你对redux使用场景的看法</li>
+<li>css实现动画vs js来实现动画</li>
+<li>讲一下如何实现前端自动化</li>
+<li>使用过docker部署吗</li>
+</ul>
+<p><strong>uu跑腿共四面</strong></p>
+<ul>
+<li>es6有哪些特性</li>
+<li>前端打包工具vite</li>
+<li>高阶组件平时使用过没</li>
+<li>redux 原则， connect</li>
+<li>深浅拷贝 如何实现一个深拷贝</li>
+<li>从拿到一个大型项目开始，如何做优化</li>
+<li>有没有做过大屏项目</li>
+<li>有没有做过可视化拖拽生成页面，可以简单讲下实现流程</li>
+<li>redux 三大原则</li>
+<li>如何解决跨域问题</li>
+</ul>
+<p><strong>鸿翼股份一面</strong></p>
+<ul>
+<li>css 伪类 伪元素</li>
+<li>html行内元素和块级元素</li>
+<li>什么是外边距合并，如何解决</li>
+<li>react hooks 相对于class组件的优势</li>
+<li>如何实现一个闭包</li>
+<li>讲一讲js 垃圾回收机制，如何回收</li>
+</ul>
+<p><strong>鸿翼股份二面</strong></p>
+<ul>
+<li>webpack如何优化包体积</li>
+<li>webpack 如何优化构建时间</li>
+<li>平时你是怎么学习和进步的，遇到不会的问题怎么办</li>
+<li>高阶组件的使用场景</li>
+<li>你未来的发展方向是什么</li>
+<li>拿到一个项目除了webpack外，如何做代码层面的优化</li>
+<li>react 实现异步加载组件的方式有哪些</li>
+</ul>
+<p><strong>字节跳动一面</strong></p>
+<ul>
+<li>手写代码 实现一个react memo效果，react.meno第二个参数是什么</li>
+<li>pureComponent</li>
+<li>手写代码实现一个有状态的倒计时</li>
+<li>浏览器强缓存，cacle-control 有哪些字段 浏览器缓存原理</li>
+<li>微信原生小程序性能指标</li>
+<li>有没有看过qiankun的底层原理</li>
+<li>webpack5缓存有哪几种方式</li>
+<li>强缓存和协商缓存的状态码是多少</li>
+<li>HTTP2.0相当于1.X有哪些优势</li>
+<li>webpack 是利用什么机制分包的</li>
+<li>webpack5 模块联邦简单介绍下如何实现</li>
+</ul>
+<p><strong>字节跳动二面</strong></p>
+<ul>
+<li>自定义一个hooks</li>
+<li>实现一个节流函数（然后改成hoos的写法）</li>
+<li>实现一个快排</li>
+<li>说说你期望的前端发展方向</li>
+</ul>
+<p><strong>中软国际(电信公司)</strong></p>
+<ul>
+<li>webpack dllPlugin 具体如何做配置的</li>
+<li>react class和hooks 分别是如何实现生命周期的</li>
+<li>纯函数组件的好处</li>
+<li>高阶组件</li>
+<li>react 项目如何做代码优化</li>
+<li>load和plugin有什么区别，常用的load和plugin有哪些</li>
+<li>一个页面的按钮权限如何控制（假如给你一个整个项目的按钮权限数据）</li>
+</ul>
+<p><strong>XX一面（过了）</strong></p>
+<ul>
+<li>宏任务微任务</li>
+<li>为什么会有跨域问题，如果接口有跨域问题，那接口到服务端了吗</li>
+<li>解释一下BFC。BFC脱离文档流没</li>
+<li>commonjs的模块导入导出和ES6的导入导出有什么区别</li>
+<li>flex用过没</li>
+<li>如何解决移动端适配问题</li>
+<li>一个div内嵌一个div margin-top30，2个div相差多少</li>
+<li>CORS2个请求有什么区别，能否合并成一个</li>
+<li>HTTP1.0和HTTP1.1有什么区别</li>
+<li>[‘fldffd’,’flrtoss’,’flodofs’] 求最长相同字符前缀</li>
+<li>forEach如何跳出循环</li>
+<li>你对自己的未来规划是什么</li>
+</ul>
+<p><strong>XX二面（过了）</strong></p>
+<ul>
+<li>之前遇到最大的困惑和挑战是什么</li>
+<li>如何做移动端适配</li>
+<li>如何做页面性能优化</li>
+<li>如何保证一个项目从开发到上线没有bug，讲讲你的思路</li>
+<li>webpack如何优化包体积和构建速度</li>
+</ul>
+<p><strong>XX三面（过了）</strong></p>
+<ul>
+<li>做微前端之前是如何考虑的，利用微前端能解决什么痛点，前期做了哪些调研</li>
+<li>qiankun配置微应用入口后，entry是如何实现应用的路由的</li>
+<li>jsx为什么能在js里写html代码，最后是怎么处理和编译的</li>
+<li>webpack的编译和浏览器的编译主要做了哪些事情</li>
+<li>vue中 html中可以写指令，如v-model,请问是如何实现的</li>
+<li>vue中双向数据绑定是如何实现的</li>
+<li>react中 状态的更新是如何触发视图渲染的</li>
+<li>一个项目做性能优化前，是做如何考虑的，做性能优化有哪些指标能参考，拿到一个项目后，是如何做性能优化的</li>
+</ul>
+<p><strong>开源中国一面</strong></p>
+<ul>
+<li>less sass平时使用过没，有哪些特性</li>
+<li>nodejs用过哪些东西</li>
+<li>讲一下栅格布局和flex布局</li>
+<li>如何实现一个换肤功能；（2个不同的css文件）</li>
+<li>如何实现一个导航栏的显示隐藏（根据分辨率）</li>
+<li>如何实现一个导航栏变窄</li>
+<li>class super是干嘛的</li>
+<li>class方法和纯函数有什么不一样</li>
+<li>ts数据类型用过哪些</li>
+<li>ts @符合的使用，angular中@是用来实现个什么东西的</li>
+<li>ts中的一些没听过的知识点（记不起来了）</li>
+<li>react forwardRef用过没</li>
+<li>react hooks 如何实现组件销毁</li>
+<li>vue熟悉吗</li>
+<li>HTTP缓存是如何处理的（服务器或者ng是如何返回缓存字段的）</li>
+<li>三方npm资源链接复用，你们公司一般都放在哪里</li>
+<li>说说复杂数据类型，function是复杂数据类型吗，如何判定复杂数据类型的类型</li>
+<li>项目打包从200M优化到120M这之间做了哪些事情</li>
+</ul>
+<p><strong>开源二面</strong></p>
+<ul>
+<li>CDN如何做配置，浏览器缓存及CDN缓存策略，CDN基本概念，CDN对应的服务器宕机了，前端快速让页面能正常打开</li>
+<li>移动端适配原理和方案，flex布局和栅格系统</li>
+<li>redux是干嘛的，是否是必须的</li>
+<li>抛开三方插件，如何实现跨页面通信，缓存有I&#x2F;O，有没有其他方案，react context之类</li>
+<li>在做性能优化之前，是基于什么做考虑的，为什么需要做性能优化</li>
+<li>如何从代码层面做性能优化，讲讲你的思路</li>
+<li>一般项目从开发到上线，你认为需要具备几个环境才是合理的</li>
+<li>git merge 和 git rebase有什么区别</li>
+<li>用react实现一个slect下拉组件，从简单到负责，通过对props、状态、事件并运用组件化的思想讲一下你的思路</li>
+<li>ts平时都使用过，在项目中你认为ts的定位是什么</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/interview/" class="category-chain-item">interview</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>前端面试题常问1</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/09/08/interview-20220908/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月8日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/11/03/js-reduce/" title="javascript手写reduce函数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">javascript手写reduce函数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/08/08/js-ArrayDeleteRepetition/" title="javascript对象数组去重">
+                        <span class="hidden-mobile">javascript对象数组去重</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

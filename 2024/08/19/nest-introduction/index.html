@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="nest.js入门一、项目创建1、创建一个新的 Nest 项目12npm i -g @nestjs&#x2F;clinest new project-name  将创建 project-name 目录，安装 node 模块和一些其他样板文件，将创建 src&#x2F; 目录并填充几个核心文件。 以下是这些核心文件的简要概述：    app.controller.ts 具有单一路由的基本控制器。    app.cont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nest.js入门">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2024/08/19/nest-introduction/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="nest.js入门一、项目创建1、创建一个新的 Nest 项目12npm i -g @nestjs&#x2F;clinest new project-name  将创建 project-name 目录，安装 node 模块和一些其他样板文件，将创建 src&#x2F; 目录并填充几个核心文件。 以下是这些核心文件的简要概述：    app.controller.ts 具有单一路由的基本控制器。    app.cont">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-19T11:27:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.272Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="nest的第一个项目">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>nest.js入门 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="nest.js入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-19 19:27" pubdate>
+          2024年8月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">nest.js入门</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="nest-js入门"><a href="#nest-js入门" class="headerlink" title="nest.js入门"></a>nest.js入门</h1><h2 id="一、项目创建"><a href="#一、项目创建" class="headerlink" title="一、项目创建"></a>一、项目创建</h2><h3 id="1、创建一个新的-Nest-项目"><a href="#1、创建一个新的-Nest-项目" class="headerlink" title="1、创建一个新的 Nest 项目"></a>1、创建一个新的 Nest 项目</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm i -g @nestjs/cli<br>nest new project-name<br></code></pre></td></tr></table></figure>
+
+<p>将创建 <code>project-name</code> 目录，安装 node 模块和一些其他样板文件，将创建 <code>src/</code> 目录并填充几个核心文件。</p>
+<p>以下是这些核心文件的简要概述：</p>
+<table>
+<thead>
+<tr>
+<th><code>app.controller.ts</code></th>
+<th>具有单一路由的基本控制器。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>app.controller.spec.ts</code></td>
+<td>控制器的单元测试。</td>
+</tr>
+<tr>
+<td><code>app.module.ts</code></td>
+<td>应用的根模块。</td>
+</tr>
+<tr>
+<td><code>app.service.ts</code></td>
+<td>具有单一方法的基本服务。</td>
+</tr>
+<tr>
+<td><code>main.ts</code></td>
+<td>使用核心函数 <code>NestFactory</code> 创建 Nest 应用实例的应用入口文件。</td>
+</tr>
+</tbody></table>
+<h3 id="2、运行应用"><a href="#2、运行应用" class="headerlink" title="2、运行应用"></a>2、运行应用</h3><p>安装过程完成后，你可以在操作系统命令提示符下运行以下命令以启动应用监听入站 HTTP 请求：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm run start<br></code></pre></td></tr></table></figure>
+
+<p>此命令启动应用，HTTP 服务器监听 <code>src/main.ts</code> 文件中定义的端口。应用运行后，打开浏览器并导航至 <code>http://localhost:3000/</code>。你应该会看到 <code>Hello World!</code> 消息</p>
+<h1 id="二、文件分析"><a href="#二、文件分析" class="headerlink" title="二、文件分析"></a>二、文件分析</h1><h2 id="1-main-ts"><a href="#1-main-ts" class="headerlink" title="1. main.ts"></a>1. main.ts</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">NestFactory</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/core&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">AppModule</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.module&#x27;</span>;<br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">bootstrap</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> <span class="hljs-title class_">NestFactory</span>.<span class="hljs-title function_">create</span>(<span class="hljs-title class_">AppModule</span>);<br>  <span class="hljs-keyword">await</span> app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>);<br>&#125;<br><span class="hljs-title function_">bootstrap</span>();<br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>NestFactory.create()</code> 来创建一个 NestJS 应用程序的实例，并监听端口3000上的请求。</p>
+<h2 id="2-app-module-ts"><a href="#2-app-module-ts" class="headerlink" title="2. app.module.ts"></a>2. app.module.ts</h2><p>app.module.ts是一个模块文件，以.module.ts结尾。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Module</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">AppController</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.controller&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">AppService</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.service&#x27;</span>;<br><br>@<span class="hljs-title class_">Module</span>(&#123;<br>  <span class="hljs-attr">imports</span>: [],<br>  <span class="hljs-attr">controllers</span>: [<span class="hljs-title class_">AppController</span>],<br>  <span class="hljs-attr">providers</span>: [<span class="hljs-title class_">AppService</span>],<br>&#125;)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>模块是具有 <code>@Module()</code> 装饰器的类，Nest 用它来组织应用程序结构。对装饰器概念不熟悉的读者，可参考我的另一篇文章：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7402960438861070399">前端想了解后端？那得先学会 TypeScript 装饰器！</a>。</p>
+<p>在app.module.ts中，<code>@Module()</code> 装饰器接受一个描述模块属性的对象：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>imports</td>
+<td>导入子模块</td>
+</tr>
+<tr>
+<td>controllers</td>
+<td>导入控制器</td>
+</tr>
+<tr>
+<td>providers</td>
+<td>由 Nest 注入器实例化的提供者，并且可以至少在整个模块中共享</td>
+</tr>
+</tbody></table>
+<p>module的内容不多，主要用来用于定义和配置模块的核心文件。</p>
+<h2 id="3-app-controller-ts"><a href="#3-app-controller-ts" class="headerlink" title="3. app.controller.ts"></a>3. app.controller.ts</h2><p>app.controller.ts是一个控制器文件，以.controller.ts结尾。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Controller</span>, <span class="hljs-title class_">Get</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">AppService</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.service&#x27;</span>;<br><br>@<span class="hljs-title class_">Controller</span>()<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppController</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">private readonly appService: AppService</span>) &#123;&#125;<br><br>  @<span class="hljs-title class_">Get</span>()<br>  <span class="hljs-title function_">getHello</span>(): string &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">appService</span>.<span class="hljs-title function_">getHello</span>();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>@Controller()</code> 装饰器定义一个基本的控制器，控制器负责处理传入的<strong>请求</strong>和向客户端返回<strong>响应</strong>。</p>
+<p>构造函数使用依赖注入机制注入了 AppService 实例（在module中配置的providers: [AppService],）。private readonly 表示 appService 是私有的并且不可更改。</p>
+<p>@Get(): 此装饰器定义了一个处理HTTP GET请求的方法。默认情况下，该方法将处理根URL（即 &#x2F;）上的GET请求。因此当访问localhost:3000时，会调用getHello方法。</p>
+<p>getHello方法调用了 AppService 的 getHello 方法。接下来继续看appService中的内容。</p>
+<p>提示：<code>在controller中，不要编写过多的业务逻辑，复杂的逻辑应交给service处理</code></p>
+<h2 id="4-app-service-ts"><a href="#4-app-service-ts" class="headerlink" title="4. app.service.ts"></a>4. app.service.ts</h2><p>app.service.ts是一个service文件，以.service.ts结尾。主要用于处理复杂的业务逻辑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Injectable</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<br><br>@<span class="hljs-title class_">Injectable</span>()<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppService</span> &#123;<br>  <span class="hljs-title function_">getHello</span>(): string &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Hello World!&#x27;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>@Injectable()</code> 装饰器用于标记类为可以被依赖注入系统管理的服务，即在module中被providers。</p>
+<p>getHello方法返回字符串’Hello World!’，因此在app.controller.ts中，调用this.appService.getHello()返回的结果是’Hello World!’，访问localhost:3000接口的结果为’Hello World!’。</p>
+<h1 id="三、创建模块"><a href="#三、创建模块" class="headerlink" title="三、创建模块"></a>三、创建模块</h1><p>通过上文，熟悉了NestJS的设计模式，主要就是 <code>Controller</code>、<code>Service</code>、<code>Module</code> 共同形成了一个模块。</p>
+<ul>
+<li><code>Controller</code>：传统意义上的控制器，提供 api 接口，负责处理路由、中转、验证等一些简洁的业务；</li>
+<li><code>Service</code>：又称为 <code>Provider</code>， 是一系列服务、repo、工厂方法、helper 的总称，主要负责处理具体的业务，如数据库的增删改查、事务、并发等逻辑代码；</li>
+<li><code>Module</code>：负责将 <code>Controller</code> 和 <code>Service</code> 连接起来，类似于 <code>namespace</code> 的概念；</li>
+</ul>
+<p>使用 nest-cli 提供的指令可以快速创建文件，语法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">nest g [文件类型] [文件名] [文件目录]<br></code></pre></td></tr></table></figure>
+
+<p>文件目录如果不提供，默认为文件名。</p>
+<h2 id="1-创建模块"><a href="#1-创建模块" class="headerlink" title="1. 创建模块"></a>1. 创建模块</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">nest g module posts<br></code></pre></td></tr></table></figure>
+
+<p>执行完命令后，我们可以发现在根模块app.module.ts中的@Model装饰器的imports中自动引入了PostsModule</p>
+<p>命令可简写为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nest g mo posts<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-创建控制器"><a href="#2-创建控制器" class="headerlink" title="2. 创建控制器"></a>2. 创建控制器</h2><p>–no-spec：不生成测试文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">nest g controller posts --no-spec<br></code></pre></td></tr></table></figure>
+
+<p>创建posts.controller.ts文件，并且在posts.module.ts文件下，@Module装饰器的controllers中自动注入</p>
+<p>命令可简写为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">nest g co posts --no-spec<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-创建服务类"><a href="#3-创建服务类" class="headerlink" title="3. 创建服务类"></a>3. 创建服务类</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">nest g service posts --no-spec<br></code></pre></td></tr></table></figure>
+
+<p>创建posts.service.ts文件，并且在posts.module.ts文件下，@Module装饰器的providers中自动注入</p>
+<p>命令可简写为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">nest g s posts --no-spec<br></code></pre></td></tr></table></figure>
+
+<p>提示：<code>注意创建顺序，先创建Module，再创建Controller和Service，这样创建出来的文件在Module中自动注册。</code></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/nest/" class="category-chain-item">nest</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/nest%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/">#nest的第一个项目</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>nest.js入门</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2024/08/19/nest-introduction/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2024/08/23/js-web/" title="前端规范总结(阿里)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">前端规范总结(阿里)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2024/08/16/poetry-twgx/" title="滕王阁序">
+                        <span class="hidden-mobile">滕王阁序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,902 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前端面试题（综合）1.0！CSS1. 请解释CSS的盒模型是什么，并描述其组成部分。​		CSS的盒模型是用于布局和定位元素的概念。它由内容区域、内边距、边框和外边距组成，这些部分依次包裹在元素周围。 2. 解释CSS中的选择器及其优先级。​		CSS选择器用于选择要应用样式的HTML元素。选择器的优先级规则是：内联样式 &gt; ID选择器 &gt; 类选择器、属性选择器、伪类选择器 &gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题（综合）">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2023/10/19/interview-web/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="前端面试题（综合）1.0！CSS1. 请解释CSS的盒模型是什么，并描述其组成部分。​		CSS的盒模型是用于布局和定位元素的概念。它由内容区域、内边距、边框和外边距组成，这些部分依次包裹在元素周围。 2. 解释CSS中的选择器及其优先级。​		CSS选择器用于选择要应用样式的HTML元素。选择器的优先级规则是：内联样式 &gt; ID选择器 &gt; 类选择器、属性选择器、伪类选择器 &gt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-19T02:01:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.264Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>前端面试题（综合） - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="前端面试题（综合）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-19 10:01" pubdate>
+          2023年10月19日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          22k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          182 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端面试题（综合）</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="前端面试题（综合）1-0！"><a href="#前端面试题（综合）1-0！" class="headerlink" title="前端面试题（综合）1.0！"></a>前端面试题（综合）1.0！</h1><h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h5 id="1-请解释CSS的盒模型是什么，并描述其组成部分。"><a href="#1-请解释CSS的盒模型是什么，并描述其组成部分。" class="headerlink" title="1. 请解释CSS的盒模型是什么，并描述其组成部分。"></a>1. 请解释CSS的盒模型是什么，并描述其组成部分。</h5><p>​		CSS的盒模型是用于布局和定位元素的概念。它由内容区域、内边距、边框和外边距组成，这些部分依次包裹在元素周围。</p>
+<h5 id="2-解释CSS中的选择器及其优先级。"><a href="#2-解释CSS中的选择器及其优先级。" class="headerlink" title="2. 解释CSS中的选择器及其优先级。"></a>2. 解释CSS中的选择器及其优先级。</h5><p>​		CSS选择器用于选择要应用样式的HTML元素。选择器的优先级规则是：内联样式 &gt; ID选择器 &gt; 类选择器、属性选择器、伪类选择器 &gt; 元素选择器 &gt; 通用选择器。同时，使用!important可以提升样式的优先级。</p>
+<h5 id="3-解释CSS中的浮动（float）是如何工作的，并提供一个示例。"><a href="#3-解释CSS中的浮动（float）是如何工作的，并提供一个示例。" class="headerlink" title="3. 解释CSS中的浮动（float）是如何工作的，并提供一个示例。"></a>3. 解释CSS中的浮动（float）是如何工作的，并提供一个示例。</h5><p>​		浮动（float）是CSS中用于实现元素的左浮动或右浮动，使其脱离文档流并环绕在其周围的元素。例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.float-example</span> &#123;<br>  <span class="hljs-attribute">float</span>: left;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="4-解释CSS中的定位（position）属性及其不同的取值。"><a href="#4-解释CSS中的定位（position）属性及其不同的取值。" class="headerlink" title="4. 解释CSS中的定位（position）属性及其不同的取值。"></a>4. 解释CSS中的定位（position）属性及其不同的取值。</h5><p>​      定位（position）属性用于控制元素的定位方式。常见的取值有：static（默认，按照文档流定位）、relative（相对定位）、absolute（绝对定位）、fixed（固定定位）和sticky（粘性定位）。</p>
+<h5 id="5-解释CSS中的层叠顺序（z-index）是如何工作的。"><a href="#5-解释CSS中的层叠顺序（z-index）是如何工作的。" class="headerlink" title="5. 解释CSS中的层叠顺序（z-index）是如何工作的。"></a>5. 解释CSS中的层叠顺序（z-index）是如何工作的。</h5><p>​      层叠顺序（z-index）用于控制元素在垂直方向上的堆叠顺序。具有较高层叠顺序值的元素将显示在较低层叠顺序值的元素之上。默认情况下，层叠顺序值为auto。</p>
+<h5 id="6-解释CSS中的伪类和伪元素的区别，并给出一个示例。"><a href="#6-解释CSS中的伪类和伪元素的区别，并给出一个示例。" class="headerlink" title="6. 解释CSS中的伪类和伪元素的区别，并给出一个示例。"></a>6. 解释CSS中的伪类和伪元素的区别，并给出一个示例。</h5><p>​      伪类用于向选择器添加特殊的状态，如:hover、:active等。伪元素用于向选择器添加特殊的元素，如::before、::after等。例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* 伪类示例 */</span><br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;<br>  <span class="hljs-attribute">color</span>: red;<br>&#125;<br><br><span class="hljs-comment">/* 伪元素示例 */</span><br><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::before</span> &#123;<br>  <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;前缀&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="7-解释CSS中的盒子模型的两种模式：标准模式和怪异模式。"><a href="#7-解释CSS中的盒子模型的两种模式：标准模式和怪异模式。" class="headerlink" title="7. 解释CSS中的盒子模型的两种模式：标准模式和怪异模式。"></a>7. 解释CSS中的盒子模型的两种模式：标准模式和怪异模式。</h5><p>​      标准模式是按照W3C标准解析渲染页面的模式。怪异模式是兼容旧版本浏览器的解析渲染页面的模式。可以通过声明来指定使用哪种模式。</p>
+<h5 id="8-解释CSS中的BFC是什么，它的作用是什么？"><a href="#8-解释CSS中的BFC是什么，它的作用是什么？" class="headerlink" title="8. 解释CSS中的BFC是什么，它的作用是什么？"></a>8. 解释CSS中的BFC是什么，它的作用是什么？</h5><p>​      BFC（块级格式化上下文）是CSS中的一种渲染模式，它创建了一个独立的渲染环境，其中的元素按照一定的规则进行布局和定位。BFC的作用包括：清除浮动、防止外边距重叠等。</p>
+<h5 id="9-解释CSS中的flexbox布局是什么，它的优势是什么？"><a href="#9-解释CSS中的flexbox布局是什么，它的优势是什么？" class="headerlink" title="9. 解释CSS中的flexbox布局是什么，它的优势是什么？"></a>9. 解释CSS中的flexbox布局是什么，它的优势是什么？</h5><p>​      flexbox布局是一种用于创建灵活的、响应式的布局的CSS模块。它通过flex容器和flex项目的组合来实现强大的布局能力。其优势包括简单易用、自适应性强、对齐和分布控制灵活等。</p>
+<h5 id="10-解释CSS中的媒体查询是什么，它的作用是什么？"><a href="#10-解释CSS中的媒体查询是什么，它的作用是什么？" class="headerlink" title="10.解释CSS中的媒体查询是什么，它的作用是什么？"></a>10.解释CSS中的媒体查询是什么，它的作用是什么？</h5><p>​      媒体查询是CSS中的一种技术，用于根据设备的特性和属性来应用不同的样式。通过媒体查询，可以根据屏幕尺寸、设备类型、分辨率等条件来优化页面的布局和样式。</p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h5 id="1-解释JavaScript的数据类型，并举例说明每种类型。"><a href="#1-解释JavaScript的数据类型，并举例说明每种类型。" class="headerlink" title="1. 解释JavaScript的数据类型，并举例说明每种类型。"></a>1. 解释JavaScript的数据类型，并举例说明每种类型。</h5><p>​      JavaScript有七种数据类型：字符串（String）、数字（Number）、布尔值（Boolean）、对象（Object）、数组（Array）、空值（Null）和未定义（Undefined）。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;Hello&quot;</span>;<br><span class="hljs-keyword">let</span> num = <span class="hljs-number">10</span>;<br><span class="hljs-keyword">let</span> bool = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">let</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span> &#125;;<br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<br><span class="hljs-keyword">let</span> n = <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">let</span> undef;<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-解释JavaScript中的变量提升（Hoisting）是什么。"><a href="#2-解释JavaScript中的变量提升（Hoisting）是什么。" class="headerlink" title="2. 解释JavaScript中的变量提升（Hoisting）是什么。"></a>2. 解释JavaScript中的变量提升（Hoisting）是什么。</h5><p>​      变量提升是指在JavaScript中，变量和函数声明会在代码执行之前被提升到作用域的顶部。这意味着可以在声明之前使用变量和函数。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x); <span class="hljs-comment">// 输出 undefined</span><br><span class="hljs-keyword">var</span> x = <span class="hljs-number">5</span>;<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-解释JavaScript中的闭包（Closure）是什么，并举例说明。"><a href="#3-解释JavaScript中的闭包（Closure）是什么，并举例说明。" class="headerlink" title="3. 解释JavaScript中的闭包（Closure）是什么，并举例说明。"></a>3. 解释JavaScript中的闭包（Closure）是什么，并举例说明。</h5><p>​      闭包是指函数可以访问并操作其词法作用域之外的变量。它通过在函数内部创建一个内部函数，并返回该内部函数来实现。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">outer</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> x = <span class="hljs-number">10</span>;<br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">inner</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x);<br>  &#125;<br>  <span class="hljs-keyword">return</span> inner;<br>&#125;<br><br><span class="hljs-keyword">let</span> closure = <span class="hljs-title function_">outer</span>();<br><span class="hljs-title function_">closure</span>(); <span class="hljs-comment">// 输出 10</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="4-解释JavaScript中的事件冒泡（Event-Bubbling）和事件捕获（Event-Capturing）。"><a href="#4-解释JavaScript中的事件冒泡（Event-Bubbling）和事件捕获（Event-Capturing）。" class="headerlink" title="4. 解释JavaScript中的事件冒泡（Event Bubbling）和事件捕获（Event Capturing）。"></a>4. 解释JavaScript中的事件冒泡（Event Bubbling）和事件捕获（Event Capturing）。</h5><p>​      事件冒泡是指事件从最具体的元素开始向父元素逐级触发，直到触发到根元素。事件捕获是指事件从根元素开始，逐级向最具体的元素触发。可以使用addEventListener方法的第三个参数来控制是使用事件冒泡还是事件捕获。</p>
+<h5 id="5-解释JavaScript中的原型继承（Prototype-Inheritance）是什么。"><a href="#5-解释JavaScript中的原型继承（Prototype-Inheritance）是什么。" class="headerlink" title="5. 解释JavaScript中的原型继承（Prototype Inheritance）是什么。"></a>5. 解释JavaScript中的原型继承（Prototype Inheritance）是什么。</h5><p>​      原型继承是JavaScript中实现对象之间继承关系的一种机制。每个对象都有一个原型对象，它包含了共享的属性和方法。当访问对象的属性或方法时，如果对象本身没有，则会沿着原型链向上查找。可以使用Object.create()方法或设置对象的__proto__属性来实现原型继承。</p>
+<h5 id="6-解释JavaScript中的异步编程，并提供一个异步操作的示例。"><a href="#6-解释JavaScript中的异步编程，并提供一个异步操作的示例。" class="headerlink" title="6. 解释JavaScript中的异步编程，并提供一个异步操作的示例。"></a>6. 解释JavaScript中的异步编程，并提供一个异步操作的示例。</h5><p>​      异步编程是指在代码执行过程中，不会阻塞后续代码执行的一种编程方式。常见的异步操作包括网络请求、定时器等。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;开始&quot;</span>);<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;异步操作&quot;</span>);<br>&#125;, <span class="hljs-number">1000</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;结束&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<h5 id="7-解释JavaScript中的闭包（Closure）是什么，并举例说明。"><a href="#7-解释JavaScript中的闭包（Closure）是什么，并举例说明。" class="headerlink" title="7. 解释JavaScript中的闭包（Closure）是什么，并举例说明。"></a>7. 解释JavaScript中的闭包（Closure）是什么，并举例说明。</h5><p>​      闭包是指函数可以访问并操作其词法作用域之外的变量。它通过在函数内部创建一个内部函数，并返回该内部函数来实现。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">outer</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">let</span> x = <span class="hljs-number">10</span>;<br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">inner</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x);<br>  &#125;<br>  <span class="hljs-keyword">return</span> inner;<br>&#125;<br><br><span class="hljs-keyword">let</span> closure = <span class="hljs-title function_">outer</span>();<br><span class="hljs-title function_">closure</span>(); <span class="hljs-comment">// 输出 10</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="8-解释JavaScript中的this关键字的作用和使用场景。"><a href="#8-解释JavaScript中的this关键字的作用和使用场景。" class="headerlink" title="8. 解释JavaScript中的this关键字的作用和使用场景。"></a>8. 解释JavaScript中的this关键字的作用和使用场景。</h5><p>​      this关键字在JavaScript中表示当前执行上下文的对象。它的具体取值根据函数的调用方式而定。在全局作用域中，this指向全局对象（浏览器环境中为window对象）。在函数中，this的指向取决于函数的调用方式，可以通过call、apply、bind等方法来显式地指定this的值。</p>
+<h5 id="9-解释JavaScript中的事件委托（Event-Delegation）是什么，并提供一个使用事件委托的示例。"><a href="#9-解释JavaScript中的事件委托（Event-Delegation）是什么，并提供一个使用事件委托的示例。" class="headerlink" title="9. 解释JavaScript中的事件委托（Event Delegation）是什么，并提供一个使用事件委托的示例。"></a>9. 解释JavaScript中的事件委托（Event Delegation）是什么，并提供一个使用事件委托的示例。</h5><p>​      事件委托是指将事件处理程序绑定到父元素上，而不是直接绑定到每个子元素上。当事件触发时，事件会冒泡到父元素，然后通过判断事件的目标来执行相应的处理逻辑。这样可以减少事件处理程序的数量，提高性能。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> &lt;ul id=<span class="hljs-string">&quot;list&quot;</span>&gt;<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>&lt;/ul&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;list&quot;</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">  <span class="hljs-keyword">if</span> (event.<span class="hljs-property">target</span>.<span class="hljs-property">tagName</span> === <span class="hljs-string">&quot;LI&quot;</span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event.<span class="hljs-property">target</span>.<span class="hljs-property">textContent</span>);</span></span><br><span class="language-javascript"><span class="language-xml">  &#125;</span></span><br><span class="language-javascript"><span class="language-xml">&#125;);</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h5 id="10-解释JavaScript中的模块化编程，并提供一个使用模块的示例。"><a href="#10-解释JavaScript中的模块化编程，并提供一个使用模块的示例。" class="headerlink" title="10. 解释JavaScript中的模块化编程，并提供一个使用模块的示例。"></a>10. 解释JavaScript中的模块化编程，并提供一个使用模块的示例。</h5><p>​      模块化编程是指将代码划分为独立的模块，每个模块负责特定的功能，并通过导入和导出来实现模块之间的依赖关系。ES6引入了模块化的语法，可以使用import和export关键字来导入和导出模块。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> <span class="hljs-comment">// module.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hello!&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">// main.js</span><br><span class="hljs-keyword">import</span> &#123; sayHello &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./module.js&quot;</span>;<br><span class="hljs-title function_">sayHello</span>(); <span class="hljs-comment">// 输出 &quot;Hello!&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="11-解释JavaScript中的事件冒泡（Event-Bubbling）和事件捕获（Event-Capturing）。"><a href="#11-解释JavaScript中的事件冒泡（Event-Bubbling）和事件捕获（Event-Capturing）。" class="headerlink" title="11. 解释JavaScript中的事件冒泡（Event Bubbling）和事件捕获（Event Capturing）。"></a>11. 解释JavaScript中的事件冒泡（Event Bubbling）和事件捕获（Event Capturing）。</h5><p>​      事件冒泡是指当一个事件在DOM树中触发时，它会从最内层的元素开始向外传播至最外层的元素。事件捕获是指当一个事件在DOM树中触发时，它会从最外层的元素开始向内传播至最内层的元素。</p>
+<h5 id="12-什么是原型链（Prototype-Chain）？如何利用原型链实现继承？"><a href="#12-什么是原型链（Prototype-Chain）？如何利用原型链实现继承？" class="headerlink" title="12. 什么是原型链（Prototype Chain）？如何利用原型链实现继承？"></a>12. 什么是原型链（Prototype Chain）？如何利用原型链实现继承？</h5><p>​      原型链是JavaScript中对象之间的连接关系，每个对象都有一个指向其原型（prototype）的引用。通过原型链，对象可以继承其原型对象的属性和方法。可以使用原型链实现继承，通过将一个对象的原型指向另一个对象，从而使得该对象可以访问另一个对象的属性和方法。</p>
+<h5 id="13-解释JavaScript中的防抖（Debounce）和节流（Throttle）。"><a href="#13-解释JavaScript中的防抖（Debounce）和节流（Throttle）。" class="headerlink" title="13. 解释JavaScript中的防抖（Debounce）和节流（Throttle）。"></a>13. 解释JavaScript中的防抖（Debounce）和节流（Throttle）。</h5><p>​      防抖和节流都是用于控制函数执行频率的技术。防抖指的是在某个时间段内，只执行最后一次触发的函数调用。节流指的是在某个时间段内，按照固定的时间间隔执行函数调用。</p>
+<h5 id="14-什么是事件循环（Event-Loop）？请解释JavaScript中的事件循环机制。"><a href="#14-什么是事件循环（Event-Loop）？请解释JavaScript中的事件循环机制。" class="headerlink" title="14. 什么是事件循环（Event Loop）？请解释JavaScript中的事件循环机制。"></a>14. 什么是事件循环（Event Loop）？请解释JavaScript中的事件循环机制。</h5><p>​      事件循环是JavaScript中处理异步操作的机制。事件循环不断地从任务队列中取出任务并执行，直到任务队列为空。事件循环由主线程和任务队列组成，主线程负责执行同步任务，异步任务会被放入任务队列中，等待主线程空闲时被执行。</p>
+<h5 id="15-解释JavaScript中的深拷贝和浅拷贝。"><a href="#15-解释JavaScript中的深拷贝和浅拷贝。" class="headerlink" title="15. 解释JavaScript中的深拷贝和浅拷贝。"></a>15. 解释JavaScript中的深拷贝和浅拷贝。</h5><p>​      深拷贝是指创建一个新对象，将原始对象的所有属性和嵌套对象的属性都复制到新对象中。浅拷贝是指创建一个新对象，将原始对象的属性复制到新对象中，但嵌套对象的引用仍然是共享的。</p>
+<h5 id="16-什么是异步编程？请列举几种处理异步操作的方法。"><a href="#16-什么是异步编程？请列举几种处理异步操作的方法。" class="headerlink" title="16. 什么是异步编程？请列举几种处理异步操作的方法。"></a>16. 什么是异步编程？请列举几种处理异步操作的方法。</h5><p>​      异步编程是一种处理可能耗时的操作而不阻塞主线程的编程方式。常见的处理异步操作的方法有回调函数、Promise、async&#x2F;await和事件监听等。</p>
+<h5 id="17-解释JavaScript中的Hoisting（变量提升）。"><a href="#17-解释JavaScript中的Hoisting（变量提升）。" class="headerlink" title="17. 解释JavaScript中的Hoisting（变量提升）。"></a>17. 解释JavaScript中的Hoisting（变量提升）。</h5><p>​      变量提升是指在JavaScript中，变量和函数的声明会被提升到当前作用域的顶部。这意味着可以在声明之前使用变量和函数，但它们的赋值或定义仍然在原来的位置。</p>
+<h5 id="18-什么是柯里化（Currying）？请给出一个柯里化的示例。"><a href="#18-什么是柯里化（Currying）？请给出一个柯里化的示例。" class="headerlink" title="18. 什么是柯里化（Currying）？请给出一个柯里化的示例。"></a>18. 什么是柯里化（Currying）？请给出一个柯里化的示例。</h5><p>​      柯里化是一种将接受多个参数的函数转换为接受一个参数并返回一个新函数的过程。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params">b</span>) &#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">var</span> add5 = <span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">add5</span>(<span class="hljs-number">3</span>)); <span class="hljs-comment">// 输出：8</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="19-解释JavaScript中的严格模式（Strict-Mode）。"><a href="#19-解释JavaScript中的严格模式（Strict-Mode）。" class="headerlink" title="19. 解释JavaScript中的严格模式（Strict Mode）。"></a>19. 解释JavaScript中的严格模式（Strict Mode）。</h5><p>​      严格模式是一种JavaScript的执行模式，它提供了更严格的语法和错误检查。在严格模式下，一些不安全或不推荐的语法会被禁用，同时会引入一些新的特性，如变量必须先声明才能使用、禁止使用this指向全局对象等。</p>
+<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><h5 id="1-解释TypeScript和JavaScript之间的关系。"><a href="#1-解释TypeScript和JavaScript之间的关系。" class="headerlink" title="1. 解释TypeScript和JavaScript之间的关系。"></a>1. 解释TypeScript和JavaScript之间的关系。</h5><p>​      TypeScript是JavaScript的超集，它添加了静态类型和其他一些特性。TypeScript代码可以编译成JavaScript代码，因此可以在任何支持JavaScript的环境中运行。</p>
+<h5 id="2-TypeScript中的类型注解是什么？如何使用类型注解？"><a href="#2-TypeScript中的类型注解是什么？如何使用类型注解？" class="headerlink" title="2. TypeScript中的类型注解是什么？如何使用类型注解？"></a>2. TypeScript中的类型注解是什么？如何使用类型注解？</h5><p>​      类型注解是指在变量、函数参数、函数返回值等地方显式地声明类型信息。可以使用冒号（:）后跟类型来添加类型注解。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> <span class="hljs-attr">num</span>: number = <span class="hljs-number">10</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a: number, b: number</span>): number &#123;<br>  <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-TypeScript中的接口是什么？如何定义和使用接口？"><a href="#3-TypeScript中的接口是什么？如何定义和使用接口？" class="headerlink" title="3. TypeScript中的接口是什么？如何定义和使用接口？"></a>3. TypeScript中的接口是什么？如何定义和使用接口？</h5><p>​      接口是一种用于定义对象的结构和类型的语法。可以使用interface关键字来定义接口。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">interface <span class="hljs-title class_">Person</span> &#123;<br>  <span class="hljs-attr">name</span>: string;<br>  <span class="hljs-attr">age</span>: number;<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">person: Person</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;person.name&#125;</span>!`</span>);<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">john</span>: <span class="hljs-title class_">Person</span> = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> &#125;;<br><span class="hljs-title function_">greet</span>(john); <span class="hljs-comment">// 输出 &quot;Hello, John!&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="4-TypeScript中的类是什么？如何定义和使用类？"><a href="#4-TypeScript中的类是什么？如何定义和使用类？" class="headerlink" title="4. TypeScript中的类是什么？如何定义和使用类？"></a>4. TypeScript中的类是什么？如何定义和使用类？</h5><p>​      类是一种用于创建对象的蓝图，它包含属性和方法。可以使用class关键字来定义类。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>  <span class="hljs-attr">name</span>: string;<br>  <span class="hljs-attr">age</span>: number;<br><br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: string, age: number</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age;<br>  &#125;<br><br>  <span class="hljs-title function_">greet</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.name&#125;</span>!`</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">let</span> john = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-number">25</span>);<br>john.<span class="hljs-title function_">greet</span>(); <span class="hljs-comment">// 输出 &quot;Hello, John!&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="5-TypeScript中的泛型是什么？如何使用泛型？"><a href="#5-TypeScript中的泛型是什么？如何使用泛型？" class="headerlink" title="5. TypeScript中的泛型是什么？如何使用泛型？"></a>5. TypeScript中的泛型是什么？如何使用泛型？</h5><p>​      泛型是一种用于创建可重用代码的工具，它允许在定义函数、类或接口时使用占位符类型。可以使用尖括号（&lt;&gt;）来指定泛型类型。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> identity&lt;T&gt;(<span class="hljs-attr">value</span>: T): T &#123;<br>  <span class="hljs-keyword">return</span> value;<br>&#125;<br><br><span class="hljs-keyword">let</span> result = identity&lt;string&gt;(<span class="hljs-string">&quot;Hello&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result); <span class="hljs-comment">// 输出 &quot;Hello&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="6-TypeScript中的枚举是什么？如何定义和使用枚举？"><a href="#6-TypeScript中的枚举是什么？如何定义和使用枚举？" class="headerlink" title="6. TypeScript中的枚举是什么？如何定义和使用枚举？"></a>6. TypeScript中的枚举是什么？如何定义和使用枚举？</h5><p>​      枚举是一种用于定义命名常量集合的语法。可以使用enum关键字来定义枚举。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">enum <span class="hljs-title class_">Color</span> &#123;<br>  <span class="hljs-title class_">Red</span>,<br>  <span class="hljs-title class_">Green</span>,<br>  <span class="hljs-title class_">Blue</span>,<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">color</span>: <span class="hljs-title class_">Color</span> = <span class="hljs-title class_">Color</span>.<span class="hljs-property">Green</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(color); <span class="hljs-comment">// 输出 1</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="7-TypeScript中的模块是什么？如何导出和导入模块？"><a href="#7-TypeScript中的模块是什么？如何导出和导入模块？" class="headerlink" title="7. TypeScript中的模块是什么？如何导出和导入模块？"></a>7. TypeScript中的模块是什么？如何导出和导入模块？</h5><p>​      模块是用于组织和封装代码的单元。可以使用export关键字将模块中的变量、函数、类等导出，以便其他模块可以使用。可以使用import关键字来导入其他模块的导出。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> <span class="hljs-comment">// module.ts</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">name: string</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span>);<br>&#125;<br><br><span class="hljs-comment">// main.ts</span><br><span class="hljs-keyword">import</span> &#123; greet &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./module&quot;</span>;<br><span class="hljs-title function_">greet</span>(<span class="hljs-string">&quot;John&quot;</span>); <span class="hljs-comment">// 输出 &quot;Hello, John!&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="8-TypeScript中的类型推断是什么？如何使用类型推断？"><a href="#8-TypeScript中的类型推断是什么？如何使用类型推断？" class="headerlink" title="8. TypeScript中的类型推断是什么？如何使用类型推断？"></a>8. TypeScript中的类型推断是什么？如何使用类型推断？</h5><p>​      类型推断是指TypeScript根据上下文自动推断变量的类型，而无需显式地添加类型注解。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">10</span>; <span class="hljs-comment">// 推断为 number 类型</span><br><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;Hello&quot;</span>; <span class="hljs-comment">// 推断为 string 类型</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="9-TypeScript中的命名空间是什么？如何定义和使用命名空间？"><a href="#9-TypeScript中的命名空间是什么？如何定义和使用命名空间？" class="headerlink" title="9. TypeScript中的命名空间是什么？如何定义和使用命名空间？"></a>9. TypeScript中的命名空间是什么？如何定义和使用命名空间？</h5><p>​      命名空间是一种用于组织和封装代码的机制，它避免了全局命名冲突。可以使用namespace关键字来定义命名空间。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">namespace <span class="hljs-title class_">MyNamespace</span> &#123;<br>  <span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">name: string</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-title class_">MyNamespace</span>.<span class="hljs-title function_">greet</span>(<span class="hljs-string">&quot;John&quot;</span>); <span class="hljs-comment">// 输出 &quot;Hello, John!&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="10-TypeScript中的类型别名是什么？如何定义和使用类型别名？"><a href="#10-TypeScript中的类型别名是什么？如何定义和使用类型别名？" class="headerlink" title="10. TypeScript中的类型别名是什么？如何定义和使用类型别名？"></a>10. TypeScript中的类型别名是什么？如何定义和使用类型别名？</h5><p>​      类型别名是给类型起一个别名，以便在代码中更方便地引用。可以使用type关键字来定义类型别名。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">type <span class="hljs-title class_">Point</span> = &#123; <span class="hljs-attr">x</span>: number; <span class="hljs-attr">y</span>: number &#125;;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">printPoint</span>(<span class="hljs-params">point: Point</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`(<span class="hljs-subst">$&#123;point.x&#125;</span>, <span class="hljs-subst">$&#123;point.y&#125;</span>)`</span>);<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">p</span>: <span class="hljs-title class_">Point</span> = &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span> &#125;;<br><span class="hljs-title function_">printPoint</span>(p); <span class="hljs-comment">// 输出 &quot;(1, 2)&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="VUE2"><a href="#VUE2" class="headerlink" title="VUE2"></a>VUE2</h2><h5 id="1-Vue-js是什么？它有哪些特点？"><a href="#1-Vue-js是什么？它有哪些特点？" class="headerlink" title="1. Vue.js是什么？它有哪些特点？"></a>1. Vue.js是什么？它有哪些特点？</h5><p>​      Vue.js是一个用于构建用户界面的JavaScript框架。它具有以下特点：</p>
+<p>响应式数据绑定：通过使用Vue的数据绑定语法，可以实现数据的自动更新。 组件化开发：Vue允许将页面划分为独立的组件，提高了代码的可维护性和复用性。 虚拟DOM：Vue使用虚拟DOM来跟踪页面上的变化，并高效地更新实际的DOM。 指令系统：Vue提供了丰富的内置指令，用于处理常见的DOM操作和逻辑控制。 生态系统：Vue拥有庞大的生态系统，包括插件、工具和第三方库，可以满足各种开发需求。</p>
+<h5 id="2-Vue中的双向数据绑定是如何实现的？"><a href="#2-Vue中的双向数据绑定是如何实现的？" class="headerlink" title="2. Vue中的双向数据绑定是如何实现的？"></a>2. Vue中的双向数据绑定是如何实现的？</h5><p>​      Vue中的双向数据绑定是通过v-model指令实现的。v-model可以在表单元素（如、、）上创建双向数据绑定。当用户输入改变表单元素的值时，数据模型会自动更新；反之，当数据模型的值改变时，表单元素也会自动更新。</p>
+<h5 id="3-Vue中的生命周期钩子有哪些？它们的执行顺序是怎样的？"><a href="#3-Vue中的生命周期钩子有哪些？它们的执行顺序是怎样的？" class="headerlink" title="3. Vue中的生命周期钩子有哪些？它们的执行顺序是怎样的？"></a>3. Vue中的生命周期钩子有哪些？它们的执行顺序是怎样的？</h5><p>​      Vue中的生命周期钩子包括beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy和destroyed。它们的执行顺序如下：</p>
+<p>beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy destroyed</p>
+<h5 id="4-Vue中的计算属性和监听器有什么区别？"><a href="#4-Vue中的计算属性和监听器有什么区别？" class="headerlink" title="4. Vue中的计算属性和监听器有什么区别？"></a>4. Vue中的计算属性和监听器有什么区别？</h5><p>​      计算属性是基于依赖的属性，它根据其依赖的数据动态计算得出值。计算属性具有缓存机制，只有在依赖的数据发生变化时才会重新计算。监听器是用于监听数据的变化并执行相应的操作。当数据发生变化时，监听器会立即执行指定的回调函数。</p>
+<h5 id="5-Vue中的组件通信有哪些方式？"><a href="#5-Vue中的组件通信有哪些方式？" class="headerlink" title="5. Vue中的组件通信有哪些方式？"></a>5. Vue中的组件通信有哪些方式？</h5><p>​      Vue中的组件通信方式包括：</p>
+<p>父子组件通信：通过props向子组件传递数据，子组件通过事件向父组件发送消息。 子父组件通信：子组件通过$emit触发事件，父组件通过监听事件并响应。 兄弟组件通信：通过共享的父组件来传递数据或通过事件总线（Event Bus）进行通信。 跨级组件通信：通过provide和inject来在祖先组件中提供数据，然后在后代组件中使用。</p>
+<h5 id="6-Vue中的路由是如何实现的？"><a href="#6-Vue中的路由是如何实现的？" class="headerlink" title="6. Vue中的路由是如何实现的？"></a>6. Vue中的路由是如何实现的？</h5><p>​      Vue中的路由是通过Vue Router实现的。Vue Router是Vue.js官方提供的路由管理器，它允许开发者在Vue应用中实现单页面应用（SPA）。Vue Router通过配置路由映射关系，将URL路径与组件进行关联，并提供导航功能，使用户可以在不刷新页面的情况下切换视图。</p>
+<h5 id="7-Vue中的指令有哪些？举例说明它们的用法。"><a href="#7-Vue中的指令有哪些？举例说明它们的用法。" class="headerlink" title="7. Vue中的指令有哪些？举例说明它们的用法。"></a>7. Vue中的指令有哪些？举例说明它们的用法。</h5><p>​      Vue中常用的指令包括：</p>
+<p>v-if：根据表达式的值条件性地渲染元素。 v-for：根据数组或对象的数据进行循环渲染。 v-bind：用于动态绑定属性或响应式地更新属性。 v-on：用于监听DOM事件并执行相应的方法。 v-model：用于在表单元素上实现双向数据绑定。 例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> &lt;div v-<span class="hljs-keyword">if</span>=<span class="hljs-string">&quot;show&quot;</span>&gt;显示内容&lt;/div&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span>&gt;</span>&#123;&#123; item.name &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br><br>&lt;img v-bind:src=&quot;imageUrl&quot;&gt;<br><br>&lt;button v-on:click=&quot;handleClick&quot;&gt;点击按钮&lt;/button&gt;<br><br>&lt;input v-model=&quot;message&quot;&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="8-Vue中的watch和computed有什么区别？"><a href="#8-Vue中的watch和computed有什么区别？" class="headerlink" title="8. Vue中的watch和computed有什么区别？"></a>8. Vue中的watch和computed有什么区别？</h5><p>​      watch和computed都可以用于监听数据的变化，但它们的用法和实现方式略有不同。watch用于监听指定的数据变化，并在数据变化时执行相应的操作。computed用于根据依赖的数据动态计算得出一个新的值，并将该值缓存起来，只有在依赖的数据发生变化时才会重新计算。</p>
+<h5 id="9-Vue中的mixin是什么？它有什么作用？"><a href="#9-Vue中的mixin是什么？它有什么作用？" class="headerlink" title="9. Vue中的mixin是什么？它有什么作用？"></a>9. Vue中的mixin是什么？它有什么作用？</h5><p>​      Mixin是一种用于在多个组件之间共享代码的方式。Mixin可以包含组件选项（如数据、方法、生命周期钩子等），并将其合并到使用Mixin的组件中。这样可以实现代码的复用和组件的扩展，减少重复编写相似代码的工作。</p>
+<h5 id="10-Vue中的keep-alive是什么？它有什么作用？"><a href="#10-Vue中的keep-alive是什么？它有什么作用？" class="headerlink" title="10. Vue中的keep-alive是什么？它有什么作用？"></a>10. Vue中的keep-alive是什么？它有什么作用？</h5><p>​      是Vue中的一个内置组件，用于缓存动态组件。当组件包裹在中时，组件的状态将被保留，包括它的实例、状态和DOM结构。这样可以避免在组件切换时重复创建和销毁组件，提高性能和用户体验。</p>
+<h5 id="11-请解释Vue-js中的依赖注入（Dependency-Injection）是什么？它在Vue中的应用场景是什么？"><a href="#11-请解释Vue-js中的依赖注入（Dependency-Injection）是什么？它在Vue中的应用场景是什么？" class="headerlink" title="11. 请解释Vue.js中的依赖注入（Dependency Injection）是什么？它在Vue中的应用场景是什么？"></a>11. 请解释Vue.js中的依赖注入（Dependency Injection）是什么？它在Vue中的应用场景是什么？</h5><p>​      依赖注入是一种设计模式，用于将依赖关系从一个组件传递到另一个组件。在Vue中，依赖注入通过provide和inject选项实现。父组件通过provide提供数据，然后子组件通过inject注入这些数据。它在跨多个层级的组件通信中非常有用。</p>
+<h5 id="12-Vue-js中的渲染函数（Render-Function）是什么？它与模板（Template）有什么区别？"><a href="#12-Vue-js中的渲染函数（Render-Function）是什么？它与模板（Template）有什么区别？" class="headerlink" title="12. Vue.js中的渲染函数（Render Function）是什么？它与模板（Template）有什么区别？"></a>12. Vue.js中的渲染函数（Render Function）是什么？它与模板（Template）有什么区别？</h5><p>​      渲染函数是一种用JavaScript代码编写组件的方式，它可以动态地生成虚拟DOM。与模板相比，渲染函数提供了更大的灵活性和控制力，可以处理更复杂的逻辑和动态渲染需求。</p>
+<h5 id="13-Vue-js中的插槽（Slot）是什么？请提供一个具有命名插槽和作用域插槽的示例。"><a href="#13-Vue-js中的插槽（Slot）是什么？请提供一个具有命名插槽和作用域插槽的示例。" class="headerlink" title="13. Vue.js中的插槽（Slot）是什么？请提供一个具有命名插槽和作用域插槽的示例。"></a>13. Vue.js中的插槽（Slot）是什么？请提供一个具有命名插槽和作用域插槽的示例。</h5><p>​      插槽是一种用于在组件中扩展内容的机制。命名插槽允许父组件向子组件插入具有特定名称的内容，而作用域插槽允许子组件将数据传递给父组件。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;!-- 父组件 --&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;data&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br><br>&lt;!-- 子组件 --&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span>默认标题<span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;computedData&quot;</span>&gt;</span>&#123;&#123; computedData &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h5 id="14-Vue-js中的动画系统是如何工作的？请提供一个简单的动画示例。"><a href="#14-Vue-js中的动画系统是如何工作的？请提供一个简单的动画示例。" class="headerlink" title="14. Vue.js中的动画系统是如何工作的？请提供一个简单的动画示例。"></a>14. Vue.js中的动画系统是如何工作的？请提供一个简单的动画示例。</h5><p>​      Vue.js的动画系统通过CSS过渡和动画类实现。通过在元素上添加过渡类或动画类，可以触发相应的过渡效果或动画效果。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> &lt;transition name=<span class="hljs-string">&quot;fade&quot;</span>&gt;<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;show&quot;</span>&gt;</span>显示内容<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/transition&gt;<br><br>&lt;!-- <span class="hljs-variable constant_">CSS</span>样式 --&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="language-css"><span class="language-xml"><span class="hljs-selector-class">.fade-enter-active</span>, <span class="hljs-selector-class">.fade-leave-active</span> &#123;</span></span><br><span class="language-css"><span class="language-xml">  <span class="hljs-attribute">transition</span>: opacity <span class="hljs-number">0.5s</span>;</span></span><br><span class="language-css"><span class="language-xml">&#125;</span></span><br><span class="language-css"><span class="language-xml"><span class="hljs-selector-class">.fade-enter</span>, <span class="hljs-selector-class">.fade-leave-to</span> &#123;</span></span><br><span class="language-css"><span class="language-xml">  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;</span></span><br><span class="language-css"><span class="language-xml">&#125;</span></span><br><span class="language-css"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h5 id="15-Vue-js中的错误处理机制是什么？如何捕获和处理Vue组件中的错误？"><a href="#15-Vue-js中的错误处理机制是什么？如何捕获和处理Vue组件中的错误？" class="headerlink" title="15. Vue.js中的错误处理机制是什么？如何捕获和处理Vue组件中的错误？"></a>15. Vue.js中的错误处理机制是什么？如何捕获和处理Vue组件中的错误？</h5><p>​      Vue.js提供了全局的错误处理机制和组件级别的错误处理机制。全局错误处理可以通过errorCaptured钩子函数捕获和处理错误。组件级别的错误处理可以通过errorCaptured钩子函数或errorHandler选项捕获和处理错误。</p>
+<h5 id="16-Vue-js中的服务端渲染（SSR）是什么？它有哪些优势和限制？"><a href="#16-Vue-js中的服务端渲染（SSR）是什么？它有哪些优势和限制？" class="headerlink" title="16. Vue.js中的服务端渲染（SSR）是什么？它有哪些优势和限制？"></a>16. Vue.js中的服务端渲染（SSR）是什么？它有哪些优势和限制？</h5><p>​      服务端渲染是指在服务器上生成HTML内容并将其发送到浏览器进行渲染的过程。Vue.js可以进行服务端渲染，提供更好的首次加载性能和SEO优化。然而，服务端渲染也带来了一些限制，如增加了服务器负载和开发复杂性。</p>
+<h5 id="17-Vue-js中的响应式数组有哪些限制？如何解决这些限制？"><a href="#17-Vue-js中的响应式数组有哪些限制？如何解决这些限制？" class="headerlink" title="17. Vue.js中的响应式数组有哪些限制？如何解决这些限制？"></a>17. Vue.js中的响应式数组有哪些限制？如何解决这些限制？</h5><p>​      Vue.js的响应式系统对于数组的变异方法（如push、pop、splice等）是无法追踪的。为了解决这个限制，Vue提供了一些特殊的方法，如Vue.set、vm.$set和Array.prototype.splice。这些方法可以用于更新数组并保持响应式。</p>
+<h5 id="18-Vue-js中的性能优化有哪些常见的技巧？"><a href="#18-Vue-js中的性能优化有哪些常见的技巧？" class="headerlink" title="18. Vue.js中的性能优化有哪些常见的技巧？"></a>18. Vue.js中的性能优化有哪些常见的技巧？</h5><p>​      常见的Vue.js性能优化技巧包括：</p>
+<p>使用v-if和v-for时注意避免不必要的渲染。 合理使用computed属性和watch监听器。 使用keep-alive组件缓存组件状态。 使用异步组件进行按需加载。 避免在模板中使用复杂的表达式。 使用key属性管理组件和元素的复用。 合理使用懒加载和分割代码。</p>
+<h5 id="19-Vue-js中的路由导航守卫有哪些？它们的执行顺序是怎样的？"><a href="#19-Vue-js中的路由导航守卫有哪些？它们的执行顺序是怎样的？" class="headerlink" title="19. Vue.js中的路由导航守卫有哪些？它们的执行顺序是怎样的？"></a>19. Vue.js中的路由导航守卫有哪些？它们的执行顺序是怎样的？</h5><p>​      Vue.js中的路由导航守卫包括全局前置守卫、全局解析守卫、全局后置守卫、路由独享守卫和组件内守卫。它们的执行顺序如下：</p>
+<p>全局前置守卫（beforeEach） 路由独享守卫（beforeEnter） 解析守卫（beforeResolve） 组件内守卫（beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave） 全局后置守卫（afterEach）</p>
+<h5 id="20-Vue-js中的单元测试是如何进行的？请提供一个简单的单元测试示例。"><a href="#20-Vue-js中的单元测试是如何进行的？请提供一个简单的单元测试示例。" class="headerlink" title="20. Vue.js中的单元测试是如何进行的？请提供一个简单的单元测试示例。"></a>20. Vue.js中的单元测试是如何进行的？请提供一个简单的单元测试示例。</h5><p>​      Vue.js的单元测试可以使用工具如Jest或Mocha进行。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 组件代码</span><br><span class="hljs-comment">// MyComponent.vue</span><br>&lt;template&gt;<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;my-component&quot;</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;increment&quot;</span>&gt;</span>增加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">return</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">      <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Hello&#x27;</span>,</span></span><br><span class="language-javascript"><span class="language-xml">      <span class="hljs-attr">count</span>: <span class="hljs-number">0</span></span></span><br><span class="language-javascript"><span class="language-xml">    &#125;</span></span><br><span class="language-javascript"><span class="language-xml">  &#125;,</span></span><br><span class="language-javascript"><span class="language-xml">  <span class="hljs-attr">methods</span>: &#123;</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">increment</span>(<span class="hljs-params"></span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span>++</span></span><br><span class="language-javascript"><span class="language-xml">    &#125;</span></span><br><span class="language-javascript"><span class="language-xml">  &#125;</span></span><br><span class="language-javascript"><span class="language-xml">&#125;</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><span class="hljs-comment">// 单元测试代码</span><br><span class="hljs-comment">// MyComponent.spec.js</span><br><span class="hljs-keyword">import</span> &#123; shallowMount &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vue/test-utils&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">MyComponent</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./MyComponent.vue&#x27;</span><br><br><span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;MyComponent&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;renders message correctly&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> wrapper = <span class="hljs-title function_">shallowMount</span>(<span class="hljs-title class_">MyComponent</span>)<br>    <span class="hljs-title function_">expect</span>(wrapper.<span class="hljs-title function_">find</span>(<span class="hljs-string">&#x27;span&#x27;</span>).<span class="hljs-title function_">text</span>()).<span class="hljs-title function_">toBe</span>(<span class="hljs-string">&#x27;Hello&#x27;</span>)<br>  &#125;)<br><br>  <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;increments count when button is clicked&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> wrapper = <span class="hljs-title function_">shallowMount</span>(<span class="hljs-title class_">MyComponent</span>)<br>    wrapper.<span class="hljs-title function_">find</span>(<span class="hljs-string">&#x27;button&#x27;</span>).<span class="hljs-title function_">trigger</span>(<span class="hljs-string">&#x27;click&#x27;</span>)<br>    <span class="hljs-title function_">expect</span>(wrapper.<span class="hljs-property">vm</span>.<span class="hljs-property">count</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">1</span>)<br>  &#125;)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h2 id="VUE3"><a href="#VUE3" class="headerlink" title="VUE3"></a>VUE3</h2><h5 id="1-Vue-js-3中的Composition-API是什么？它与Options-API有什么区别？"><a href="#1-Vue-js-3中的Composition-API是什么？它与Options-API有什么区别？" class="headerlink" title="1. Vue.js 3中的Composition API是什么？它与Options API有什么区别？"></a>1. Vue.js 3中的Composition API是什么？它与Options API有什么区别？</h5><p>​      Composition API是Vue.js 3中引入的一种新的组织组件逻辑的方式。它允许开发者通过函数的方式组织和重用逻辑，而不是通过选项对象。相比之下，Options API是Vue.js 2中常用的组织组件逻辑的方式，通过选项对象中的属性来定义组件的数据、方法等。</p>
+<h5 id="2-Vue-js-3中的Teleport是什么？请给出一个Teleport的示例。"><a href="#2-Vue-js-3中的Teleport是什么？请给出一个Teleport的示例。" class="headerlink" title="2. Vue.js 3中的Teleport是什么？请给出一个Teleport的示例。"></a>2. Vue.js 3中的Teleport是什么？请给出一个Teleport的示例。</h5><p>​      Teleport是Vue.js 3中引入的一种机制，用于将组件的内容渲染到DOM树中的任意位置。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> &lt;template&gt;<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;showModal = true&quot;</span>&gt;</span>打开模态框<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">teleport</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;body&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">modal</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;showModal&quot;</span> @<span class="hljs-attr">close</span>=<span class="hljs-string">&quot;showModal = false&quot;</span>&gt;</span>模态框内容<span class="hljs-tag">&lt;/<span class="hljs-name">modal</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">teleport</span>&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-Vue-js-3中的响应式系统是如何工作的？它与Vue-js-2中的响应式系统有什么区别？"><a href="#3-Vue-js-3中的响应式系统是如何工作的？它与Vue-js-2中的响应式系统有什么区别？" class="headerlink" title="3. Vue.js 3中的响应式系统是如何工作的？它与Vue.js 2中的响应式系统有什么区别？"></a>3. Vue.js 3中的响应式系统是如何工作的？它与Vue.js 2中的响应式系统有什么区别？</h5><p>​      Vue.js 3中的响应式系统使用了Proxy对象来实现。与Vue.js 2中的响应式系统相比，Vue.js 3的响应式系统具有更好的性能和更细粒度的追踪，能够更准确地检测到数据的变化，并且支持嵌套的响应式数据。</p>
+<h5 id="4-Vue-js-3中的Suspense是什么？它的作用是什么？"><a href="#4-Vue-js-3中的Suspense是什么？它的作用是什么？" class="headerlink" title="4. Vue.js 3中的Suspense是什么？它的作用是什么？"></a>4. Vue.js 3中的Suspense是什么？它的作用是什么？</h5><p>​      Suspense是Vue.js 3中引入的一种机制，用于处理异步组件的加载状态。它可以在异步组件加载完成之前显示一个占位符，并在加载完成后渲染异步组件的内容。这样可以更好地处理异步组件的加载过程，提供更好的用户体验。</p>
+<h5 id="5-Vue-js-3中的provide和inject有什么作用？请给出一个provide和inject的示例。"><a href="#5-Vue-js-3中的provide和inject有什么作用？请给出一个provide和inject的示例。" class="headerlink" title="5. Vue.js 3中的provide和inject有什么作用？请给出一个provide和inject的示例。"></a>5. Vue.js 3中的provide和inject有什么作用？请给出一个provide和inject的示例。</h5><p>​      provide和inject用于实现组件之间的依赖注入。通过在父组件中使用provide提供数据，然后在子组件中使用inject注入这些数据。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">      <span class="hljs-comment">// 父组件</span><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">Parent</span> = &#123;<br>  <span class="hljs-attr">provide</span>: &#123;<br>    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Hello&#x27;</span><br>  &#125;,<br>  <span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-comment">// 子组件</span><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">Child</span> = &#123;<br>  <span class="hljs-attr">inject</span>: [<span class="hljs-string">&#x27;message&#x27;</span>],<br>  <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span>); <span class="hljs-comment">// 输出：Hello</span><br>  &#125;,<br>  <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="6-Vue-js-3中的动画系统有哪些改进？请列举几个改进之处。"><a href="#6-Vue-js-3中的动画系统有哪些改进？请列举几个改进之处。" class="headerlink" title="6. Vue.js 3中的动画系统有哪些改进？请列举几个改进之处。"></a>6. Vue.js 3中的动画系统有哪些改进？请列举几个改进之处。</h5><p>​      Vue.js 3中的动画系统相比Vue.js 2有以下改进之处：</p>
+<p>更好的性能：Vue.js 3的动画系统使用了更高效的动画引擎，提供了更好的性能。 更简洁的语法：Vue.js 3的动画系统使用了更简洁的语法，使得动画的定义和使用更加直观和方便。 支持更多的动画特性：Vue.js 3的动画系统支持更多的动画特性，如交互式动画和更复杂的动画效果。</p>
+<p> Vue.js 3中的静态提升（Static Tree Hoisting）是什么？它有什么优势？ 答案：静态提升是Vue.js 3中的一项优化技术，通过在编译阶段将静态节点提升为常量，从而减少了运行时的开销。这项优化技术可以提高组件的渲染性能，并减少生成的代码体积。</p>
+<h5 id="7-Vue-js-3中的Fragment是什么？它的作用是什么？"><a href="#7-Vue-js-3中的Fragment是什么？它的作用是什么？" class="headerlink" title="7. Vue.js 3中的Fragment是什么？它的作用是什么？"></a>7. Vue.js 3中的Fragment是什么？它的作用是什么？</h5><p>​      Fragment是Vue.js 3中引入的一种机制，用于在组件中返回多个根节点。在Vue.js 2中，组件的模板只能有一个 Vue.js 3中的Composition API中的ref和reactive有什么区别？什么时候使用哪个？       ref用于创建一个响应式的基本数据类型，而reactive用于创建一个响应式的对象。当需要创建一个简单的响应式数据时，可以使用ref，当需要创建一个包含多个属性的响应式对象时，可以使用reactive。</p>
+<h5 id="8-Vue-js-3中的watchEffect和watch有什么区别？什么时候使用哪个？"><a href="#8-Vue-js-3中的watchEffect和watch有什么区别？什么时候使用哪个？" class="headerlink" title="8. Vue.js 3中的watchEffect和watch有什么区别？什么时候使用哪个？"></a>8. Vue.js 3中的watchEffect和watch有什么区别？什么时候使用哪个？</h5><p>​      watchEffect用于监听响应式数据的变化，并在回调函数中执行相应的操作。它会自动追踪依赖，并在依赖变化时重新运行回调函数。watch用于监听指定的响应式数据，并在其变化时执行相应的操作。它可以精确地指定要监听的数据，并提供更多的配置选项。一般来说，如果只需要监听一个响应式数据的变化并执行相应操作，可以使用watchEffect；如果需要更细粒度的控制，可以使用watch。</p>
+<h5 id="9-Vue-js-3中的v-model指令在使用时有哪些注意事项？"><a href="#9-Vue-js-3中的v-model指令在使用时有哪些注意事项？" class="headerlink" title="9. Vue.js 3中的v-model指令在使用时有哪些注意事项？"></a>9. Vue.js 3中的v-model指令在使用时有哪些注意事项？</h5><p>​      在使用v-model指令时，有以下注意事项：</p>
+<p>v-model指令必须与一个表单元素一起使用，如、、等。 当使用自定义组件时，组件内部必须实现modelValue属性和update:modelValue事件，以支持v-model的双向绑定。 可以使用.lazy修饰符实现在输入框失去焦点时更新数据。 可以使用.trim修饰符自动去除输入框内容的首尾空格。 可以使用.number修饰符将输入框的值转换为数字类型。</p>
+<h5 id="10-Vue-js-3中的provide和inject是否支持响应式数据？"><a href="#10-Vue-js-3中的provide和inject是否支持响应式数据？" class="headerlink" title="10. Vue.js 3中的provide和inject是否支持响应式数据？"></a>10. Vue.js 3中的provide和inject是否支持响应式数据？</h5><p>​      默认情况下，provide和inject不支持响应式数据。如果需要在provide中提供一个响应式数据，可以使用ref或reactive将数据包装起来。然后在inject中使用toRefs或toRef将数据解构出来，以获取响应式的引用。</p>
+<h5 id="11-Vue-js-3中的nextTick方法有什么作用？在什么情况下使用它？"><a href="#11-Vue-js-3中的nextTick方法有什么作用？在什么情况下使用它？" class="headerlink" title="11. Vue.js 3中的nextTick方法有什么作用？在什么情况下使用它？"></a>11. Vue.js 3中的nextTick方法有什么作用？在什么情况下使用它？</h5><p>​      nextTick方法用于在下次DOM更新循环结束之后执行回调函数。它可以用来确保在更新DOM后执行某些操作，如操作更新后的DOM元素或获取更新后的计算属性的值。通常在需要等待DOM更新完成后进行操作的情况下使用nextTick。</p>
+<h5 id="12-Vue-js-3中的和组件有什么区别？"><a href="#12-Vue-js-3中的和组件有什么区别？" class="headerlink" title="12. Vue.js 3中的和组件有什么区别？"></a>12. Vue.js 3中的和组件有什么区别？</h5><p>​      组件用于将组件的内容渲染到DOM树中的任意位置，而组件用于在组件进入或离开DOM树时应用过渡效果。主要用于组件的位置移动，而主要用于组件的显示和隐藏过渡。</p>
+<h5 id="13-Vue-js-3中的v-for指令中的key属性有什么作用？为什么要使用它？"><a href="#13-Vue-js-3中的v-for指令中的key属性有什么作用？为什么要使用它？" class="headerlink" title="13. Vue.js 3中的v-for指令中的key属性有什么作用？为什么要使用它？"></a>13. Vue.js 3中的v-for指令中的key属性有什么作用？为什么要使用它？</h5><p>​      v-for指令中的key属性用于给每个迭代项设置一个唯一的标识符。它的作用是帮助Vue.js跟踪每个节点的身份，以便在数据发生变化时高效地更新DOM。使用key属性可以避免出现错误的节点更新或重新排序的问题。</p>
+<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h5 id="1-什么是React？它的核心概念是什么？"><a href="#1-什么是React？它的核心概念是什么？" class="headerlink" title="1. 什么是React？它的核心概念是什么？"></a>1. 什么是React？它的核心概念是什么？</h5><p>​      React是一个用于构建用户界面的JavaScript库。它的核心概念是组件化和声明式编程。React将用户界面拆分为独立的可重用组件，并使用声明式语法描述组件的状态和UI的关系，使得构建复杂的UI变得简单和可维护。</p>
+<h5 id="2-什么是JSX？它与HTML有什么区别？"><a href="#2-什么是JSX？它与HTML有什么区别？" class="headerlink" title="2. 什么是JSX？它与HTML有什么区别？"></a>2. 什么是JSX？它与HTML有什么区别？</h5><p>​      JSX是一种JavaScript的语法扩展，用于在React中描述UI的结构。它类似于HTML，但有一些区别：</p>
+<h5 id="3-什么是React组件？它们有哪两种类型？"><a href="#3-什么是React组件？它们有哪两种类型？" class="headerlink" title="3. 什么是React组件？它们有哪两种类型？"></a>3. 什么是React组件？它们有哪两种类型？</h5><p>​      React组件是构建用户界面的独立单元。React组件有两种类型：</p>
+<p>函数组件：使用函数来定义组件，接收props作为参数，并返回一个React元素。 类组件：使用ES6类来定义组件，继承自React.Component类，通过render方法返回一个React元素。</p>
+<h5 id="4-什么是状态（state）和属性（props）？它们之间有什么区别？"><a href="#4-什么是状态（state）和属性（props）？它们之间有什么区别？" class="headerlink" title="4. 什么是状态（state）和属性（props）？它们之间有什么区别？"></a>4. 什么是状态（state）和属性（props）？它们之间有什么区别？</h5><p>​      状态（state）是组件自身管理的数据，可以通过setState方法来更新。属性（props）是从父组件传递给子组件的数据，子组件无法直接修改props，只能通过父组件的更新来改变props。</p>
+<p>区别：</p>
+<p>状态（state）是组件内部的数据，可以在组件中自由修改和管理。 属性（props）是从父组件传递给子组件的数据，子组件无法直接修改，只能接收和使用。</p>
+<h5 id="5-什么是React生命周期方法？列举一些常用的生命周期方法。"><a href="#5-什么是React生命周期方法？列举一些常用的生命周期方法。" class="headerlink" title="5. 什么是React生命周期方法？列举一些常用的生命周期方法。"></a>5. 什么是React生命周期方法？列举一些常用的生命周期方法。</h5><p>​      React生命周期方法是在组件不同阶段执行的特定方法。以下是一些常用的React生命周期方法：</p>
+<p>componentDidMount：组件挂载后立即调用。 componentDidUpdate：组件更新后调用。 componentWillUnmount：组件卸载前调用。 shouldComponentUpdate：决定组件是否需要重新渲染。 getDerivedStateFromProps：根据props的变化来更新状态。</p>
+<h5 id="6-什么是React-Hooks？它们的作用是什么？"><a href="#6-什么是React-Hooks？它们的作用是什么？" class="headerlink" title="6. 什么是React Hooks？它们的作用是什么？"></a>6. 什么是React Hooks？它们的作用是什么？</h5><p>​      React Hooks是React 16.8版本引入的一种特性，用于在函数组件中使用状态和其他React特性。Hooks提供了一种无需编写类组件的方式来管理状态和处理副作用，使得函数组件具有类组件的能力。</p>
+<h5 id="7-什么是React-Router？它的作用是什么？"><a href="#7-什么是React-Router？它的作用是什么？" class="headerlink" title="7. 什么是React Router？它的作用是什么？"></a>7. 什么是React Router？它的作用是什么？</h5><p>​      React Router是React中用于处理路由的库。它提供了一种在单页面应用中实现导航和路由功能的方式。React Router可以帮助开发者实现页面之间的切换、URL参数的传递、嵌套路由等功能。</p>
+<h5 id="8-什么是React-Context？它的作用是什么？"><a href="#8-什么是React-Context？它的作用是什么？" class="headerlink" title="8. 什么是React Context？它的作用是什么？"></a>8. 什么是React Context？它的作用是什么？</h5><p>​      React Context是一种用于在组件树中共享数据的机制。它可以避免通过props一层层传递数据，使得跨组件的数据共享变得更加简单和高效。React Context提供了一个Provider和Consumer组件，用于提供和消费共享的数据。</p>
+<h5 id="9-什么是React的协调（Reconciliation）过程？它是如何工作的？"><a href="#9-什么是React的协调（Reconciliation）过程？它是如何工作的？" class="headerlink" title="9. 什么是React的协调（Reconciliation）过程？它是如何工作的？"></a>9. 什么是React的协调（Reconciliation）过程？它是如何工作的？</h5><p>​      React的协调过程是指React在进行组件更新时，通过比较新旧虚拟DOM树的差异，仅对需要更新的部分进行实际的DOM操作。协调过程的工作方式如下：</p>
+<p>React会逐层比较新旧虚拟DOM树的节点，并找出差异。 对于每个差异，React会生成相应的DOM操作指令，如插入、更新或删除节点。 React会将所有的DOM操作指令批量执行，以减少对真实DOM的操作次数。</p>
+<h5 id="10-什么是React的事件合成（SyntheticEvent）？它的作用是什么？"><a href="#10-什么是React的事件合成（SyntheticEvent）？它的作用是什么？" class="headerlink" title="10. 什么是React的事件合成（SyntheticEvent）？它的作用是什么？"></a>10. 什么是React的事件合成（SyntheticEvent）？它的作用是什么？</h5><p>​      React的事件合成是一种在React中处理事件的机制。它是React为了提高性能和跨浏览器兼容性而实现的一种事件系统。事件合成的作用包括：</p>
+<p>提供了一种统一的方式来处理事件，无需考虑浏览器兼容性。 可以通过事件委托的方式将事件处理程序绑定到父组件，提高性能。 可以访问原生事件对象的属性和方法。</p>
+<h5 id="11-什么是React的Fiber架构？它解决了什么问题？"><a href="#11-什么是React的Fiber架构？它解决了什么问题？" class="headerlink" title="11. 什么是React的Fiber架构？它解决了什么问题？"></a>11. 什么是React的Fiber架构？它解决了什么问题？</h5><p>​      React的Fiber架构是React 16版本引入的一种新的协调算法和架构。它旨在解决长时间渲染阻塞主线程的问题，提高应用的性能和用户体验。Fiber架构通过将渲染过程分解为多个小任务，并使用优先级调度算法来动态分配时间片，使得React可以在每个帧中执行一部分任务，从而实现平滑的用户界面和更好的响应性能。</p>
+<h5 id="12-什么是React的错误边界（Error-Boundary）？它的作用是什么？"><a href="#12-什么是React的错误边界（Error-Boundary）？它的作用是什么？" class="headerlink" title="12. 什么是React的错误边界（Error Boundary）？它的作用是什么？"></a>12. 什么是React的错误边界（Error Boundary）？它的作用是什么？</h5><p>​      React的错误边界是一种用于处理组件错误的机制。它允许组件捕获并处理其子组件中发生的JavaScript错误，以避免整个应用崩溃。错误边界的作用包括：</p>
+<p>捕获并处理组件树中的错误，防止错误导致整个应用崩溃。 提供一种优雅的方式来显示错误信息或备用UI。 可以用于记录错误和发送错误报告。</p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h5 id="1-什么是HTTP？它是如何工作的？"><a href="#1-什么是HTTP？它是如何工作的？" class="headerlink" title="1. 什么是HTTP？它是如何工作的？"></a>1. 什么是HTTP？它是如何工作的？</h5><p>​      HTTP（Hypertext Transfer Protocol）是一种用于在Web上传输数据的协议。它使用客户端-服务器模型，客户端发送HTTP请求到服务器，服务器返回HTTP响应。HTTP的工作流程如下：</p>
+<p>客户端发送HTTP请求到指定的URL。 服务器接收请求并处理，然后返回HTTP响应。 客户端接收响应并解析，从中获取所需的数据。</p>
+<h5 id="2-什么是HTTPS？与HTTP有什么区别？"><a href="#2-什么是HTTPS？与HTTP有什么区别？" class="headerlink" title="2. 什么是HTTPS？与HTTP有什么区别？"></a>2. 什么是HTTPS？与HTTP有什么区别？</h5><p>​      HTTPS（Hypertext Transfer Protocol Secure）是HTTP的安全版本，通过使用SSL（Secure Sockets Layer）或TLS（Transport Layer Security）协议对通信进行加密和身份验证。与HTTP相比，HTTPS具有以下区别：</p>
+<p>数据在传输过程中通过加密进行保护，提供更高的安全性。 使用数字证书对服务器进行身份验证，防止中间人攻击。 使用默认端口443。</p>
+<h5 id="3-什么是跨域请求？它是如何解决的？"><a href="#3-什么是跨域请求？它是如何解决的？" class="headerlink" title="3. 什么是跨域请求？它是如何解决的？"></a>3. 什么是跨域请求？它是如何解决的？</h5><p>​      跨域请求是指在浏览器中向不同域名、端口或协议发送的请求。由于浏览器的同源策略（Same-Origin Policy）限制，跨域请求会受到限制。为了解决跨域问题，可以使用以下方法：</p>
+<p>JSONP（JSON with Padding）：通过动态创建</p>
+<h5 id="4-什么是缓存？在前端中如何使用缓存来提高性能？"><a href="#4-什么是缓存？在前端中如何使用缓存来提高性能？" class="headerlink" title="4. 什么是缓存？在前端中如何使用缓存来提高性能？"></a>4. 什么是缓存？在前端中如何使用缓存来提高性能？</h5><p>​      缓存是将数据或资源存储在临时存储中，以便在后续请求中重复使用，从而提高性能和减少网络流量。在前端中，可以使用以下方式来利用缓存：</p>
+<p>HTTP缓存：通过设置适当的缓存头（如Cache-Control和Expires）来指示浏览器缓存响应。 资源缓存：使用文件指纹或版本号来重命名静态资源文件，以便在文件内容变化时使浏览器重新下载。 数据缓存：使用内存缓存、浏览器本地存储（如localStorage）或服务端缓存（如Redis）来存储数据，避免重复请求。</p>
+<h5 id="5-什么是CDN？它的作用是什么？"><a href="#5-什么是CDN？它的作用是什么？" class="headerlink" title="5. 什么是CDN？它的作用是什么？"></a>5. 什么是CDN？它的作用是什么？</h5><p>​      CDN（Content Delivery Network）是一种分布式网络架构，用于在全球各地提供高性能、低延迟的内容传输服务。CDN的作用包括：</p>
+<p>将静态资源（如图片、样式表、脚本等）缓存到离用户更近的服务器上，提供更快的加载速度。 分发网络流量，减轻源服务器的负载压力。 提供内容压缩、数据压缩和缓存等优化技术，提高用户体验。</p>
+<h5 id="6-什么是网页加载性能优化？可以采取哪些措施来改善网页加载性能？"><a href="#6-什么是网页加载性能优化？可以采取哪些措施来改善网页加载性能？" class="headerlink" title="6. 什么是网页加载性能优化？可以采取哪些措施来改善网页加载性能？"></a>6. 什么是网页加载性能优化？可以采取哪些措施来改善网页加载性能？</h5><p>​      网页加载性能优化是指通过各种技术手段来减少网页加载时间并提高用户体验。可以采取以下措施来改善网页加载性能：</p>
+<p>压缩和合并资源文件（如CSS和JavaScript），减少文件大小和请求数量。 使用图像压缩和适当的格式选择来减小图像文件大小。 使用浏览器缓存和HTTP缓存头来缓存静态资源。 使用懒加载延迟加载非关键资源，提高初始加载速度。 使用CDN（内容分发网络）来分发静态资源，减少网络延迟。 优化关键渲染路径，尽早呈现页面内容。</p>
+<h5 id="7-什么是网页性能监测和分析？可以使用哪些工具来监测和分析网页性能？"><a href="#7-什么是网页性能监测和分析？可以使用哪些工具来监测和分析网页性能？" class="headerlink" title="7. 什么是网页性能监测和分析？可以使用哪些工具来监测和分析网页性能？"></a>7. 什么是网页性能监测和分析？可以使用哪些工具来监测和分析网页性能？</h5><p>​      网页性能监测和分析是指通过测量和收集有关网页加载和交互性能的数据，以便识别性能瓶颈并进行优化。可以使用以下工具来监测和分析网页性能：</p>
+<p>Web性能API：浏览器提供的JavaScript API，可通过performance对象来收集性能数据。 Lighthouse：一种开源工具，可提供关于网页性能、可访问性和最佳实践的综合报告。 WebPagetest：在线工具，可测量网页加载时间并提供详细的性能分析报告。 Chrome开发者工具：浏览器内置的开发者工具，提供了性能分析、网络监控和页面审查等功能。</p>
+<h5 id="8-什么是渐进式图像加载（Progressive-Image-Loading）？它如何改善网页加载性能？"><a href="#8-什么是渐进式图像加载（Progressive-Image-Loading）？它如何改善网页加载性能？" class="headerlink" title="8. 什么是渐进式图像加载（Progressive Image Loading）？它如何改善网页加载性能？"></a>8. 什么是渐进式图像加载（Progressive Image Loading）？它如何改善网页加载性能？</h5><p>​      渐进式图像加载是一种技术，通过逐步加载图像的模糊或低分辨率版本，然后逐渐提高图像的清晰度，以改善网页加载性能和用户体验。渐进式图像加载的好处包括：</p>
+<p>用户可以更快地看到页面内容，提高感知速度。 逐步加载图像可以减少网页整体的加载时间。 渐进式图像加载可以提供平滑的过渡效果，避免页面内容突然闪烁或变化。</p>
+<h5 id="9-什么是前端资源优先级（Resource-Prioritization）？如何设置资源的优先级？"><a href="#9-什么是前端资源优先级（Resource-Prioritization）？如何设置资源的优先级？" class="headerlink" title="9. 什么是前端资源优先级（Resource Prioritization）？如何设置资源的优先级？"></a>9. 什么是前端资源优先级（Resource Prioritization）？如何设置资源的优先级？</h5><p>​      前端资源优先级是指为不同类型的资源分配加载优先级，以优化网页加载性能。可以使用以下方法设置资源的优先级：</p>
+<p>使用标签来指定资源的预加载，以确保关键资源尽早加载。 使用标签来指定可能在未来页面中使用的资源，以提前加载。 使用标签来指定要预解析的域名，以减少DNS查找时间。 使用标签来指定要预连接的域名，以减少建立连接的时间。</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><h5 id="1-解释一下浏览器的工作原理。"><a href="#1-解释一下浏览器的工作原理。" class="headerlink" title="1.解释一下浏览器的工作原理。"></a>1.解释一下浏览器的工作原理。</h5><p>​      浏览器的工作原理包括以下几个关键步骤：</p>
+<p>解析：浏览器将接收到的HTML、CSS和JavaScript代码解析成DOM树、CSSOM树和JavaScript引擎可执行的代码。 渲染：浏览器使用DOM树和CSSOM树构建渲染树，然后根据渲染树进行布局（计算元素的位置和大小）和绘制（将元素绘制到屏幕上）。 布局和绘制：浏览器根据渲染树的变化进行布局和绘制，然后将最终的页面呈现给用户。 JavaScript引擎执行：浏览器的JavaScript引擎解释和执行JavaScript代码，并根据需要更新渲染树和重新渲染页面。</p>
+<h5 id="2-什么是重绘（Repaint）和重排（Reflow）？它们之间有什么区别？"><a href="#2-什么是重绘（Repaint）和重排（Reflow）？它们之间有什么区别？" class="headerlink" title="2. 什么是重绘（Repaint）和重排（Reflow）？它们之间有什么区别？"></a>2. 什么是重绘（Repaint）和重排（Reflow）？它们之间有什么区别？</h5><p>​      重绘是指当元素的外观（如颜色、背景等）发生改变，但布局不受影响时的更新过程。重绘不会导致元素的位置或大小发生变化。</p>
+<p>重排是指当元素的布局属性（如宽度、高度、位置等）发生改变时的更新过程。重排会导致浏览器重新计算渲染树和重新绘制页面的一部分或全部。</p>
+<p>区别在于重绘只涉及外观的更改，而重排涉及布局的更改。重排比重绘更消耗性能，因为它需要重新计算布局和绘制整个页面。</p>
+<h5 id="3-什么是事件冒泡和事件捕获？它们之间有什么区别？"><a href="#3-什么是事件冒泡和事件捕获？它们之间有什么区别？" class="headerlink" title="3. 什么是事件冒泡和事件捕获？它们之间有什么区别？"></a>3. 什么是事件冒泡和事件捕获？它们之间有什么区别？</h5><p>​      事件冒泡和事件捕获是指浏览器处理事件时的两种不同的传播方式。</p>
+<p>事件冒泡是指事件从最内层的元素开始触发，然后逐级向上传播到父元素，直到传播到最外层的元素。</p>
+<p>事件捕获是指事件从最外层的元素开始触发，然后逐级向下传播到最内层的元素。</p>
+<p>区别在于传播方向的不同。事件冒泡是从内向外传播，而事件捕获是从外向内传播。</p>
+<h5 id="4-解释一下同步和异步的JavaScript代码执行方式。"><a href="#4-解释一下同步和异步的JavaScript代码执行方式。" class="headerlink" title="4. 解释一下同步和异步的JavaScript代码执行方式。"></a>4. 解释一下同步和异步的JavaScript代码执行方式。</h5><p>​      同步代码是按照顺序执行的代码，每个任务必须等待前一个任务完成后才能执行。同步代码会阻塞后续代码的执行，直到当前任务完成。</p>
+<p>异步代码是不按照顺序执行的代码，它会在后台执行，不会阻塞后续代码的执行。异步代码通常使用回调函数、Promise、async&#x2F;await等方式来处理异步操作的结果。</p>
+<p>通过异步执行，可以避免阻塞主线程，提高页面的响应性能。</p>
+<h5 id="5-什么是事件循环（Event-Loop）？它在JavaScript中的作用是什么？"><a href="#5-什么是事件循环（Event-Loop）？它在JavaScript中的作用是什么？" class="headerlink" title="5. 什么是事件循环（Event Loop）？它在JavaScript中的作用是什么？"></a>5. 什么是事件循环（Event Loop）？它在JavaScript中的作用是什么？</h5><p>​      事件循环是JavaScript中处理异步代码执行的机制。它负责管理调度和执行异步任务，并将它们添加到执行队列中。</p>
+<p>在JavaScript中，事件循环的作用是确保异步任务按照正确的顺序执行，并且不会阻塞主线程。它通过不断地从执行队列中取出任务并执行，以实现非阻塞的异步操作。</p>
+<h5 id="6-解释一下浏览器的垃圾回收机制是如何工作的。"><a href="#6-解释一下浏览器的垃圾回收机制是如何工作的。" class="headerlink" title="6. 解释一下浏览器的垃圾回收机制是如何工作的。"></a>6. 解释一下浏览器的垃圾回收机制是如何工作的。</h5><p>​      浏览器的垃圾回收机制是一种自动管理内存的机制，用于检测和回收不再使用的对象，以释放内存资源。</p>
+<p>垃圾回收机制通过标记-清除算法实现。它的工作原理如下：</p>
+<p>标记阶段：垃圾回收器会从根对象（如全局对象）开始，递归遍历所有对象，并标记仍然可访问的对象。 清除阶段：垃圾回收器会扫描堆内存，清除未被标记的对象，并回收它们所占用的内存空间。 垃圾回收机制的目标是识别和回收不再使用的对象，以避免内存泄漏和提高内存利用率。</p>
+<h5 id="7-解释一下浏览器的同源策略（Same-Origin-Policy）及其限制。"><a href="#7-解释一下浏览器的同源策略（Same-Origin-Policy）及其限制。" class="headerlink" title="7. 解释一下浏览器的同源策略（Same-Origin Policy）及其限制。"></a>7. 解释一下浏览器的同源策略（Same-Origin Policy）及其限制。</h5><p>​      同源策略是浏览器的一项安全机制，用于限制来自不同源的网页之间的交互。同源是指协议、域名和端口号完全相同。</p>
+<p>同源策略的限制包括：</p>
+<p>脚本访问限制：不同源的脚本无法直接访问彼此的数据和操作。 DOM访问限制：不同源的网页无法通过JavaScript访问彼此的DOM元素。 Cookie限制：不同源的网页无法读取或修改彼此的Cookie。 AJAX请求限制：不同源的网页无法通过AJAX请求访问彼此的数据。 同源策略的存在可以防止恶意网站获取用户的敏感信息或进行恶意操作。</p>
+<h5 id="8-什么是Web-Workers？它们在浏览器中的作用是什么？"><a href="#8-什么是Web-Workers？它们在浏览器中的作用是什么？" class="headerlink" title="8. 什么是Web Workers？它们在浏览器中的作用是什么？"></a>8. 什么是Web Workers？它们在浏览器中的作用是什么？</h5><p>​      Web Workers是一种浏览器提供的JavaScript API，用于在后台线程中执行耗时的计算任务，以避免阻塞主线程。</p>
+<p>Web Workers的作用是提高浏览器的响应性能，使得在执行复杂计算或处理大量数据时，不会影响用户界面的流畅性。</p>
+<p>Web Workers通过将任务委托给后台线程来实现并行处理，从而充分利用多核处理器的能力。它们可以与主线程进行通信，但不能直接访问DOM或执行UI相关的操作。</p>
+<h5 id="9-解释一下浏览器缓存（Browser-Cache）是什么，以及它的作用是什么？"><a href="#9-解释一下浏览器缓存（Browser-Cache）是什么，以及它的作用是什么？" class="headerlink" title="9. 解释一下浏览器缓存（Browser Cache）是什么，以及它的作用是什么？"></a>9. 解释一下浏览器缓存（Browser Cache）是什么，以及它的作用是什么？</h5><p>​      浏览器缓存是浏览器在本地存储Web页面和资源的副本，以便在后续访问时可以快速加载。它的作用是减少对服务器的请求次数和网络传输量，提高页面加载速度和用户体验。</p>
+<p>浏览器缓存通过在首次请求时将资源保存到本地，并在后续请求时检查资源是否已经存在并且没有过期来工作。如果资源已经存在且未过期，浏览器会直接从缓存中加载资源，而不是从服务器重新下载。</p>
+<h5 id="10-什么是重定向（Redirect）？它在浏览器中的作用是什么？"><a href="#10-什么是重定向（Redirect）？它在浏览器中的作用是什么？" class="headerlink" title="10. 什么是重定向（Redirect）？它在浏览器中的作用是什么？"></a>10. 什么是重定向（Redirect）？它在浏览器中的作用是什么？</h5><p>​      重定向是指当浏览器请求一个URL时，服务器返回一个不同的URL，从而将浏览器的请求重定向到新的URL上。</p>
+<p>重定向在浏览器中的作用是实现页面的跳转、URL的修改或资源的重定向。它可以用于多种情况，例如处理旧链接的跳转、实现URL的规范化、处理用户认证等。</p>
+<p>重定向通过在HTTP响应中设置特定的状态码（如301永久重定向、302临时重定向）和Location头部字段来实现。</p>
+<h5 id="11-什么是浏览器存储（Browser-Storage）？它有哪些不同的存储机制？"><a href="#11-什么是浏览器存储（Browser-Storage）？它有哪些不同的存储机制？" class="headerlink" title="11. 什么是浏览器存储（Browser Storage）？它有哪些不同的存储机制？"></a>11. 什么是浏览器存储（Browser Storage）？它有哪些不同的存储机制？</h5><p>​      浏览器存储是浏览器提供的一种在客户端存储数据的机制，用于在不同的网页间共享数据或持久保存数据。</p>
+<p>浏览器存储有以下不同的存储机制：</p>
+<p>Cookie：小型文本文件，可以存储少量数据，并在每次HTTP请求中自动发送到服务器。 Web Storage（localStorage和sessionStorage）：可以存储较大量的数据，以键值对的形式存储在浏览器中。 IndexedDB：一种高级的客户端数据库，可以存储大量结构化数据，并支持索引和事务操作。 Cache API：用于缓存网络请求的响应，以便离线访问或提高页面加载速度。 不同的存储机制适用于不同的需求，开发者可以根据具体情况选择合适的存储方式。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/interview/" class="category-chain-item">interview</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>前端面试题（综合）</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2023/10/19/interview-web/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2023/12/08/flutter-configuration/" title="Flutter开发环境搭建">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Flutter开发环境搭建</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2023/10/18/interview-js/" title="JavaScript前端面试题">
+                        <span class="hidden-mobile">JavaScript前端面试题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

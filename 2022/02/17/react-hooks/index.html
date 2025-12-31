@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <link rel="icon" href="/a937321983/a937321983.atomgit.io.git/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="React Hooks 详解为什么会有Hooks？介绍Hooks之前，首先要给大家说一下React的组件创建方式，一种是类组件，一种是纯函数组件，并且React团队希望，组件不要变成复杂的容器，最好只是数据流的管道。开发者根据需要，组合管道即可。也就是说组件的最佳写法应该是函数，而不是类。但是我们知道，在以往开发中类组件和纯函数组件的区别是很大的，纯函数组件有着类组件不具备的多种特点，简单列举几条">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React基础-hooks">
+<meta property="og:url" content="https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/02/17/react-hooks/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="React Hooks 详解为什么会有Hooks？介绍Hooks之前，首先要给大家说一下React的组件创建方式，一种是类组件，一种是纯函数组件，并且React团队希望，组件不要变成复杂的容器，最好只是数据流的管道。开发者根据需要，组合管道即可。也就是说组件的最佳写法应该是函数，而不是类。但是我们知道，在以往开发中类组件和纯函数组件的区别是很大的，纯函数组件有着类组件不具备的多种特点，简单列举几条">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-17T01:55:22.000Z">
+<meta property="article:modified_time" content="2024-11-05T06:05:06.273Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="hooks">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>React基础-hooks - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/a937321983/a937321983.atomgit.io.git/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"atomgit.com","root":"/a937321983/a937321983.atomgit.io.git/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/a937321983/a937321983.atomgit.io.git/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/utils.js" ></script>
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/a937321983/a937321983.atomgit.io.git/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/a937321983/a937321983.atomgit.io.git/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/a937321983/a937321983.atomgit.io.git/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="React基础-hooks"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-17 09:55" pubdate>
+          2022年2月17日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          62 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">React基础-hooks</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="React-Hooks-详解"><a href="#React-Hooks-详解" class="headerlink" title="React Hooks 详解"></a>React Hooks 详解</h1><h3 id="为什么会有Hooks？"><a href="#为什么会有Hooks？" class="headerlink" title="为什么会有Hooks？"></a>为什么会有Hooks？</h3><p>介绍Hooks之前，首先要给大家说一下React的组件创建方式，一种是类组件，一种是纯函数组件，并且React团队希望，组件不要变成复杂的容器，最好只是数据流的管道。开发者根据需要，组合管道即可。也就是说组件的最佳写法应该是函数，而不是类。<br>但是我们知道，在以往开发中类组件和纯函数组件的区别是很大的，纯函数组件有着类组件不具备的多种特点，简单列举几条</p>
+<ul>
+<li>纯函数组件没有状态</li>
+<li>纯函数组件没有生命周期</li>
+<li>纯函数组件没有<code>this</code></li>
+<li>只能是纯函数</li>
+</ul>
+<p>这就注定，我们所推崇的函数组件，只能做UI展示的功能，涉及到状态的管理与切换，我们不得不用类组件或者redux，但我们知道类组件的也是有缺点的，比如，遇到简单的页面，你的代码会显得很重，并且每创建一个类组件，都要去继承一个React实例，至于Redux,更不用多说，很久之前Redux的作者就说过，“能用React解决的问题就不用Redux”,等等一系列的话。关于React类组件redux的作者又有话说</p>
+<blockquote>
+<ul>
+<li>大型组件很难拆分和重构，也很难测试。</li>
+<li>业务逻辑分散在组件的各个方法之中，导致重复逻辑或关联逻辑。</li>
+<li>组件类引入了复杂的编程模式，比如 render props 和高阶组件。</li>
+</ul>
+</blockquote>
+<p>下面我们用类组件做一个简单的计数器</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">AddCount</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.PureComponent</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>)&#123;<br>    <span class="hljs-variable language_">super</span>(props)<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>=&#123;<br>      <span class="hljs-attr">count</span>: <span class="hljs-number">0</span><br>    &#125;<br>  &#125;<br>  addcount = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">let</span> newCount = <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">count</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123;<br>      <span class="hljs-attr">count</span>: newCount +=<span class="hljs-number">1</span><br>  &#125;)<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;this.state.count&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.addcount&#125;</span>&gt;</span>count++<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/&gt;</span></span><br>    )<br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">AddCount</span><br></code></pre></td></tr></table></figure>
+
+<p>可以看出来，上面的代码确实很重。<br>为了解决这种，<em>类组件功能齐全却很重，纯函数很轻便却有上文几点重大限制</em>，React团队设计了React Hooks<br><strong>React Hooks就是加强版的函数组件，我们可以完全不使用 <code>class</code>，就能写出一个全功能的组件</strong></p>
+<h3 id="什么是Hooks"><a href="#什么是Hooks" class="headerlink" title="什么是Hooks?"></a>什么是Hooks?</h3><p>‘Hooks’的单词意思为“钩子”。<br>**React Hooks 的意思是，组件尽量写成纯函数，如果需要外部功能和副作用，就用钩子把外部代码”钩”进来。**而React Hooks 就是我们所说的“钩子”。<br>那么Hooks要怎么用呢？“你需要写什么功能，就用什么钩子”。对于常见的功能，React为我们提供了一些常用的钩子，当然有特殊需要，我们也可以写自己的钩子。下面是React为我们提供的默认的四种最常用钩子</p>
+<blockquote>
+<ul>
+<li>useState()</li>
+<li>userContext()</li>
+<li>userReducer()</li>
+<li>useEffect()</li>
+</ul>
+</blockquote>
+<p>不同的钩子为函数引入不同的外部功能，我们发现上面四种钩子都带有<code>use</code>前缀，React约定，钩子<em>一律使用</em> <code>use</code>前缀命名。所以，你自己定义的钩子都要命名为useXXX。</p>
+<h3 id="React-Hooks的用法"><a href="#React-Hooks的用法" class="headerlink" title="React Hooks的用法"></a>React Hooks的用法</h3><p>下面介绍四种默认钩子的用法</p>
+<h5 id="一、userState-状态钩子"><a href="#一、userState-状态钩子" class="headerlink" title="一、userState():状态钩子"></a>一、userState():状态钩子</h5><p>我们知道，纯函数组件没有状态，<code>useState()</code>用于为函数组件引入状态。<br>下面我们使用Hooks重写上面的计数器。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123;useState&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">AddCount</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> [ count, setCount ] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>)<br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">addcount</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-keyword">let</span> newCount = count<br>    <span class="hljs-title function_">setCount</span>(newCount+=<span class="hljs-number">1</span>)<br>  &#125; <br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;count&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;addcount&#125;</span>&gt;</span>count++<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/&gt;</span></span><br>  )<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">AddCount</span> <br></code></pre></td></tr></table></figure>
+
+<p>通过上面的代码，我们实现了一个功能完全一样的计数器，代码看起来更加的轻便简洁，没有了继承，没有了渲染逻辑，没有了生命周期等。这就是hooks存在的意义。<br>在<code>useState()</code>中，它接受状态的初始值作为参数，即上例中计数的初始值，它返回一个数组，其中数组第一项为一个变量，指向状态的当前值。类似<code>this.state</code>,第二项是一个函数，用来更新状态,类似<code>setState</code>。该函数的命名，我们约定为<code>set</code>前缀加状态的变量名。</p>
+<h5 id="二、useContext-共享状态钩子"><a href="#二、useContext-共享状态钩子" class="headerlink" title="二、useContext():共享状态钩子"></a>二、useContext():共享状态钩子</h5><p>该钩子的作用是，在组件之间共享状态。关于Context这里不再赘述，其作用就是可以做状态的分发，在React16.X以后支持，避免了react逐层通过Props传递数据。<br>下面是一个例子，现在假设有A组件和B组件需要共享一个状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs react">import React,&#123; useContext &#125; from &#x27;react&#x27;<br>const Ceshi = () =&gt; &#123;<br>  const AppContext = React.createContext(&#123;&#125;)<br>  const A =() =&gt; &#123;<br>    const &#123; name &#125; = useContext(AppContext)<br>    return (<br>        &lt;p&gt;我是A组件的名字&#123;name&#125;&lt;span&gt;我是A的子组件&#123;name&#125;&lt;/span&gt;&lt;/p&gt;<br>    )<br>&#125;<br>const B =() =&gt; &#123;<br>  const &#123; name &#125; = useContext(AppContext)<br>  return (<br>      &lt;p&gt;我是B组件的名字&#123;name&#125;&lt;/p&gt;<br>  )<br>&#125;<br>  return (<br>    &lt;AppContext.Provider value=&#123;&#123;name: &#x27;hook测试&#x27;&#125;&#125;&gt;<br>    &lt;A/&gt;<br>    &lt;B/&gt;<br>    &lt;/AppContext.Provider&gt;<br>  )<br>&#125;<br>export default Ceshi <br></code></pre></td></tr></table></figure>
+
+<h5 id="三、useReducer-Action钩子"><a href="#三、useReducer-Action钩子" class="headerlink" title="三、useReducer():Action钩子"></a>三、useReducer():Action钩子</h5><p>我们知道，在使用React的过程中，如遇到状态管理，我们一般会用到Redux,而React本身是不提供状态管理的。而<code>useReducer()</code>为我们提供了状态管理。首先，关于redux我们都知道，其原理是我们通过用户在页面中发起action,从而通过reducer方法来改变state,从而实现页面和状态的通信。而Reducer的形式是<code>(state, action) =&gt; newstate</code>。类似，我们的<code>useReducer()</code>是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs react">const [state, dispatch] = useReducer(reducer, initialState)<br></code></pre></td></tr></table></figure>
+
+<p>它接受reducer函数和状态的初始值作为参数，返回一个数组，其中第一项为<em>当前的</em>状态值，第二项为发送action的dispatch函数。下面我们依然用来实现一个计数器。<br>和redux一样，我们是需要通过页面组件发起action来调用reducer方法，从而改变状态，达到改变页面UI的这样一个过程。所以我们会先写一个Reducer函数，然后通过useReducer()返回给我们的state和dispatch来驱动这个数据流。思路就是这样，下面我们上代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>,&#123;useReducer&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">AddCount</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br><span class="hljs-keyword">const</span> <span class="hljs-title function_">reducer</span> = (<span class="hljs-params">state, action</span>) =&gt;  &#123;<br> <span class="hljs-keyword">if</span>(action.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;&#x27;</span>add)&#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>  ...state,<br>  <span class="hljs-attr">count</span>: state.<span class="hljs-property">count</span> +<span class="hljs-number">1</span>,<br>  &#125;<br> &#125;<span class="hljs-keyword">else</span> &#123;<br>   <span class="hljs-keyword">return</span> state<br>  &#125;<br> &#125;<br><span class="hljs-keyword">const</span> <span class="hljs-title function_">addcount</span> = (<span class="hljs-params"></span>) =&gt; &#123; <br>  <span class="hljs-title function_">dispatch</span>(&#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;add&#x27;</span><br>  &#125;)<br> &#125;<br><span class="hljs-keyword">const</span> [state, dispatch] = <span class="hljs-title function_">useReducer</span>(reducer, &#123;<span class="hljs-attr">count</span>: <span class="hljs-number">0</span>&#125;)<br><span class="hljs-keyword">return</span> (<br><span class="language-xml"><span class="hljs-tag">&lt;&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;state.count&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;addcount&#125;</span>&gt;</span>count++<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/&gt;</span></span><br>)<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">AddCount</span><br></code></pre></td></tr></table></figure>
+
+<p>通过代码我们看到了，我们使用<code>useReducer()</code>代替了Redux的功能，但<code>useReducer</code>无法为我们提供中间件等功能，加入你有这些需求，还是需要用到redux。</p>
+<h5 id="四、useEffect-副作用钩子"><a href="#四、useEffect-副作用钩子" class="headerlink" title="四、useEffect():副作用钩子"></a>四、useEffect():副作用钩子</h5><p>熟悉redux-saga的同学一定对<code>Effect</code>不陌生,它可以用来更好的处理副作用，如异步请求等，我们的<code>useEffect()</code>也是为函数组件提供了处理副作用的钩子。依然我们会把请求房子<code>componentDidMount</code>里面，在函数组件中我们可以使用<code>useEffect()</code>。其具体用法如下</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;&#125;,[array])<br></code></pre></td></tr></table></figure>
+
+<p><code>useEffect()</code>接受两个参数，第一个参数是你要进行的异步操作，第二个参数是一个数组，用来给出Effect的依赖项。只要这个数组发生变化，<code>useEffect()</code>就会执行。当第二项省略不填时，<code>useEffect()</code>会在每次组件渲染时执行。这一点类似于类组件的<code>componentDidMount</code>。下面我们通过代码模拟一个异步加载数据。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">AsyncPage</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br><span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>)<br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span> &#123;<br>      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>)<br>    &#125;,<span class="hljs-number">5000</span>)<br>  &#125;)<br><span class="hljs-keyword">return</span> (<br>loading ? <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>: <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>异步请求完成<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>)<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">AsyncPage</span> <br></code></pre></td></tr></table></figure>
+
+<p>上面的代码实现了一个异步加载，下面我们再做一个<code>useEffect()</code>依赖第二项数组变化的例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs react">import React, &#123; useState, useEffect &#125; from &#x27;react&#x27;<br><br>const AsyncPage = (&#123;name&#125;) =&gt; &#123;<br>const [loading, setLoading] = useState(true)<br>const [person, setPerson] = useState(&#123;&#125;)<br><br>  useEffect(() =&gt; &#123;<br>    setLoading(true)<br>    setTimeout(()=&gt; &#123;<br>      setLoading(false)<br>      setPerson(&#123;name&#125;)<br>    &#125;,2000)<br>  &#125;,[name])<br>  return (<br>    &lt;&gt;<br>      &#123;loading?&lt;p&gt;Loading...&lt;/p&gt;:&lt;p&gt;&#123;person.name&#125;&lt;/p&gt;&#125;<br>    &lt;/&gt;<br>  )<br>&#125;<br><br>const PersonPage = () =&gt;&#123;<br>  const [state, setState] = useState(&#x27;&#x27;)<br>  const changeName = (name) =&gt; &#123;<br>    setState(name)<br>  &#125;<br>  return (<br>    &lt;&gt;<br>      &lt;AsyncPage name=&#123;state&#125;/&gt;<br>      &lt;button onClick=&#123;() =&gt; &#123;changeName(&#x27;名字1&#x27;)&#125;&#125;&gt;名字1&lt;/button&gt;<br>      &lt;button onClick=&#123;() =&gt; &#123;changeName(&#x27;名字2&#x27;)&#125;&#125;&gt;名字2&lt;/button&gt;<br>    &lt;/&gt;<br>  )<br>&#125;<br><br>export default PersonPage <br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，通过改变传给<code>AsyncPage</code>的props,从而调用<code>useEffect()</code>。</p>
+<h5 id="五、创建自己的Hooks"><a href="#五、创建自己的Hooks" class="headerlink" title="五、创建自己的Hooks"></a>五、创建自己的Hooks</h5><p>以上我们介绍了四种最常用的react提供给我们的默认React Hooks,有时候我们需要创建我们自己想要的Hooks,来满足更便捷的开发，在小编看来，无非就是根据业务场景对以上四种Hooks进行组装，从而得到满足自己需求的钩子。<br>比如，我们要将我们上面的代码功能封装成Hooks,代码如下</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">usePerson</span> = (<span class="hljs-params">name</span>) =&gt; &#123;<br><span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>)<br><span class="hljs-keyword">const</span> [person, setPerson] = <span class="hljs-title function_">useState</span>(&#123;&#125;)<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>)<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span> &#123;<br>      <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>)<br>      <span class="hljs-title function_">setPerson</span>(&#123;name&#125;)<br>    &#125;,<span class="hljs-number">2000</span>)<br>  &#125;,[name])<br>  <span class="hljs-keyword">return</span> [loading,person]<br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">AsyncPage</span> = (<span class="hljs-params">&#123;name&#125;</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> [loading, person] = <span class="hljs-title function_">usePerson</span>(name)<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span></span><br><span class="language-xml">        &#123;loading?<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>:<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;person.name&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>&#125;</span><br><span class="language-xml">      <span class="hljs-tag">&lt;/&gt;</span></span><br>    )<br>  &#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">PersonPage</span> = (<span class="hljs-params"></span>) =&gt;&#123;<br>  <span class="hljs-keyword">const</span> [state, setState]=<span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">changeName</span> = (<span class="hljs-params">name</span>) =&gt; &#123;<br>    <span class="hljs-title function_">setState</span>(name)<br>  &#125;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">AsyncPage</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#123;state&#125;/</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> &#123;changeName(&#x27;名字1&#x27;)&#125;&#125;&gt;名字1<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> &#123;changeName(&#x27;名字2&#x27;)&#125;&#125;&gt;名字2<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/&gt;</span></span><br>  )<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">PersonPage</span> <br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，我们将之前的例子封装成了自己的Hooks,便于共享。其中，我们定义<code>usePerson()</code>为我们的自定义Hooks,它接受一个字符串，返回一个数组，数组中包括两个数据的状态，之后我们在使用<code>usePerson()</code>时，会根据我们传入的参数不同而返回不同的状态，然后很简便的应用于我们的页面中。</p>
+<p>至此，关于React Hooks的讲解结束，它为我们带来了React翻天覆地的变化，也让我们感受到了React的未来，不过，假如你不会Hooks也是没有关系的。根据官方文档的话来说</p>
+<blockquote>
+<ul>
+<li><strong>完全可选的。</strong> 你无需重写任何已有代码就可以在一些组件中尝试 Hook。但是如果你不想，你不必现在就去学习或使用 Hook。</li>
+<li><strong>100% 向后兼容的。</strong> Hook 不包含任何破坏性改动。</li>
+<li><strong>现在可用。</strong> Hook 已发布于 v16.8.0。</li>
+<li><strong>没有计划从 React 中移除 class。</strong></li>
+<li><strong>Hook 不会影响你对 React 概念的理解。</strong> 恰恰相反，Hook 为已知的 React 概念提供了更直接的 API：props， state，context，refs 以及生命周期。</li>
+</ul>
+</blockquote>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/a937321983/a937321983.atomgit.io.git/categories/react/" class="category-chain-item">react</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/a937321983/a937321983.atomgit.io.git/tags/hooks/">#hooks</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>React基础-hooks</div>
+      <div>https://atomgit.com/a937321983/a937321983.atomgit.io.git/2022/02/17/react-hooks/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月17日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/02/17/tcp-ftp/" title="TCP协议和FTP协议">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TCP协议和FTP协议</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/a937321983/a937321983.atomgit.io.git/2022/02/17/js-treeData/" title="javascript tree结构数据">
+                        <span class="hidden-mobile">javascript tree结构数据</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/events.js" ></script>
+<script  src="/a937321983/a937321983.atomgit.io.git/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/a937321983/a937321983.atomgit.io.git/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/a937321983/a937321983.atomgit.io.git/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/a937321983/a937321983.atomgit.io.git/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
