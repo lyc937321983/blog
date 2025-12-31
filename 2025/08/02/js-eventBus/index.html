@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="手写发布订阅设计模式什么是发布订阅设计模式？打个比方：  想象一个 微信公众号平台。 写文章的人就是 发布者 (Publisher) 。 看文章的人就是 订阅者 (Subscriber) 。 微信公众号平台本身就是 事件通道&#x2F;消息代理&#x2F;事件总线 (Event Channel&#x2F;Message Broker&#x2F;Event Bus) 。 作者写好文章后，不是直接发给">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS手写发布订阅设计模式(Event Bus)">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2025/08/02/js-eventBus/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="手写发布订阅设计模式什么是发布订阅设计模式？打个比方：  想象一个 微信公众号平台。 写文章的人就是 发布者 (Publisher) 。 看文章的人就是 订阅者 (Subscriber) 。 微信公众号平台本身就是 事件通道&#x2F;消息代理&#x2F;事件总线 (Event Channel&#x2F;Message Broker&#x2F;Event Bus) 。 作者写好文章后，不是直接发给">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-02T06:15:22.000Z">
+<meta property="article:modified_time" content="2025-12-31T05:47:19.362Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="Event Bus">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>JS手写发布订阅设计模式(Event Bus) - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JS手写发布订阅设计模式(Event Bus)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-02 14:15" pubdate>
+          2025年8月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JS手写发布订阅设计模式(Event Bus)</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="手写发布订阅设计模式"><a href="#手写发布订阅设计模式" class="headerlink" title="手写发布订阅设计模式"></a>手写发布订阅设计模式</h1><h3 id="什么是发布订阅设计模式？"><a href="#什么是发布订阅设计模式？" class="headerlink" title="什么是发布订阅设计模式？"></a>什么是发布订阅设计模式？</h3><p><em><strong>打个比方：</strong></em></p>
+<ul>
+<li>想象一个 <strong>微信公众号平台</strong>。</li>
+<li>写文章的人就是 <strong>发布者 (Publisher)</strong> 。</li>
+<li>看文章的人就是 <strong>订阅者 (Subscriber)</strong> 。</li>
+<li>微信公众号平台本身就是 <strong>事件通道&#x2F;消息代理&#x2F;事件总线 (Event Channel&#x2F;Message Broker&#x2F;Event Bus)</strong> 。</li>
+<li>作者写好文章后，不是直接发给读者，而是 <strong>发布 (Publish)</strong> 到公众号平台上，说“我写了一篇关于‘设计模式’的文章”。</li>
+<li>读者对“设计模式”感兴趣，就 <strong>订阅 (Subscribe)</strong> 了这个主题（Topic）。</li>
+<li>平台负责 <strong>把消息从发布者传递给订阅者</strong>。当有新的“设计模式”文章发布时，平台会自动推送给所有订阅了该主题的读者。</li>
+<li>关键点：作者 <strong>不知道</strong> 谁订阅了他的文章；读者 <strong>也不知道</strong> 文章具体是谁写的（除非作者署名）。他们只和平台打交道。</li>
+</ul>
+<blockquote>
+<p>简单来说：读者看到自己喜欢的文章，则会点击订阅，平台收到后将订阅消息先存储起来，等到发布者发布了该类文章，则平台找到喜欢该文章的订阅消息，将其执行，也就是向读者推荐该文章。</p>
+</blockquote>
+<h3 id="那么要如何实现发布订阅设计模式呢？"><a href="#那么要如何实现发布订阅设计模式呢？" class="headerlink" title="那么要如何实现发布订阅设计模式呢？"></a>那么要如何实现发布订阅设计模式呢？</h3><p>底层逻辑：定义一个<strong>EventEmitter</strong>类，该类内部定义了<strong>订阅函数on</strong>，<strong>发布函数emit</strong>以及<strong>enventList对象</strong>（用于存储订阅消息的），再创建一个EventEmitter类的**_event实例**（事件总线），每当有订阅信息，_event则调用on方法将回调函数（订阅者）与特定事件名称关联起来，存储在内部的 eventList 对象中。只要等到发布文章时，_event调用emit方法查找对应事件的所有回调函数并执行，实现了发布者与订阅者的解耦 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">EventEmitter</span>&#123;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-comment">//定义eventList对象，用于存储各类文章的订阅事件</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>=&#123;&#125;<br>    &#125;<br>    <span class="hljs-comment">//订阅函数，eventName未订阅的书籍类型，cb订阅者的回调函数，发布时调用</span><br>    <span class="hljs-title function_">on</span>(<span class="hljs-params">eventName,cb</span>)&#123;<span class="hljs-comment">//订阅事件</span><br>        <span class="hljs-comment">//当对象内不存在该类订阅书籍，则添加一个新数组进行存储</span><br>        <span class="hljs-keyword">if</span>(!<span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[eventName])&#123;<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[eventName]=[]<br>        &#125;<br>        <span class="hljs-comment">//将书籍类型设为键，订阅者的回调函数加入到该类的数组中</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[eventName].<span class="hljs-title function_">push</span>(cb)<br>    &#125;<br>    <span class="hljs-comment">//发布函数，当发布者发布文章时，事件总线则调用该函数，执行所有该类文章的回调函数</span><br>    <span class="hljs-comment">//eventName表示要发布的文章的类别</span><br>    <span class="hljs-title function_">emit</span>(<span class="hljs-params">eventName</span>)&#123;<span class="hljs-comment">//发布事件</span><br>        <span class="hljs-comment">//查找订阅消息对象中有无该类文章的订阅消息</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[enventName])&#123;<br>        <span class="hljs-comment">//将订阅的事件回调函数复制一份，避免直接操作订阅的事件回调函数数组</span><br>            <span class="hljs-keyword">const</span> handlers=<span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[eventName].<span class="hljs-title function_">slice</span>()<br>            <span class="hljs-comment">//遍历订阅的事件回调函数数组，执行每个回调函数</span><br>            handlers.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>&#123;<br>                <span class="hljs-title function_">item</span>()<br>            &#125;)<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//创建事件总线_event</span><br><span class="hljs-keyword">let</span> _event=<span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>()<br><span class="hljs-comment">//订阅者kang，</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">kang</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;小康收到文学类文章&#x27;</span>)<br>&#125;<br><span class="hljs-comment">//订阅者liu</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">liu</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;小刘收到艺术类文章&#x27;</span>)<br>&#125;<br><span class="hljs-comment">//订阅者cheng</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">cheng</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;小成收到科学类文章&#x27;</span>)<br>&#125;<br>_event.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;wenxue&#x27;</span>,kang)<span class="hljs-comment">//订阅事件&#x27;wenxue&#x27;，订阅者kang</span><br>_event.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;kexue&#x27;</span>,cheng)<span class="hljs-comment">//订阅事件&#x27;kexue&#x27;，订阅者cheng</span><br>_event.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;wenxue&#x27;</span>)<span class="hljs-comment">//发布事件&#x27;wenxue&#x27;--&gt;订阅者kang执行 </span><br>_event.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;kexue&#x27;</span>)<span class="hljs-comment">//发布事件&#x27;hasCar&#x27;--&gt;订阅者cheng执行 </span><br></code></pre></td></tr></table></figure>
+
+<p><strong>简单总结</strong>：事件总线调用on方法将小康和小刘的订阅消息分别存储到文学和艺术类订阅数组内，当发布者发布了文学类书籍时，事件总线则会调用emit方法，将该书籍推荐给小康，小康则会收到文学类书籍，但小刘收不到，小刘只有当艺术类书籍发布时才会收到。</p>
+<h3 id="如何实现取消订阅呢？"><a href="#如何实现取消订阅呢？" class="headerlink" title="如何实现取消订阅呢？"></a>如何实现取消订阅呢？</h3><p><strong>大体思路</strong>：就是在EventEmitter类内再<strong>添加一个off方法用于取消订阅</strong>，当有读者想取消订阅时，事件总线则调用off方法，将该读者的订阅消息从其订阅的那类书籍的数组内删除即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//eventName为要取消哪类书籍的订阅，cb为订阅者的回调函数</span><br><span class="hljs-title function_">off</span>(<span class="hljs-params">eventName,cb</span>)&#123;<span class="hljs-comment">//取消订阅事件</span><br>    <span class="hljs-comment">//查找该读者是否订阅过该类书籍</span><br>    <span class="hljs-keyword">if</span>(!<span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[eventName].<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item===cb))&#123;<br>        <span class="hljs-keyword">return</span> <br>    &#125;<br>    <span class="hljs-keyword">const</span> handlers=<span class="hljs-variable language_">this</span>.<span class="hljs-property">eventList</span>[eventName]<br>    <span class="hljs-comment">//将订阅的事件回调函数数组中，与取消订阅的事件回调函数不同的回调函数保留，相同的回调函数删除</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">enventList</span>[eventName]=handlers.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item!==cb)<br>&#125;<br>_event.<span class="hljs-title function_">off</span>(<span class="hljs-string">&#x27;wenxue&#x27;</span>,kang)<span class="hljs-comment">//表示订阅者kang取消了文学类书籍的订阅事件</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="如何实现单次订阅呢"><a href="#如何实现单次订阅呢" class="headerlink" title="如何实现单次订阅呢?"></a>如何实现单次订阅呢?</h3><p><strong>大体思路：</strong></p>
+<ol>
+<li>创建<strong>包装函数wrap</strong>（形成闭包环境）</li>
+</ol>
+<ul>
+<li>闭包捕获：原始回调<code>cb</code>、事件名称<code>eventName</code>、当前<code>this</code>上下文</li>
+</ul>
+<ol>
+<li>wrap函数内部逻辑：</li>
+</ol>
+<ul>
+<li>执行原始回调<code>cb()</code></li>
+<li>调用<code>this.off(eventName, wrap)</code><strong>移除自身</strong></li>
+</ul>
+<ol>
+<li>使用<code>this.on(eventName, wrap)</code>将wrap函数添加到订阅消息数组内</li>
+</ol>
+<p><strong>当事件触发时：</strong></p>
+<ul>
+<li>执行wrap函数</li>
+<li>先执行原始回调</li>
+<li>随后移除wrap自身</li>
+<li>实现<strong>只触发一次</strong>的效果</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">once</span>(<span class="hljs-params">eventName,cb</span>)&#123;<span class="hljs-comment">//单次订阅</span><br>    <span class="hljs-comment">//创建wrap函数，具有闭包特性，wrap函数会记住当前的cb函数以及eventName和this值，当其被调用时引用</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-title function_">wrap</span>=(<span class="hljs-params"></span>)=&gt;&#123;<br>        <span class="hljs-title function_">cb</span>()<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">off</span>(eventName,wrap)<br>    &#125;<br>    <span class="hljs-comment">//将wrap添加到订阅消息内，发布时调用</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">on</span>(eventName,wrap)<br>&#125;<br>_event.<span class="hljs-title function_">once</span>(<span class="hljs-string">&#x27;yishu&#x27;</span>,liu)<span class="hljs-comment">//单次订阅事件&#x27;yishu&#x27;，订阅者liu</span><br>_event.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;yishu&#x27;</span>)<span class="hljs-comment">//发布事件&#x27;yishu&#x27;--&gt;订阅者liu执行 </span><br>_event.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;yishu&#x27;</span>)<span class="hljs-comment">//发布事件&#x27;yishu&#x27;--&gt;订阅者liu不执行 </span><br></code></pre></td></tr></table></figure>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/js/" class="category-chain-item">js</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/Event-Bus/">#Event Bus</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JS手写发布订阅设计模式(Event Bus)</div>
+      <div>https://lyc937321983.github.io/blog/2025/08/02/js-eventBus/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月2日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2025/08/21/linux-Vim%E4%BD%BF%E7%94%A8/" title="Linux 必学：Vim工具使用方法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux 必学：Vim工具使用方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2025/01/09/css-fitter/" title="rem适配PC端和移动端">
+                        <span class="hidden-mobile">rem适配PC端和移动端</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
