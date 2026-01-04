@@ -13,7 +13,7 @@ categories:
 
 在 Linux 江湖里，Vim 堪称 "编辑器之神"。它不仅能让你双手不离键盘完成所有操作，更能通过代码高亮、智能补全、多窗口编辑等黑科技，把敲代码变成一场指尖舞蹈。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/aP5o5iaj0QUr83fll7rQOicFibOGGmHArRehBX788wjCibatXTGSc9vSkuw9tyKicbEpTiaTVdrnpp7T29ibdQr0Fd3Lg/640?wx_fmt=png&from=appmsg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://s3.bmp.ovh/imgs/2025/12/31/e5bf3023e7f4c3e0.png)
 
 ## 🚀基础操作：三招解锁 Vim 世界
 

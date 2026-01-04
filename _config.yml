@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://atomgit.com/a937321983/a937321983.atomgit.io.git
+url: https://lyc937321983.github.io/blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -103,6 +103,8 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
-  repo: https://atomgit.com/a937321983/a937321983.atomgit.io.git
+  type: 'git'
+  repo: https://github.com/lyc937321983/blog.git
   branch: main
+  name: lyc937321983
+  email: 937321983@qq.com
