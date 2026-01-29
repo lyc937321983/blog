@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Nuxt部署到服务器一.打包项目文件：1.首先使用yarn或者npm，pnpm等包管理工具在项目终端构建项目。 1yarn run build  执行构建命令，并输出一个指定的目录，我这里是.ouput文件 2.压缩打包构建输出目录 1tar -cvf nuxt3-test.tar .output  该命令将.output文件压缩为nuxt-test.tar名字的文件 二. 上传压缩文件到服务器1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nuxt部署到服务器">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2026/01/29/nuxt-pack/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="Nuxt部署到服务器一.打包项目文件：1.首先使用yarn或者npm，pnpm等包管理工具在项目终端构建项目。 1yarn run build  执行构建命令，并输出一个指定的目录，我这里是.ouput文件 2.压缩打包构建输出目录 1tar -cvf nuxt3-test.tar .output  该命令将.output文件压缩为nuxt-test.tar名字的文件 二. 上传压缩文件到服务器1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-29T03:09:56.000Z">
+<meta property="article:modified_time" content="2026-01-29T06:16:40.547Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="Nuxt部署">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Nuxt部署到服务器 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Nuxt部署到服务器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-29 11:09" pubdate>
+          2026年1月29日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Nuxt部署到服务器</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Nuxt部署到服务器"><a href="#Nuxt部署到服务器" class="headerlink" title="Nuxt部署到服务器"></a>Nuxt部署到服务器</h1><h2 id="一-打包项目文件："><a href="#一-打包项目文件：" class="headerlink" title="一.打包项目文件："></a>一.打包项目文件：</h2><p>1.首先使用yarn或者npm，pnpm等包管理工具在项目终端构建项目。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">yarn run build<br></code></pre></td></tr></table></figure>
+
+<p>执行构建命令，并输出一个指定的目录，我这里是.ouput文件</p>
+<p>2.压缩打包构建输出目录</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">tar -cvf nuxt3-test.tar .<span class="hljs-built_in">output</span><br></code></pre></td></tr></table></figure>
+
+<p>该命令将.output文件压缩为nuxt-test.tar名字的文件</p>
+<h2 id="二-上传压缩文件到服务器"><a href="#二-上传压缩文件到服务器" class="headerlink" title="二. 上传压缩文件到服务器"></a>二. 上传压缩文件到服务器</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">scp -i <span class="hljs-symbol">C:</span>\<span class="hljs-title class_">Users</span>\zhouzhou\<span class="hljs-title class_">Desktop</span>\xxx.pem nuxt3-test.tar  username<span class="hljs-variable">@ip</span><span class="hljs-symbol">:/root/test</span><br></code></pre></td></tr></table></figure>
+
+<p>将压缩包上传到指定服务器的test文件夹中，我这里的服务器密钥是保存在桌面的一个pem文件，username是服务器用户名称，ip就是服务器ip；</p>
+<h2 id="三-连接服务器并解压文件"><a href="#三-连接服务器并解压文件" class="headerlink" title="三.连接服务器并解压文件"></a>三.连接服务器并解压文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ssh -i 服务器密钥  username@ip<br></code></pre></td></tr></table></figure>
+
+<p>连接到服务器后打开压缩包所在的文件夹,当有显示welcome和登陆时间就说明服务器连接成功了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> nuxt-test //进入有压缩包的文件夹<br><span class="hljs-built_in">ls</span> //查看当前文件夹的文件<br>tar -xvf nuxt3-test.tar //解压.output文件<br></code></pre></td></tr></table></figure>
+
+<p>解压完成后输入 <code>ls -a</code>就可以看到.output文件</p>
+<h2 id="四-使用pm2管理，运行服务，并配置ecosystem-config-cjs环境文件"><a href="#四-使用pm2管理，运行服务，并配置ecosystem-config-cjs环境文件" class="headerlink" title="四.使用pm2管理，运行服务，并配置ecosystem.config.cjs环境文件"></a>四.使用pm2管理，运行服务，并配置ecosystem.config.cjs环境文件</h2><p>PM2 是一个流行的用于Node.js 应用程序的进程管理工具，它可以帮助开发者更轻松地管理和运行 Node.js 应用 ，可以帮助我们管理服务的进程和监视服务。可以通过 <code>npm install pm2</code>来进行安装、也可以-g进行全局安装</p>
+<p>配置ecosystem.config.cjs文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 导出一个配置对象，用于 PM2 管理应用程序</span><br><span class="hljs-keyword">module</span>.<span class="hljs-keyword">exports</span> = &#123;<br>  <span class="hljs-comment">// apps 数组用于定义要管理的多个应用程序，这里只定义了一个应用</span><br>  apps: [<br>    &#123;<br>      <span class="hljs-comment">// 应用程序的名称，用于在 PM2 管理命令中标识该应用</span><br>      name: <span class="hljs-string">&quot;nuxt-test&quot;</span>,<br>      <span class="hljs-comment">// 应用程序的入口脚本文件路径，PM2 将从此处启动应用</span><br>      script: <span class="hljs-string">&quot;.output/server/index.mjs&quot;</span>,<br>      <span class="hljs-comment">// 要启动的应用程序实例数量，这里设置为 10 个实例</span><br>      instances: <span class="hljs-string">&quot;10&quot;</span>,<br>      <span class="hljs-comment">// 执行模式，cluster 表示集群模式，可利用多核 CPU 提高性能</span><br>      exec_mode: <span class="hljs-string">&quot;cluster&quot;</span>,<br>      <span class="hljs-comment">// 之前设置 autorestart 为 false，这里又重新设置为 true，表示当应用程序崩溃或退出时，PM2 会自动重启该应用</span><br>      autorestart: <span class="hljs-literal">true</span>,<br>      <span class="hljs-comment">// 是否开启文件监听功能，设置为 true 时，当项目文件发生变化，PM2 会自动重启应用</span><br>      watch: <span class="hljs-literal">true</span>,<br>      <span class="hljs-comment">// 配置在文件监听时需要忽略的目录或文件，这里忽略了 logs 目录</span><br>      ignore_watch: [<span class="hljs-string">&quot;logs&quot;</span>], <br>      <span class="hljs-comment">// 注释掉的配置项，用于设置当应用程序使用的内存超过指定值（这里是 1G）时，PM2 会自动重启应用</span><br>      <span class="hljs-comment">// max_memory_restart: &#x27;1G&#x27;,</span><br>      <span class="hljs-comment">// 环境变量配置，在应用程序运行时会注入这些环境变量</span><br>      env: &#123;<br>        <span class="hljs-comment">// 应用程序监听的主机地址，0.0.0.0 表示监听所有可用的网络接口</span><br>        HOST: <span class="hljs-string">&quot;0.0.0.0&quot;</span>,<br>        <span class="hljs-comment">// Node.js 运行环境，设置为 production 表示生产环境</span><br>        NODE_ENV: <span class="hljs-string">&quot;production&quot;</span>,<br>        <span class="hljs-comment">// 应用程序监听的端口号</span><br>        PORT: <span class="hljs-number">8089</span>,<br>      &#125;,<br>      <span class="hljs-comment">// 日志日期格式，用于在日志中显示每条日志记录的时间，这里的格式为年-月-日 时:分，X 可能表示其他时间相关信息</span><br>      log_date_format: <span class="hljs-string">&quot;YYYY-MM-DD HH:mm X&quot;</span>,<br>      <span class="hljs-comment">// 标准输出日志文件的名称，应用程序的标准输出信息会被记录到这个文件中</span><br>      out_file: <span class="hljs-string">&quot;log.log&quot;</span>,<br>      <span class="hljs-comment">// 是否合并日志，设置为 true 时，会将不同实例的日志合并到同一个文件中</span><br>      merge_log: <span class="hljs-literal">true</span>,<br>    &#125;,<br>  ],<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>配置好文件后就可以启动服务了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">pm2 start ecosystem.config.cjs<br></code></pre></td></tr></table></figure>
+
+<p>运行成功后会出现管理服务的一个表单，显示online则表示服务跑成功了，stopping则失败</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>namespace</th>
+<th>version</th>
+<th>mode</th>
+<th>pid</th>
+<th>uptime</th>
+<th>?</th>
+<th>status</th>
+<th>cpu</th>
+<th>mem</th>
+<th>user</th>
+<th>watching</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>24</td>
+<td>dxjob-PC-dxc</td>
+<td>default</td>
+<td>0.0.0</td>
+<td>cluster</td>
+<td>0</td>
+<td>0</td>
+<td>2917</td>
+<td>stopping</td>
+<td>0%</td>
+<td>0b</td>
+<td>root</td>
+<td>disabled</td>
+</tr>
+</tbody></table>
+<p>一些pm2常用语句：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">pm2 stop all：停止所有由 PM2 管理的应用程序进程。<br>pm2 stop my-app：停止名称为 `my-app` 的应用程序进程。也可以使用进程 ID 来停止特定进程，如 `pm2 stop 0（假设 `my-app 的 ID 是 0）<br>pm2 restart all：重启所有由 PM2 管理的应用程序进程。<br>pm2 restart my-app：重启名称为 `my-app` 的应用程序进程，同样也能用进程 ID 来指定。<br>pm2 delete all：从 PM2 的管理列表中删除所有应用程序进程。<br>pm2 delete my-app：从管理列表中删除名称为 `my-app` 的应用程序进程。<br>pm2 list：显示当前由 PM2 管理的所有进程的详细信息，包括进程 ID、名称、状态、CPU 使用率、内存占用等。<br>pm2 show my-app ：显示名称为 `my-app` 的应用程序进程的详细信息，如启动时间、运行模式等<br>pm2 logs ：查看所有由 PM2 管理的应用程序的日志输出。<br>pm2 logs my-app ：只查看名称为 `my-app` 的应用程序的日志。<br>pm2 flush ：清空所有日志文件。<br>pm2 monit ：打开一个交互式界面，实时监控所有进程的 CPU 和内存使用情况<br>pm2 save ：将当前 PM2 管理的所有进程的状态保存下来，以便在服务器重启后能自动恢复这些进程。<br></code></pre></td></tr></table></figure>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/nuxt/" class="category-chain-item">nuxt</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/Nuxt%E9%83%A8%E7%BD%B2/">#Nuxt部署</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Nuxt部署到服务器</div>
+      <div>https://lyc937321983.github.io/blog/2026/01/29/nuxt-pack/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月29日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2026/01/23/flutter-json/" title="Flutter json 序列化">
+                        <span class="hidden-mobile">Flutter json 序列化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

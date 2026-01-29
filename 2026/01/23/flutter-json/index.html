@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. json_serializable 库1.1. 添加依赖它由三个部分组成：  json_annotation → 定义注解。 json_serializable → 使用这些注解来生成代码。 build_runner → 执行生成代码的任务。  添加库依赖的方式二选一： 1234567891011121314# 方式一：终端直接键入下述命令安装flutter pub add json_ann">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter json 序列化">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2026/01/23/flutter-json/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="1. json_serializable 库1.1. 添加依赖它由三个部分组成：  json_annotation → 定义注解。 json_serializable → 使用这些注解来生成代码。 build_runner → 执行生成代码的任务。  添加库依赖的方式二选一： 1234567891011121314# 方式一：终端直接键入下述命令安装flutter pub add json_ann">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-23T06:10:02.000Z">
+<meta property="article:modified_time" content="2026-01-29T06:12:53.974Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="json 序列化">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Flutter json 序列化 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Flutter json 序列化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-23 14:10" pubdate>
+          2026年1月23日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Flutter json 序列化</h1>
+            
+            <div class="markdown-body">
+              
+              <h2 id="1-json-serializable-库"><a href="#1-json-serializable-库" class="headerlink" title="1. json_serializable 库"></a>1. json_serializable 库</h2><h3 id="1-1-添加依赖"><a href="#1-1-添加依赖" class="headerlink" title="1.1. 添加依赖"></a>1.1. 添加依赖</h3><p>它由三个部分组成：</p>
+<ul>
+<li><strong>json_annotation</strong> → 定义注解。</li>
+<li><strong>json_serializable</strong> → 使用这些注解来生成代码。</li>
+<li><strong>build_runner</strong> → 执行生成代码的任务。</li>
+</ul>
+<p>添加库依赖的方式二选一：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 方式一：终端直接键入下述命令安装</span><br>flutter pub add json_annotation dev:build_runner dev:json_serializable<br><br><span class="hljs-comment"># 方式2：打开 build.yaml文件手动添加依赖</span><br>dependencies:<br>flutter:<br>  sdk: flutter<br>json_annotation: ^4.8.1<br><br>dev_dependencies:<br>flutter_test:<br>  sdk: flutter<br>build_runner: ^2.4.7<br>json_serializable: ^6.7.1<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-基本使用"><a href="#1-2-基本使用" class="headerlink" title="1.2. 基本使用"></a>1.2. 基本使用</h3><p>定义Model类添加属性，给类加上 <strong>@JsonSerializable</strong> 注解，并添加 <strong>fromJson()</strong> 和 <strong>toJson()</strong> 方法：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:json_annotation/json_annotation.dart&#x27;</span>;<br><br><span class="hljs-keyword">part</span> <span class="hljs-string">&#x27;banner.g.dart&#x27;</span>; <span class="hljs-comment">// 1.指定生成的文件，一般是当前文件.g.dart</span><br><br><span class="hljs-meta">@JsonSerializable</span>() <span class="hljs-comment">// 2.添加注解，告知此类是要生成Model类的</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Banner</span> </span>&#123;<br>  <span class="hljs-meta">@JsonKey</span>(name: <span class="hljs-string">&#x27;id&#x27;</span>) <span class="hljs-comment">// 3.可选，添加注解，告知此属性对应的json key</span><br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> bid;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> desc;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> imagePath;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> isVisible;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> order;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> title;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> type;<br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> url;<br><br>  Banner(&#123;<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.bid,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.desc,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.imagePath,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.isVisible,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.order,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.title,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.type,<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.url,<br>  &#125;);<br><br>  <span class="hljs-comment">// 4、反序列化，固定写法：_$&#123;类名&#125;FromJson(json)</span><br>  <span class="hljs-keyword">factory</span> Banner.fromJson(<span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">dynamic</span>&gt; json) =&gt; _$BannerFromJson(json);<br><br>  <span class="hljs-comment">// 5、序列化，固定写法：_$&#123;类名&#125;ToJson(this)</span><br>  <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">dynamic</span>&gt; toJson() =&gt; _$BannerToJson(<span class="hljs-keyword">this</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>编写完上述代码，编译器会报_BannerFromJson和_BannerToJson找不到，没关系，只要确定没拼写错误就行，直接执行下述命令生成对应的序列化代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">flutter pub run build_runner build --delete-conflicting-outputs<br><br><span class="hljs-comment"># 后面的 --delete-conflicting-outputs 是可选的，作用是：</span><br><span class="hljs-comment"># 自动删除任何现存的，与即将生成的输出文件冲突的文件，然后继续构建过程。</span><br><span class="hljs-comment"># 这样可以清理由于老版本或不同构建配置造成的遗留文件</span><br></code></pre></td></tr></table></figure>
+
+<p>命令执行完，原先的报错就消失了，而且会在 <strong>同级目录</strong> 生成一个 <strong>xxx.g.dart</strong> 的文件.</p>
+<p>然后跟前面一样调用fromJson()就行了，这里用到了这两个 <strong>注解</strong>，详细讲讲，加⭐的属性是比较常用的~</p>
+<h4 id="1-2-1-JsonSerializable"><a href="#1-2-1-JsonSerializable" class="headerlink" title="1.2.1. @JsonSerializable"></a>1.2.1. @JsonSerializable</h4><p><strong>用于</strong>：指示生成器如何 <strong>为类生成序&#x2F;反序列化代码</strong>，可选属性如下：</p>
+<ul>
+<li><strong>explicitToJson</strong> → 默认为false，涉及Model类嵌套时，赋值一个 <strong>引用类型</strong>，而不是 <strong>显式调用嵌套类的toJson()</strong> ！涉及对象嵌套时，建议设置为true。</li>
+<li><strong>ignoreUnannotated</strong> → 默认为false，如果设置为true时，生成器只序列化和反序列化用 <strong>@JsonKey标记</strong> 的字段。</li>
+<li><strong>includeIfNull</strong> → 序列化时是否包含值为null的字段，默认为true，即忽略为null的字段。</li>
+<li><strong>genericArgumentFactories</strong> → 用于 <strong>泛型类的序列化和反序列化</strong>，默认为false，如果设置为true，生成的fromJson()和toJson()将 <strong>需要额外的类型参数的工厂函数</strong>，以保证泛型类的正确序列化和反序列化。</li>
+<li><strong>anyMap</strong> → 默认false，如果设置为true，生成的 fromJson() 方法将接受如何类型为Map的对象，而不仅仅是Map&lt;String, dynamic&gt;。</li>
+<li><strong>checked</strong> → 默认为false，如果设置为true，生成的代码会包含对每个字段的类型检查，确保在反序列化期间的类型匹配，如果类型不匹配，会抛出一个有用的错误信息。</li>
+<li><strong>constructor</strong> → 指定用于生成 fromJson() 工厂构造函数的名称，默认为空字符串，即使用无名构造函数。</li>
+<li><strong>createFieldMap</strong> → 默认为true，生成器将为 <strong>Map类型的字段</strong> 生成额外的序列化逻辑。</li>
+<li><strong>createFactory</strong> → 默认为true，当你需要自定义反序列化逻辑时，可以设置为false，生成器不会生成fromJson()。</li>
+<li><strong>createToJson</strong> → 默认为true，需要自定义序列化逻辑时，可以设置为false，生成器不会生成 toJson()。</li>
+<li><strong>disallowUnrecognizedKeys</strong> → 默认为false，设置为true时，如果输入的Json中包含Model中未定义的Key，fromJson() 将抛出一个异常。</li>
+<li><strong>fieldRename</strong> → 控制如何将类字段的名称更改为Json键名称，枚举类FieldRename，可选值有：none(默认，不更改)、kebab(短横线命名a-b)、snak(蛇形命名a_b)、pascal(帕斯卡命名AxxBxx)。</li>
+<li><strong>converters</strong> → 允许自定义转换器，这些转换器可以在序列化和反序列期间使用。</li>
+<li><strong>createPerFieldToJson</strong> → 默认为false，是否为每个字段创建一个单独的 <strong>_$[FieldName]ToJson()</strong> 函数，当你需要对某些字段进行特殊处理时，如：自定义类型需要特殊的序列化逻辑、想根据字段的值改变输出的Json结构等，即复杂的自定义序列化，再考虑是否将这个属性设置为true，毕竟会增加代码的复杂性！</li>
+</ul>
+<h4 id="1-2-2-JsonKey"><a href="#1-2-2-JsonKey" class="headerlink" title="1.2.2. @JsonKey"></a>1.2.2. @JsonKey</h4><p>用于：定制 <strong>单个字段的序&#x2F;反序列化行为</strong>，可选属性如下：</p>
+<ul>
+<li><strong>disallowNullValue</strong> → 如果设为true，序列化时字段为null，会抛出一个异常，通常用于确保某些字段在序列化时不为null的场景。</li>
+<li><strong>ignore</strong> → 如果设置为true，序列化和反序列化时会忽略这个字段。</li>
+<li><strong>includeIfNull</strong> → 如果设置为true，即便字段的值为null，仍然会被包含在序列化的Json中。</li>
+<li><strong>name</strong> → 用于对Json中Key指定一个不同于Dart字段名的名称。</li>
+<li><strong>defaultValue</strong> → json中缺少这个字段或值为null时，反序列化过程中使用的默认值。</li>
+<li><strong>fromJson</strong> → 允许为字段提供一个自定义的反序列化函数。</li>
+<li><strong>required</strong> → 如果设置为 true，反序列化时，如果Json中缺少这个字段会抛出一个异常。</li>
+<li><strong>toJson</strong> → 允许为字段提供一个自定义的序列化函数。</li>
+<li><strong>unknownEnumValue</strong> → Json中的值无法映射到Dart枚举类型中的任何值时，可以指定一个枚举默认值。</li>
+</ul>
+<h2 id="2-Json-生成-Model类-的一些工具"><a href="#2-Json-生成-Model类-的一些工具" class="headerlink" title="2.Json 生成 Model类 的一些工具"></a>2.Json 生成 Model类 的一些工具</h2><h4 id="2-1-QuickType"><a href="#2-1-QuickType" class="headerlink" title="2.1. QuickType"></a>2.1. QuickType</h4><p><a target="_blank" rel="noopener" href="https://app.quicktype.io/">https://app.quicktype.io/</a></p>
+<h4 id="2-2-json2dart"><a href="#2-2-json2dart" class="headerlink" title="2.2. json2dart"></a>2.2. json2dart</h4><p><a target="_blank" rel="noopener" href="https://caijinglong.github.io/json2dart/index_ch.html">https://caijinglong.github.io/json2dart/index_ch.html</a></p>
+<h4 id="2-3-vscode插件-其它"><a href="#2-3-vscode插件-其它" class="headerlink" title="2.3 vscode插件 &amp; 其它"></a>2.3 vscode插件 &amp; 其它</h4><p><strong>JsonToDart</strong></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/json-%E5%BA%8F%E5%88%97%E5%8C%96/">#json 序列化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Flutter json 序列化</div>
+      <div>https://lyc937321983.github.io/blog/2026/01/23/flutter-json/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月23日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2026/01/29/nuxt-pack/" title="Nuxt部署到服务器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nuxt部署到服务器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2026/01/23/flutter-async/" title="Flutter 异步编程">
+                        <span class="hidden-mobile">Flutter 异步编程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
