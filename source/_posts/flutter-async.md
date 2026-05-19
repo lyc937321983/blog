@@ -1,13 +1,13 @@
 ---
-title: Flutter 异步编程
-date: 2026-01-23 10:29:23
-tags: Dart异步编程
+title: Flutter 异步编程API
+date: 2026-01-06 10:30:23
+tags: Flutter async
 comment: 'valine'
 categories: 
 - Flutter
 ---
 
-## Flutter Dart异步编程API
+## Dart异步编程API
 
 Dart 中的异步编程API，主要是通过 **Future** 和 **Stream** 两个API来实现的
 
@@ -261,7 +261,7 @@ void main() {
 // Stream is closed
 ```
 
-有些读者可能会疑惑：没有定义StreamSubscription变量兜住listen()的返回值，然后调用cancel() 取消订阅不会**内存泄露** 吗？
+没有定义StreamSubscription变量兜住listen()的返回值，然后调用cancel() 取消订阅不会**内存泄露** 吗？
 
 > 答：不会。cancel() 方法一般在监听器不需要接收数据，但Stream还未结束时使用。当调用StreamController的close() 方法时，该控制器上的Stream会结束，一旦Stream结束，它会自动发送一个完成事件给所有监听器，并关闭Stream。这种情况下，监听器就不需要显式调用 cancel() 来取消订阅，因为Stream已经完成。
 

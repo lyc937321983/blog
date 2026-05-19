@@ -1,5 +1,5 @@
 ---
-title: 自动切换npm
+title: nvm 迁移到 Volta
 date: 2026-05-11 09:58:22
 tags: Volta
 comment: 'valine'
@@ -7,7 +7,7 @@ categories:
 - Linux
 ---
 
-## 自动切换npm
+## nvm 迁移到 Volta
 
 ### 从 nvm 迁移到 Volta：让 Node 版本跟着项目自动切换
 
