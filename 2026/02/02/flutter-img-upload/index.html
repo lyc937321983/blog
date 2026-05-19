@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Flutter  图片上传一、使用示例1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F;&#x2F; 没有默认数据&#x2F;&#x2F; var selectedModels &#x3D; &lt;AssetUploadModel&gt;[];&#x2F;&#x2F;&#x2F; 有默认数据var selectedModels &#x3D; [  &quot;https:&#x2F;&#x2F;yl-prescript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 图片上传">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2026/02/02/flutter-img-upload/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="Flutter  图片上传一、使用示例1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F;&#x2F; 没有默认数据&#x2F;&#x2F; var selectedModels &#x3D; &lt;AssetUploadModel&gt;[];&#x2F;&#x2F;&#x2F; 有默认数据var selectedModels &#x3D; [  &quot;https:&#x2F;&#x2F;yl-prescript">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-02T08:52:40.000Z">
+<meta property="article:modified_time" content="2026-02-03T03:42:24.702Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="Flutter Image upload">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Flutter 图片上传 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Flutter 图片上传"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-02 16:52" pubdate>
+          2026年2月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          22k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          183 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Flutter 图片上传</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Flutter-图片上传"><a href="#Flutter-图片上传" class="headerlink" title="Flutter  图片上传"></a>Flutter  图片上传</h1><h2 id="一、使用示例"><a href="#一、使用示例" class="headerlink" title="一、使用示例"></a>一、使用示例</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-comment">/// 没有默认数据</span><br><span class="hljs-comment">// var selectedModels = &lt;AssetUploadModel&gt;[];</span><br><br><span class="hljs-comment">/// 有默认数据</span><br><span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">selectedModels</span> = <span class="hljs-selector-attr">[  <span class="hljs-string">&quot;https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/fb013ec6b90a4c5bb1059b003dada9ee.jpg&quot;</span>,  <span class="hljs-string">&quot;https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/ce326143c5b84fd9b99ffca943353b05.jpg&quot;</span>,]</span><span class="hljs-selector-class">.map</span>((e) =&gt; <span class="hljs-built_in">AssetUploadModel</span>(<span class="hljs-attribute">url</span>: e, <span class="hljs-attribute">entity</span>: null))<span class="hljs-selector-class">.toList</span>();<br><br><span class="hljs-comment">/// 获取图片链接数组</span><br><span class="hljs-selector-tag">List</span>&lt;<span class="hljs-selector-tag">String</span>&gt; <span class="hljs-selector-tag">urls</span> = <span class="hljs-selector-attr">[]</span>;<br><span class="hljs-selector-tag">buildBody</span>() &#123;<br>  <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">SingleChildScrollView</span>(<br>    <span class="hljs-attribute">child</span>: <span class="hljs-built_in">Column</span>(<br>      <span class="hljs-attribute">mainAxisSize</span>: MainAxisSize.min,<br>      <span class="hljs-attribute">crossAxisAlignment</span>: CrossAxisAlignment.start,<br>      <span class="hljs-attribute">children</span>: [<br>        <span class="hljs-built_in">NText</span>(<span class="hljs-attribute">data</span>: <span class="hljs-string">&quot;AssetUploadBox&quot;</span>, <span class="hljs-attribute">fontSize</span>: <span class="hljs-number">16</span>,),<br>        <span class="hljs-built_in">Container</span>(<br>          <span class="hljs-attribute">padding</span>: EdgeInsets.<span class="hljs-built_in">symmetric</span>(<span class="hljs-attribute">horizontal</span>: <span class="hljs-number">20</span>),<br>          <span class="hljs-attribute">child</span>: <span class="hljs-built_in">AssetUploadBox</span>(<br>            <span class="hljs-attribute">maxCount</span>: <span class="hljs-number">8</span>,<br>            <span class="hljs-comment">// rowCount: 4,</span><br>            <span class="hljs-attribute">items</span>: selectedModels,<br>            <span class="hljs-comment">// canEdit: false,</span><br>            <span class="hljs-comment">// showFileSize: true,</span><br>            <span class="hljs-attribute">onChanged</span>: (items)&#123;<br>              <span class="hljs-built_in">debugPrint</span>(<span class="hljs-string">&quot;onChanged items.length: $&#123;items.length&#125;&quot;</span>);<br>              selectedModels = items.<span class="hljs-built_in">where</span>((e) =&gt; e.url?.<span class="hljs-built_in">startsWith</span>(<span class="hljs-string">&quot;http&quot;</span>) == true).<span class="hljs-built_in">toList</span>();<br>              urls = selectedModels.<span class="hljs-built_in">map</span>((e) =&gt; e.url ?? <span class="hljs-string">&quot;&quot;</span>).<span class="hljs-built_in">toList</span>();<br>              <span class="hljs-built_in">setState</span>(() &#123;&#125;);<br>            &#125;,<br>          ),<br>        ),<br>      ],<br>    ),<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="二、源码"><a href="#二、源码" class="headerlink" title="二、源码"></a>二、源码</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">/// <span class="language-markdown">图片实体模型</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AssetUploadModel</span> </span>&#123;<br><br>  AssetUploadModel(&#123;<br>    <span class="hljs-keyword">required</span> <span class="hljs-keyword">this</span>.entity,<br>    <span class="hljs-keyword">this</span>.url,<br>    <span class="hljs-keyword">this</span>.file,<br>  &#125;);<br><br>  <span class="hljs-keyword">final</span> AssetEntity? entity;<br>  <span class="hljs-comment">/// <span class="language-markdown">上传之后的文件 url</span></span><br>  <span class="hljs-built_in">String?</span> url;<br>  <span class="hljs-comment">/// <span class="language-markdown">压缩之后的文件</span></span><br>  File? file;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="1、AssetUploadBox-源码，整个图片区域"><a href="#1、AssetUploadBox-源码，整个图片区域" class="headerlink" title="1、AssetUploadBox 源码，整个图片区域"></a>1、AssetUploadBox 源码，整个图片区域</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br></pre></td><td class="code"><pre><code class="hljs php">import <span class="hljs-string">&#x27;dart:ffi&#x27;</span>;<br><br>import <span class="hljs-string">&#x27;package:dio/dio.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_screenutil/flutter_screenutil.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/n_image_preview.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/upload/asset_upload_button.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/upload/asset_upload_config.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/extension/overlay_ext.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/extension/widget_ext.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:wechat_assets_picker/wechat_assets_picker.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:wechat_camera_picker/wechat_camera_picker.dart&#x27;</span>;<br><br><br><span class="hljs-comment">/// 上传图片单元(基于 wechat_assets_picker)</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AssetUploadBox</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span> </span>&#123;<br><br>  <span class="hljs-title function_ invoke__">AssetUploadBox</span>(&#123;<br>    Key? key,<br>    required this.items,<br>    required this.onChanged,<br>    this.maxCount = <span class="hljs-number">9</span>,<br>    this.rowCount = <span class="hljs-number">4</span>,<br>    this.spacing = <span class="hljs-number">3</span>,<br>    this.runSpacing = <span class="hljs-number">3</span>,<br>    this.canCameraTakePhoto = <span class="hljs-literal">false</span>,<br>    this.canEdit = <span class="hljs-literal">true</span>,<br>    this.imgBuilder,<br>    this.onTap,<br>    this.showFileSize = <span class="hljs-literal">false</span>,<br>  &#125;) : <span class="hljs-title function_ invoke__">super</span>(<span class="hljs-attr">key</span>: key);<br><br><br>  List&lt;AssetUploadModel&gt; items;<br>  <span class="hljs-comment">/// 全部结束(有成功有失败 url=&quot;&quot;)或者删除完失败图片时会回调</span><br>  ValueChanged&lt;List&lt;AssetUploadModel&gt;&gt; onChanged;<br>  <span class="hljs-comment">/// 做大个数</span><br>  <span class="hljs-keyword">int</span> maxCount;<br>  <span class="hljs-comment">/// 每行个数</span><br>  <span class="hljs-keyword">int</span> rowCount;<br>  <span class="hljs-comment">/// 水平间距</span><br>  <span class="hljs-keyword">double</span> spacing;<br>  <span class="hljs-comment">/// 垂直间距</span><br>  <span class="hljs-keyword">double</span> runSpacing;<br>  <span class="hljs-comment">/// 可以 拍摄图片</span><br>  <span class="hljs-keyword">bool</span> canCameraTakePhoto;<br>  <span class="hljs-comment">/// 可以编辑</span><br>  <span class="hljs-keyword">bool</span> canEdit;<br>  <span class="hljs-comment">/// 网络图片url转为组件</span><br>  Widget <span class="hljs-title function_ invoke__">Function</span>(String url)? imgBuilder;<br>  <span class="hljs-comment">/// 图片点击事件</span><br>  Void <span class="hljs-title function_ invoke__">Function</span>(List&lt;String&gt; urls, <span class="hljs-keyword">int</span> index)? onTap;<br>  <span class="hljs-comment">/// 显示文件大小</span><br>  <span class="hljs-keyword">bool</span> showFileSize;<br><br>  @override<br>  _AssetUploadBoxState <span class="hljs-title function_ invoke__">createState</span>() =&gt; <span class="hljs-title function_ invoke__">_AssetUploadBoxState</span>();<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_AssetUploadBoxState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">AssetUploadBox</span>&gt; </span>&#123;<br><br>  late List&lt;AssetUploadModel&gt; selectedModels = widget.items;<br>  <span class="hljs-comment">// List&lt;AssetEntity&gt; selectedEntitys = [];</span><br><br>  @override<br>  <span class="hljs-keyword">void</span> <span class="hljs-title function_ invoke__">initState</span>() &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement initState</span><br>    super.<span class="hljs-title function_ invoke__">initState</span>();<br>  &#125;<br><br>  @override<br>  Widget <span class="hljs-title function_ invoke__">build</span>(BuildContext context) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">photoSection</span>(<br>      <span class="hljs-attr">items</span>: selectedModels,<br>      <span class="hljs-attr">maxCount</span>: widget.maxCount,<br>      <span class="hljs-attr">rowCount</span>: widget.rowCount,<br>      <span class="hljs-attr">spacing</span>: widget.spacing,<br>      <span class="hljs-attr">runSpacing</span>: widget.runSpacing,<br>      <span class="hljs-attr">canEdit</span>: widget.canEdit,<br>    );<br>  &#125;<br><br>  <span class="hljs-title function_ invoke__">photoSection</span>(&#123;<br>    List&lt;AssetUploadModel&gt; items = <span class="hljs-keyword">const</span> [],<br>    <span class="hljs-keyword">int</span> maxCount = <span class="hljs-number">9</span>,<br>    <span class="hljs-keyword">int</span> rowCount = <span class="hljs-number">4</span>,<br>    <span class="hljs-keyword">double</span> spacing = <span class="hljs-number">10</span>,<br>    <span class="hljs-keyword">double</span> runSpacing = <span class="hljs-number">10</span>,<br>    <span class="hljs-keyword">bool</span> canEdit = <span class="hljs-literal">true</span>,<br>  &#125;) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">LayoutBuilder</span>(<br>      <span class="hljs-attr">builder</span>: (BuildContext context, BoxConstraints constraints)&#123;<br>        <span class="hljs-keyword">var</span> itemWidth = ((constraints.maxWidth - spacing * (rowCount - <span class="hljs-number">1</span>))/rowCount).<span class="hljs-title function_ invoke__">truncateToDouble</span>();<br>        <span class="hljs-comment">// print(&quot;itemWidth: $itemWidth&quot;);</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Wrap</span>(<br>          <span class="hljs-attr">spacing</span>: spacing,<br>          <span class="hljs-attr">runSpacing</span>: runSpacing,<br>          <span class="hljs-attr">alignment</span>: WrapAlignment.start,<br>          <span class="hljs-attr">children</span>: [<br>            ...items.<span class="hljs-title function_ invoke__">map</span>((e) &#123;<br>              // <span class="hljs-keyword">final</span> size = await e.<span class="hljs-title function_ invoke__">length</span>()/(<span class="hljs-number">1024</span>*<span class="hljs-number">1024</span>);<br><br>              <span class="hljs-keyword">final</span> index = items.<span class="hljs-title function_ invoke__">indexOf</span>(e);<br><br>              <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Container</span>(<br>                <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Column</span>(<br>                  <span class="hljs-attr">children</span>: [<br>                    <span class="hljs-title function_ invoke__">ClipRRect</span>(<br>                      <span class="hljs-attr">borderRadius</span>: BorderRadius.<span class="hljs-title function_ invoke__">all</span>(Radius.<span class="hljs-title function_ invoke__">circular</span>(<span class="hljs-number">8</span>)),<br>                      <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">SizedBox</span>(<br>                        <span class="hljs-attr">width</span>: itemWidth,<br>                        <span class="hljs-attr">height</span>: itemWidth,<br>                        <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">InkWell</span>(<br>                          <span class="hljs-attr">onTap</span>: ()&#123;<br>                            // <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;onTap: $&#123;e.url&#125;&quot;</span>);<br>                            <span class="hljs-keyword">final</span> urls = items.<span class="hljs-title function_ invoke__">where</span>((e) =&gt; e.url?.<span class="hljs-title function_ invoke__">startsWith</span>(<span class="hljs-string">&quot;http&quot;</span>) == <span class="hljs-literal">true</span>)<br>                              .<span class="hljs-title function_ invoke__">map</span>((e) =&gt; e.url ?? <span class="hljs-string">&quot;&quot;</span>).<span class="hljs-title function_ invoke__">toList</span>();<br>                            <span class="hljs-keyword">final</span> index = urls.<span class="hljs-title function_ invoke__">indexOf</span>(e.url ?? <span class="hljs-string">&quot;&quot;</span>);<br>                            // <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;urls: $&#123;urls.length&#125;, <span class="hljs-subst">$index</span>&quot;</span>);<br>                            FocusScope.<span class="hljs-title function_ invoke__">of</span>(context).<span class="hljs-title function_ invoke__">unfocus</span>();<br><br>                            <span class="hljs-keyword">if</span> (widget.onTap != <span class="hljs-literal">null</span>) &#123;<br>                              widget.onTap?.<span class="hljs-title function_ invoke__">call</span>(urls, index);<br>                              <span class="hljs-keyword">return</span>;<br>                            &#125;<br>                            <span class="hljs-title function_ invoke__">showEntry</span>(<br>                              <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">NImagePreview</span>(<br>                                <span class="hljs-attr">urls</span>: urls,<br>                                <span class="hljs-attr">index</span>: index,<br>                                <span class="hljs-attr">onBack</span>: ()&#123;<br>                                  <span class="hljs-title function_ invoke__">hideEntry</span>();<br>                                &#125;,<br>                              ),<br>                            );<br>                          &#125;,<br>                          child: <span class="hljs-title function_ invoke__">AssetUploadButton</span>(<br>                            <span class="hljs-attr">model</span>: e,<br>                            <span class="hljs-attr">urlBlock</span>: (url)&#123;<br>                              <span class="hljs-comment">// e.url = url;</span><br>                              <span class="hljs-comment">// debugPrint(&quot;e: $&#123;e.data?.name&#125;_$&#123;e.url&#125;&quot;);</span><br>                              <span class="hljs-keyword">final</span> isAllFinished = items.<span class="hljs-title function_ invoke__">where</span>((e) =&gt;<br>                              e.url == <span class="hljs-literal">null</span>).isEmpty;<br>                              <span class="hljs-comment">// debugPrint(&quot;isAllFinsied: $&#123;isAllFinsied&#125;&quot;);</span><br>                              <span class="hljs-keyword">if</span> (isAllFinished) &#123;<br>                                <span class="hljs-keyword">final</span> urls = items.<span class="hljs-title function_ invoke__">map</span>((e) =&gt; e.url).<span class="hljs-title function_ invoke__">toList</span>();<br>                                <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;isAllFinsied urls: $&#123;urls&#125;&quot;</span>);<br>                                widget.<span class="hljs-title function_ invoke__">onChanged</span>(items);<br>                              &#125;<br>                            &#125;,<br>                            onDelete: canEdit == <span class="hljs-literal">false</span> ? <span class="hljs-literal">null</span> : ()&#123;<br>                              <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;onDelete: <span class="hljs-subst">$index</span>, lenth: $&#123;items[index].file?.path&#125;&quot;</span>);<br>                              items.<span class="hljs-title function_ invoke__">remove</span>(e);<br>                              <span class="hljs-title function_ invoke__">setState</span>(() &#123;&#125;);<br>                              widget.<span class="hljs-title function_ invoke__">onChanged</span>(items);<br>                            &#125;,<br>                            showFileSize: widget.showFileSize,<br>                          ),<br>                        ),<br>                      ),<br>                    ),<br>                  ],<br>                ),<br>              );<br>            &#125;).<span class="hljs-title function_ invoke__">toList</span>(),<br>            <span class="hljs-keyword">if</span> (items.length &lt; maxCount &amp;&amp; canEdit)<br>              <span class="hljs-title function_ invoke__">InkWell</span>(<br>                <span class="hljs-attr">onTap</span>: () &#123;<br>                  <span class="hljs-title function_ invoke__">onPicker</span>(<span class="hljs-attr">maxCount</span>: maxCount);<br>                &#125;,<br>                child: <span class="hljs-title function_ invoke__">Container</span>(<br>                  <span class="hljs-attr">margin</span>: EdgeInsets.<span class="hljs-title function_ invoke__">only</span>(<span class="hljs-attr">top</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">10</span>),<br>                  <span class="hljs-attr">width</span>: itemWidth - <span class="hljs-number">10</span>,<br>                  <span class="hljs-attr">height</span>: itemWidth - <span class="hljs-number">10</span>,<br>                  <span class="hljs-attr">decoration</span>: <span class="hljs-title function_ invoke__">BoxDecoration</span>(<br>                    <span class="hljs-attr">color</span>: Colors.black.<span class="hljs-title function_ invoke__">withOpacity</span>(<span class="hljs-number">0.1</span>),<br>                    // <span class="hljs-attr">border</span>: Border.<span class="hljs-title function_ invoke__">all</span>(<span class="hljs-attr">width</span>: <span class="hljs-number">1</span>),<br>                    <span class="hljs-attr">borderRadius</span>: BorderRadius.<span class="hljs-title function_ invoke__">all</span>(Radius.<span class="hljs-title function_ invoke__">circular</span>(<span class="hljs-number">4</span>)),<br>                  ),<br>                  // <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Icon</span>(Icons.camera_alt, <span class="hljs-attr">color</span>: Colors.black12,),<br>                  <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Center</span>(<br>                    <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Image</span>(<br>                      <span class="hljs-attr">image</span>: <span class="hljs-title function_ invoke__">AssetImage</span>(<span class="hljs-string">&quot;assets/images/icon_camera.png&quot;</span>),<br>                      <span class="hljs-attr">width</span>: <span class="hljs-number">24</span>.w,<br>                      <span class="hljs-attr">height</span>: <span class="hljs-number">24</span>.w,<br>                    ),<br>                  ),<br>                ),<br>              )<br>          ]<br>        );<br>      &#125;<br>    );<br>  &#125;<br><br>  <span class="hljs-title function_ invoke__">onPicker</span>(&#123;<br>    <span class="hljs-keyword">int</span> maxCount = <span class="hljs-number">4</span>,<br>    // required <span class="hljs-title function_ invoke__">Function</span>(<span class="hljs-keyword">int</span> length, String result) cb,<br>  &#125;) async &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">final</span> tmpUrls = selectedModels.<span class="hljs-title function_ invoke__">map</span>((e) =&gt; e.url).<span class="hljs-title function_ invoke__">where</span>((e) =&gt; e != <span class="hljs-literal">null</span>).<span class="hljs-title function_ invoke__">toList</span>();<br>      <span class="hljs-keyword">final</span> tmpEntitys = selectedModels.<span class="hljs-title function_ invoke__">map</span>((e) =&gt; e.entity).<span class="hljs-title function_ invoke__">where</span>((e) =&gt; e != <span class="hljs-literal">null</span>).<span class="hljs-title function_ invoke__">toList</span>();<br>      <span class="hljs-keyword">final</span> selectedEntitys = List&lt;AssetEntity&gt;.<span class="hljs-keyword">from</span>(tmpEntitys);<br><br>      <span class="hljs-keyword">final</span> result = await AssetPicker.<span class="hljs-title function_ invoke__">pickAssets</span>(<br>        context,<br>        <span class="hljs-attr">pickerConfig</span>: <span class="hljs-title function_ invoke__">AssetPickerConfig</span>(<br>          <span class="hljs-attr">requestType</span>: RequestType.image,<br>          <span class="hljs-attr">specialPickerType</span>: SpecialPickerType.noPreview,<br>          <span class="hljs-attr">selectedAssets</span>: selectedEntitys,<br>          <span class="hljs-attr">maxAssets</span>: maxCount - tmpUrls.length,<br>          <span class="hljs-attr">specialItemPosition</span>: SpecialItemPosition.prepend,<br>          <span class="hljs-attr">specialItemBuilder</span>: (context, AssetPathEntity? path, <span class="hljs-keyword">int</span> length,) &#123;<br>            <span class="hljs-keyword">if</span> (path?.isAll != <span class="hljs-literal">true</span>) &#123;<br>              <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (!widget.canCameraTakePhoto) &#123;<br>              <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            &#125;<br><br>            <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">textDelegate</span> = <span class="hljs-title function_ invoke__">AssetPickerTextDelegate</span>();<br>            <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Semantics</span>(<br>              <span class="hljs-attr">label</span>: textDelegate.sActionUseCameraHint,<br>              <span class="hljs-attr">button</span>: <span class="hljs-literal">true</span>,<br>              <span class="hljs-attr">onTapHint</span>: textDelegate.sActionUseCameraHint,<br>              <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">GestureDetector</span>(<br>                <span class="hljs-attr">behavior</span>: HitTestBehavior.opaque,<br>                <span class="hljs-attr">onTap</span>: () async &#123;<br>                  Feedback.<span class="hljs-title function_ invoke__">forTap</span>(context);<br>                  <span class="hljs-keyword">final</span> takePhoto = await CameraPicker.<span class="hljs-title function_ invoke__">pickFromCamera</span>(<br>                    context,<br>                    <span class="hljs-attr">pickerConfig</span>: <span class="hljs-keyword">const</span> <span class="hljs-title function_ invoke__">CameraPickerConfig</span>(<span class="hljs-attr">enableRecording</span>: <span class="hljs-literal">true</span>),<br>                  );<br>                  <span class="hljs-keyword">if</span> (takePhoto != <span class="hljs-literal">null</span>) &#123;<br>                    selectedModels.<span class="hljs-title function_ invoke__">add</span>(<span class="hljs-title function_ invoke__">AssetUploadModel</span>(<span class="hljs-attr">entity</span>: takePhoto));<br>                    <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;selectedEntitys:$&#123;selectedEntitys.length&#125; $&#123;selectedModels.length&#125;&quot;</span>);<br>                    <span class="hljs-title function_ invoke__">setState</span>(() &#123;&#125;);<br>                  &#125;<br>                &#125;,<br>                child: <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">Center</span>(<br>                  child: <span class="hljs-title function_ invoke__">Icon</span>(Icons.camera_enhance, <span class="hljs-attr">size</span>: <span class="hljs-number">42.0</span>),<br>                ),<br>              ),<br>            );<br>          &#125;,<br>        ),<br>      ) ?? [];<br><br>      <span class="hljs-comment">// BrunoUtil.showLoading(&quot;图片处理中...&quot;);</span><br>      <span class="hljs-keyword">final</span> same = result.<span class="hljs-title function_ invoke__">map</span>((e) =&gt; e.id).<span class="hljs-title function_ invoke__">join</span>() == selectedEntitys.<span class="hljs-title function_ invoke__">map</span>((e) =&gt; e.id).<span class="hljs-title function_ invoke__">join</span>();<br>      <span class="hljs-keyword">if</span> (result.isEmpty || same) &#123;<br>        <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;没有添加新图片&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>      &#125;<br><br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">final</span> e in result) &#123;<br>        <span class="hljs-keyword">if</span> (!selectedEntitys.<span class="hljs-title function_ invoke__">contains</span>(e)) &#123;<br>          selectedModels.<span class="hljs-title function_ invoke__">add</span>(<span class="hljs-title function_ invoke__">AssetUploadModel</span>(<span class="hljs-attr">entity</span>: e));<br>        &#125;<br>      &#125;<br>      <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;selectedEntitys:$&#123;selectedEntitys.length&#125; $&#123;selectedModels.length&#125;&quot;</span>);<br>      <span class="hljs-title function_ invoke__">setState</span>(() &#123;&#125;);<br>    &#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>      <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;err:<span class="hljs-subst">$err</span>&quot;</span>);<br>      <span class="hljs-comment">// BrunoUtil.showToast(&#x27;$err&#x27;);</span><br>      <span class="hljs-title function_ invoke__">showToast</span>(<span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;$err&#x27;</span>);<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-title function_ invoke__">showToast</span>(&#123;required String message&#125;) &#123;<br>    <span class="hljs-title function_ invoke__">Text</span>(message).<span class="hljs-title function_ invoke__">toShowCupertinoDialog</span>(<span class="hljs-attr">context</span>: context);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2、AssetUploadButton-源码，单个图片组件"><a href="#2、AssetUploadButton-源码，单个图片组件" class="headerlink" title="2、AssetUploadButton 源码，单个图片组件"></a>2、AssetUploadButton 源码，单个图片组件</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br></pre></td><td class="code"><pre><code class="hljs php">import <span class="hljs-string">&#x27;dart:io&#x27;</span>;<br><br>import <span class="hljs-string">&#x27;package:dio/dio.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_screenutil/flutter_screenutil.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/n_network_image.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/n_text.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/upload/asset_upload_config.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/basicWidget/upload/image_service.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/extension/num_ext.dart&#x27;</span>;<br>import <span class="hljs-string">&#x27;package:flutter_templet_project/extension/string_ext.dart&#x27;</span>;<br><br><br><span class="hljs-comment">/// 上传图片单元(基于 wechat_assets_picker)</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AssetUploadButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span> </span>&#123;<br><br>  <span class="hljs-title function_ invoke__">AssetUploadButton</span>(&#123;<br>    Key? key,<br>    required this.model,<br>    this.urlBlock,<br>    this.onDelete,<br>    this.radius = <span class="hljs-number">8</span>,<br>    this.imgBuilder,<br>    this.urlConvert,<br>    // this.isFinished = <span class="hljs-literal">false</span>,<br>    this.showFileSize = <span class="hljs-literal">false</span>,<br>  &#125;) : <span class="hljs-title function_ invoke__">super</span>(<span class="hljs-attr">key</span>: key);<br><br>  <span class="hljs-keyword">final</span> AssetUploadModel model;<br><br>  <span class="hljs-comment">/// 上传成功获取 url 回调</span><br>  <span class="hljs-keyword">final</span> ValueChanged&lt;String&gt;? urlBlock;<br>  <span class="hljs-comment">/// 返回删除元素的 id</span><br>  <span class="hljs-keyword">final</span> VoidCallback? onDelete;<br>  <span class="hljs-comment">/// 圆角 默认8</span><br>  <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> radius;<br><br>  <span class="hljs-comment">/// 网络图片url转为组件</span><br>  Widget <span class="hljs-title function_ invoke__">Function</span>(String url)? imgBuilder;<br><br>  <span class="hljs-comment">/// 上传网络返回值转为 url</span><br>  String <span class="hljs-title function_ invoke__">Function</span>(Map&lt;String, dynamic&gt; res)? urlConvert;<br><br>  <span class="hljs-comment">/// 显示文件大小</span><br>  <span class="hljs-keyword">final</span> <span class="hljs-keyword">bool</span> showFileSize;<br><br>  <span class="hljs-comment">// bool isFinished;</span><br><br>  @override<br>  _AssetUploadButtonState <span class="hljs-title function_ invoke__">createState</span>() =&gt; <span class="hljs-title function_ invoke__">_AssetUploadButtonState</span>();<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_AssetUploadButtonState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">AssetUploadButton</span>&gt; <span class="hljs-title">with</span> <span class="hljs-title">AutomaticKeepAliveClientMixin</span> </span>&#123;<br>  <span class="hljs-comment">/// 防止触发多次上传动作</span><br>  <span class="hljs-keyword">var</span> _isLoading = <span class="hljs-literal">false</span>;<br>  <span class="hljs-comment">/// 请求成功或失败</span><br>  <span class="hljs-keyword">final</span> _successVN = <span class="hljs-title function_ invoke__">ValueNotifier</span>(<span class="hljs-literal">true</span>);<br>  <span class="hljs-comment">/// 上传进度</span><br>  <span class="hljs-keyword">final</span> _percentVN = <span class="hljs-title function_ invoke__">ValueNotifier</span>(<span class="hljs-number">0.0</span>);<br><br><br>  @override<br>  <span class="hljs-keyword">void</span> <span class="hljs-title function_ invoke__">initState</span>() &#123;<br>    super.<span class="hljs-title function_ invoke__">initState</span>();<br><br>    <span class="hljs-title function_ invoke__">onRefresh</span>();<br>  &#125;<br><br>  @override<br>  <span class="hljs-keyword">void</span> <span class="hljs-title function_ invoke__">didUpdateWidget</span>(covariant AssetUploadButton oldWidget) &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement didUpdateWidget</span><br>    super.<span class="hljs-title function_ invoke__">didUpdateWidget</span>(oldWidget);<br>    <span class="hljs-keyword">if</span> (widget.model.entity?.id == oldWidget.model.entity?.id) &#123;<br>      <span class="hljs-comment">// BrunoUtil.showInfoToast(&quot;path相同&quot;);</span><br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">// onRefresh();</span><br>  &#125;<br><br>  @override<br>  Widget <span class="hljs-title function_ invoke__">build</span>(BuildContext context) &#123;<br>    super.<span class="hljs-title function_ invoke__">build</span>(context);<br><br>    Widget img = <span class="hljs-title function_ invoke__">Image</span>(<span class="hljs-attr">image</span>: <span class="hljs-string">&quot;img_placehorder.png&quot;</span>.<span class="hljs-title function_ invoke__">toAssetImage</span>());<br>    <span class="hljs-keyword">if</span> (widget.model.url?.<span class="hljs-title function_ invoke__">startsWith</span>(<span class="hljs-string">&quot;http&quot;</span>) == <span class="hljs-literal">true</span>) &#123;<br>      <span class="hljs-keyword">final</span> imgUrl = widget.model.url ?? <span class="hljs-string">&quot;&quot;</span>;<br>      img = widget.imgBuilder?.<span class="hljs-title function_ invoke__">call</span>(imgUrl) ?? <span class="hljs-title function_ invoke__">NNetworkImage</span>(<span class="hljs-attr">url</span>: imgUrl);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (widget.model.file != <span class="hljs-literal">null</span>) &#123;<br>      img = Image.<span class="hljs-title function_ invoke__">file</span>(<br>        <span class="hljs-title function_ invoke__">File</span>(widget.model.file?.path ?? <span class="hljs-string">&quot;&quot;</span>),<br>        <span class="hljs-attr">fit</span>: BoxFit.cover,<br>      );<br>    &#125;<br><br>    <span class="hljs-keyword">var</span> imgChild = <span class="hljs-title function_ invoke__">ClipRRect</span>(<br>      <span class="hljs-attr">borderRadius</span>: BorderRadius.<span class="hljs-title function_ invoke__">all</span>(Radius.<span class="hljs-title function_ invoke__">circular</span>(widget.radius)),<br>      <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Padding</span>(<br>        <span class="hljs-attr">padding</span>: EdgeInsets.<span class="hljs-title function_ invoke__">only</span>(<span class="hljs-attr">top</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">0</span>),<br>        <span class="hljs-attr">child</span>: img,<br>      ),<br>    );<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Stack</span>(<br>      <span class="hljs-attr">fit</span>: StackFit.expand,<br>      <span class="hljs-attr">children</span>: [<br>        <span class="hljs-title function_ invoke__">Padding</span>(<br>          <span class="hljs-attr">padding</span>: EdgeInsets.<span class="hljs-title function_ invoke__">only</span>(<span class="hljs-attr">top</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">10</span>),<br>          <span class="hljs-attr">child</span>: imgChild,<br>        )<br>            // .<span class="hljs-title function_ invoke__">toColoredBox</span>()<br>        ,<br>        <span class="hljs-keyword">if</span>(widget.model.url == <span class="hljs-literal">null</span> || widget.model.url == <span class="hljs-string">&quot;&quot;</span>)<span class="hljs-title function_ invoke__">Positioned</span>(<br>          <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">right</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">bottom</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">left</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">buildUploading</span>(),<br>        ),<br>        <span class="hljs-keyword">if</span> (widget.showFileSize) <span class="hljs-title function_ invoke__">Positioned</span>(<br>          <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">right</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">bottom</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">left</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">buildFileSizeInfo</span>(<span class="hljs-attr">length</span>: widget.model.file?.<span class="hljs-title function_ invoke__">lengthSync</span>(),),<br>        ),<br>        <span class="hljs-title function_ invoke__">Positioned</span>(<br>          <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">right</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">buildDelete</span>(),<br>        ),<br>      ],<br>    );<br>  &#125;<br><br>  <span class="hljs-comment">/// 右上角删除按钮</span><br>  Widget <span class="hljs-title function_ invoke__">buildDelete</span>() &#123;<br>    <span class="hljs-keyword">if</span> (widget.onDelete == <span class="hljs-literal">null</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">SizedBox</span>();<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Container</span>(<br>      <span class="hljs-attr">decoration</span>: <span class="hljs-keyword">const</span> <span class="hljs-title function_ invoke__">BoxDecoration</span>(<br>        <span class="hljs-attr">color</span>: Colors.white,<br>        <span class="hljs-attr">shape</span>: BoxShape.circle,<br>      ),<br>      <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">IconButton</span>(<br>        <span class="hljs-attr">padding</span>: EdgeInsets.zero,<br>        <span class="hljs-attr">constraints</span>: <span class="hljs-title function_ invoke__">BoxConstraints</span>(),<br>        <span class="hljs-attr">onPressed</span>: widget.onDelete,<br>        <span class="hljs-attr">icon</span>: <span class="hljs-keyword">const</span> <span class="hljs-title function_ invoke__">Icon</span>(Icons.cancel, <span class="hljs-attr">color</span>: Colors.red,),<br>      ),<br>    );<br>  &#125;<br><br>  Widget <span class="hljs-title function_ invoke__">buildUploading</span>() &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">AnimatedBuilder</span>(<br>      <span class="hljs-attr">animation</span>: Listenable.<span class="hljs-title function_ invoke__">merge</span>([<br>        _successVN,<br>        _percentVN,<br>      ]),<br>      <span class="hljs-attr">builder</span>: (context, child) &#123;<br>        <span class="hljs-keyword">if</span> (_successVN.value == <span class="hljs-literal">false</span>) &#123;<br>          <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">buildUploadFail</span>();<br>        &#125;<br>        <span class="hljs-keyword">final</span> value = _percentVN.value;<br>        <span class="hljs-keyword">if</span> (value &gt;= <span class="hljs-number">1</span>) &#123;<br>          <span class="hljs-keyword">return</span> <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SizedBox</span>();<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Container</span>(<br>          <span class="hljs-attr">alignment</span>: Alignment.center,<br>          <span class="hljs-attr">margin</span>: <span class="hljs-keyword">const</span> EdgeInsets.<span class="hljs-title function_ invoke__">only</span>(<span class="hljs-attr">top</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">10</span>),<br>          <span class="hljs-attr">decoration</span>: <span class="hljs-title function_ invoke__">BoxDecoration</span>(<br>            <span class="hljs-attr">color</span>: Colors.black45,<br>            <span class="hljs-attr">borderRadius</span>: BorderRadius.<span class="hljs-title function_ invoke__">all</span>(Radius.<span class="hljs-title function_ invoke__">circular</span>(widget.radius)),<br>          ),<br>          <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Column</span>(<br>            <span class="hljs-attr">mainAxisSize</span>: MainAxisSize.min,<br>            <span class="hljs-attr">children</span>: [<br>              // <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0</span>)<span class="hljs-title function_ invoke__">NText</span>(<br>              //   <span class="hljs-attr">data</span>: <span class="hljs-string">&quot;处理中&quot;</span>,<br>              //   <span class="hljs-attr">fontSize</span>: <span class="hljs-number">14</span>,<br>              //   <span class="hljs-attr">color</span>: Colors.white,<br>              // ),<br>              <span class="hljs-keyword">if</span>(widget.model.file != <span class="hljs-literal">null</span> &amp;&amp; (widget.model.file!.<span class="hljs-title function_ invoke__">lengthSync</span>() &gt; <span class="hljs-number">2</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>) == <span class="hljs-literal">true</span>)<span class="hljs-title function_ invoke__">NText</span>(<br>                <span class="hljs-attr">data</span>: value.<span class="hljs-title function_ invoke__">toStringAsPercent</span>(<span class="hljs-number">2</span>),<br>                <span class="hljs-attr">fontSize</span>: <span class="hljs-number">12</span>.sp,<br>                <span class="hljs-attr">color</span>: Colors.white,<br>              ),<br>              <span class="hljs-title function_ invoke__">NText</span>(<br>                <span class="hljs-attr">data</span>: <span class="hljs-string">&quot;上传中&quot;</span>,<br>                <span class="hljs-attr">fontSize</span>: <span class="hljs-number">12</span>.sp,<br>                <span class="hljs-attr">color</span>: Colors.white,<br>              ),<br>            ],<br>          ),<br>        );<br>      &#125;<br>    );<br>  &#125;<br><br>  Widget <span class="hljs-title function_ invoke__">buildUploadFail</span>() &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Stack</span>(<br>      <span class="hljs-attr">children</span>: [<br>        <span class="hljs-title function_ invoke__">InkWell</span>(<br>          <span class="hljs-attr">onTap</span>: ()&#123;<br>            <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;onTap&quot;</span>);<br>            <span class="hljs-title function_ invoke__">onRefresh</span>();<br>          &#125;,<br>          <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Container</span>(<br>            <span class="hljs-attr">alignment</span>: Alignment.center,<br>            <span class="hljs-attr">margin</span>: EdgeInsets.<span class="hljs-title function_ invoke__">only</span>(<span class="hljs-attr">top</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">10</span>),<br>            <span class="hljs-attr">decoration</span>: <span class="hljs-title function_ invoke__">BoxDecoration</span>(<br>              <span class="hljs-attr">color</span>: Colors.black45,<br>              <span class="hljs-attr">borderRadius</span>: BorderRadius.<span class="hljs-title function_ invoke__">all</span>(Radius.<span class="hljs-title function_ invoke__">circular</span>(widget.radius)),<br>            ),<br>            <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Column</span>(<br>              <span class="hljs-attr">mainAxisSize</span>: MainAxisSize.min,<br>              <span class="hljs-attr">children</span>: [<br>                <span class="hljs-title function_ invoke__">Icon</span>(Icons.refresh, <span class="hljs-attr">color</span>: Colors.red),<br>                <span class="hljs-title function_ invoke__">NText</span>(<br>                  <span class="hljs-attr">data</span>: <span class="hljs-string">&quot;点击重试&quot;</span>,<br>                  <span class="hljs-attr">fontSize</span>: <span class="hljs-number">14</span>,<br>                  <span class="hljs-attr">color</span>: Colors.white,<br>                ),<br>              ],<br>            ),<br>          ),<br>        ),<br>        <span class="hljs-title function_ invoke__">Positioned</span>(<br>          <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">right</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">buildDelete</span>(),<br>        ),<br>      ],<br>    );<br>  &#125;<br><br>  Future&lt;String<span class="hljs-meta">?&gt;</span> <span class="hljs-title function_ invoke__">uploadFile</span>(&#123;<br>    required String filePath,<br>    ProgressCallback? onSendProgress,<br>    ProgressCallback? onReceiveProgress,<br>    String <span class="hljs-title function_ invoke__">Function</span>(Map&lt;String, dynamic&gt; res)? urlConvert,<br>  &#125;) async &#123;<br>    <span class="hljs-keyword">final</span> url = AssetUploadConfig.uploadUrl;<br>    <span class="hljs-title function_ invoke__">assert</span>(url.<span class="hljs-title function_ invoke__">startsWith</span>(<span class="hljs-string">&quot;http&quot;</span>), <span class="hljs-string">&quot;请设置上传地址&quot;</span>);<br><br>    <span class="hljs-keyword">final</span> formData = FormData.<span class="hljs-title function_ invoke__">fromMap</span>(&#123;<br>      <span class="hljs-string">&#x27;files&#x27;</span>: await MultipartFile.<span class="hljs-title function_ invoke__">fromFile</span>(filePath),<br>    &#125;);<br>    <span class="hljs-keyword">final</span> response = await <span class="hljs-title function_ invoke__">Dio</span>().post&lt;Map&lt;String, dynamic&gt;&gt;(<br>      url,<br>      data: formData,<br>      onSendProgress: onSendProgress,<br>      onReceiveProgress: onReceiveProgress,<br>    );<br>    <span class="hljs-keyword">final</span> res = response.data ?? &#123;&#125;;<br>    <span class="hljs-keyword">final</span> result = urlConvert?.<span class="hljs-title function_ invoke__">call</span>(res) ?? res[<span class="hljs-string">&#x27;result&#x27;</span>];<br>    <span class="hljs-keyword">return</span> result;<br>  &#125;<br>  <br>  <span class="hljs-title function_ invoke__">onRefresh</span>() &#123;<br>    <span class="hljs-comment">// debugPrint(&quot;onRefresh $&#123;widget.entity&#125;&quot;);</span><br>    <span class="hljs-keyword">final</span> entityFile = widget.model.entity?.file;<br>    <span class="hljs-keyword">if</span> (entityFile == <span class="hljs-literal">null</span>) &#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (_isLoading) &#123;<br>      <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;_isLoading: <span class="hljs-subst">$_isLoading</span> $&#123;widget.model.entity&#125;&quot;</span>);<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    _isLoading = <span class="hljs-literal">true</span>;<br>    _successVN.value = <span class="hljs-literal">true</span>;<br><br>    entityFile.<span class="hljs-title function_ invoke__">then</span>((file) &#123;<br>      <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">&quot;文件为空&quot;</span>;<br>      &#125;<br>      <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">ImageService</span>().<span class="hljs-title function_ invoke__">compressAndGetFile</span>(file);<br>    &#125;).<span class="hljs-title function_ invoke__">then</span>((file) &#123;<br>      <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">&quot;文件为空&quot;</span>;<br>      &#125;<br>      widget.model.file = file;<br>      <span class="hljs-title function_ invoke__">setState</span>(() &#123;&#125;);<br><br>      <span class="hljs-keyword">final</span> path = widget.model.file?.path;<br>      <span class="hljs-keyword">if</span> (path == <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">&quot;文件路径为空&quot;</span>;<br>      &#125;<br>      <span class="hljs-comment">// return &quot;&quot;;//调试代码,勿删!!!</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">uploadFile</span>(<br>        <span class="hljs-attr">filePath</span>: path,<br>        <span class="hljs-attr">onSendProgress</span>: (<span class="hljs-keyword">int</span> count, <span class="hljs-keyword">int</span> total)&#123;<br>          _percentVN.value = (count/total);<br>          <span class="hljs-comment">// debugPrint(&quot;$&#123;count&#125;/$&#123;total&#125;_$&#123;_percentVN.value&#125;_$&#123;_percentVN.value.toStringAsPercent(2)&#125;&quot;);</span><br>        &#125;,<br>        urlConvert: widget.urlConvert,<br>      );<br>    &#125;).<span class="hljs-title function_ invoke__">then</span>((value) &#123;<br>      <span class="hljs-keyword">final</span> url = value;<br>      <span class="hljs-keyword">if</span> (url == <span class="hljs-literal">null</span> || url.isEmpty) &#123;<br>        _successVN.value = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">&quot;上传失败 $&#123;widget.model.file?.path&#125;&quot;</span>;<br>      &#125;<br>      _successVN.value = <span class="hljs-literal">true</span>;<br>      widget.model.url = url;<br>    &#125;).<span class="hljs-title function_ invoke__">catchError</span>((err)&#123;<br>      <span class="hljs-title function_ invoke__">debugPrint</span>(<span class="hljs-string">&quot;err: <span class="hljs-subst">$err</span>&quot;</span>);<br>      widget.model.url = <span class="hljs-string">&quot;&quot;</span>;<br>      _successVN.value = <span class="hljs-literal">false</span>;<br>    &#125;).<span class="hljs-title function_ invoke__">whenComplete</span>(() &#123;<br>      _isLoading = <span class="hljs-literal">false</span>;<br>      widget.urlBlock?.<span class="hljs-title function_ invoke__">call</span>(widget.model.url ?? <span class="hljs-string">&quot;&quot;</span>);<br>    &#125;);<br>  &#125;<br><br>  Widget <span class="hljs-title function_ invoke__">buildFileSizeInfo</span>(&#123;required <span class="hljs-keyword">int</span>? length&#125;) &#123;<br>    <span class="hljs-keyword">if</span> (length == <span class="hljs-literal">null</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">SizedBox</span>();<br>    &#125;<br>    <span class="hljs-keyword">final</span> result = length/(<span class="hljs-number">1024</span> *<span class="hljs-number">1024</span>);<br>    <span class="hljs-keyword">final</span> desc = <span class="hljs-string">&quot;$&#123;result.toStringAsFixed(2)&#125;MB&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">Align</span>(<br>      <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Container</span>(<br>        <span class="hljs-attr">color</span>: Colors.red,<br>        <span class="hljs-attr">child</span>: <span class="hljs-title function_ invoke__">Text</span>(desc)<br>      )<br>    );<br>  &#125;<br><br>  <br>  @override<br>  <span class="hljs-keyword">bool</span> get wantKeepAlive =&gt; <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3、ImageService-源码，图片处理工具类"><a href="#3、ImageService-源码，图片处理工具类" class="headerlink" title="3、ImageService 源码，图片处理工具类"></a>3、ImageService 源码，图片处理工具类</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;dart:io&#x27;</span>;<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/cupertino.dart&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter_image_compress/flutter_image_compress.dart&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter_templet_project/cache/cache_asset_service.dart&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter_templet_project/extension/num_ext.dart&#x27;</span>;<br><br><br><br><span class="hljs-comment">/// <span class="language-markdown">图片处理工具类</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ImageService</span></span>&#123;<br><br>  <span class="hljs-comment">/// <span class="language-markdown">图片压缩</span></span><br>   Future&lt;File?&gt; compressAndGetFile(File file, [<span class="hljs-built_in">String?</span> targetPath]) <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">var</span> fileName = file.absolute.path.split(<span class="hljs-string">&#x27;/&#x27;</span>).last;<br><br>      <span class="hljs-comment">// Directory tempDir = await getTemporaryDirectory();</span><br>      <span class="hljs-comment">// Directory assetDir = Directory(&#x27;$&#123;tempDir.path&#125;/asset&#x27;);</span><br>      <span class="hljs-comment">// if (!assetDir.existsSync()) &#123;</span><br>      <span class="hljs-comment">//   assetDir.createSync();</span><br>      <span class="hljs-comment">//   debugPrint(&#x27;assetDir 文件保存路径为 $&#123;assetDir.path&#125;&#x27;);</span><br>      <span class="hljs-comment">// &#125;</span><br><br>      Directory? assetDir = <span class="hljs-keyword">await</span> CacheAssetService().getDir();<br>      <span class="hljs-keyword">var</span> tmpPath = <span class="hljs-string">&#x27;<span class="hljs-subst">$&#123;assetDir.path&#125;</span>/<span class="hljs-subst">$fileName</span>&#x27;</span>;<br>      targetPath ??= tmpPath;<br>      <span class="hljs-comment">// debugPrint(&#x27;fileName_$&#123;fileName&#125;&#x27;);</span><br>      <span class="hljs-comment">// debugPrint(&#x27;assetDir_$&#123;assetDir&#125;&#x27;);</span><br>      <span class="hljs-comment">// debugPrint(&#x27;targetPath_$&#123;targetPath&#125;&#x27;);</span><br><br>      <span class="hljs-keyword">final</span> compressQuality = file.lengthSync().compressQuality;<br><br>      <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> FlutterImageCompress.compressAndGetFile(<br>        file.absolute.path, targetPath,<br>        quality: compressQuality,<br>        rotate: <span class="hljs-number">0</span>,<br>      );<br>      <span class="hljs-keyword">final</span> path = result?.path;<br>      <span class="hljs-keyword">if</span> (result == <span class="hljs-keyword">null</span> || path == <span class="hljs-keyword">null</span> || path.isEmpty) &#123;<br>        debugPrint(<span class="hljs-string">&quot;压缩文件路径获取失败&quot;</span>);<br>        <span class="hljs-keyword">return</span> file;<br>      &#125;<br>      <span class="hljs-keyword">final</span> lenth = <span class="hljs-keyword">await</span> result.length();<br><br>      <span class="hljs-keyword">final</span> infos = [<br>        <span class="hljs-string">&quot;图片名称: <span class="hljs-subst">$fileName</span>&quot;</span>,<br>        <span class="hljs-string">&quot;压缩前: <span class="hljs-subst">$&#123;file.lengthSync().fileSize&#125;</span>&quot;</span>,<br>        <span class="hljs-string">&quot;压缩质量: <span class="hljs-subst">$compressQuality</span>&quot;</span>,<br>        <span class="hljs-string">&quot;压缩后: <span class="hljs-subst">$&#123;lenth.fileSize&#125;</span>&quot;</span>,<br>        <span class="hljs-string">&quot;原路径: <span class="hljs-subst">$&#123;file.absolute.path&#125;</span>&quot;</span>,<br>        <span class="hljs-string">&quot;压缩路径: <span class="hljs-subst">$targetPath</span>&quot;</span>,<br>      ];<br>      debugPrint(<span class="hljs-string">&quot;图片压缩: <span class="hljs-subst">$&#123;infos.join(<span class="hljs-string">&quot;\n&quot;</span>)&#125;</span>&quot;</span>);<br><br>      <span class="hljs-keyword">return</span> File(path);<br>    &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br>      debugPrint(<span class="hljs-string">&quot;compressAndGetFile:<span class="hljs-subst">$&#123;e.toString()&#125;</span>&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br><br>  <span class="hljs-comment">/// <span class="language-markdown">图片压缩</span></span><br>  Future&lt;<span class="hljs-built_in">String</span>&gt; compressAndGetFilePath(<span class="hljs-built_in">String</span> imagePath, [<span class="hljs-built_in">String?</span> targetPath,]) <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">final</span> file = File(imagePath);<br>      <span class="hljs-keyword">final</span> fileNew = <span class="hljs-keyword">await</span> compressAndGetFile(file, targetPath);<br>      <span class="hljs-keyword">final</span> result = fileNew?.path ?? imagePath;<br>      <span class="hljs-keyword">return</span> result;<br>    &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br>      debugPrint(<span class="hljs-string">&quot;compressAndGetFilePath:<span class="hljs-subst">$&#123;e.toString()&#125;</span>&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> imagePath;<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、CacheAssetService-源码，媒体缓存工具类"><a href="#4、CacheAssetService-源码，媒体缓存工具类" class="headerlink" title="4、CacheAssetService 源码，媒体缓存工具类"></a>4、CacheAssetService 源码，媒体缓存工具类</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;dart:async&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;dart:io&#x27;</span>;<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/foundation.dart&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:path_provider/path_provider.dart&#x27;</span>;<br><br><span class="hljs-comment">///<span class="language-markdown">缓存媒体文件</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CacheAssetService</span> </span>&#123;<br>  CacheAssetService._();<br><br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> CacheAssetService _instance = CacheAssetService._();<br><br>  <span class="hljs-keyword">factory</span> CacheAssetService() =&gt; _instance;<br><br><br>  Directory? _dir;<br><br>  Future&lt;Directory&gt; getDir() <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">if</span> (_dir != <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-keyword">return</span> _dir!;<br>    &#125;<br>    Directory tempDir = <span class="hljs-keyword">await</span> getTemporaryDirectory();<br>    Directory targetDir = Directory(<span class="hljs-string">&#x27;<span class="hljs-subst">$&#123;tempDir.path&#125;</span>/asset&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (!targetDir.existsSync()) &#123;<br>      targetDir.createSync();<br>      debugPrint(<span class="hljs-string">&#x27;targetDir 路径为 <span class="hljs-subst">$&#123;targetDir.path&#125;</span>&#x27;</span>);<br>    &#125;<br>    _dir = targetDir;<br>    <span class="hljs-keyword">return</span> targetDir;<br>  &#125;<br><br>  <span class="hljs-comment">/// <span class="language-markdown">清除缓存文件</span></span><br>  Future&lt;<span class="hljs-keyword">void</span>&gt; clearDirCache() <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">final</span> dir = <span class="hljs-keyword">await</span> getDir();<br>    <span class="hljs-keyword">await</span> deleteDirectory(dir);<br>  &#125;<br><br>  <span class="hljs-comment">/// <span class="language-markdown">递归方式删除目录</span></span><br>  Future&lt;<span class="hljs-keyword">void</span>&gt; deleteDirectory(FileSystemEntity? file) <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">if</span> (file == <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (file <span class="hljs-keyword">is</span> Directory) &#123;<br>      <span class="hljs-keyword">final</span> <span class="hljs-built_in">List</span>&lt;FileSystemEntity&gt; children = file.listSync();<br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">final</span> FileSystemEntity child <span class="hljs-keyword">in</span> children) &#123;<br>        <span class="hljs-keyword">await</span> deleteDirectory(child);<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">await</span> file.delete();<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h5 id="1、为了效果和微信保持一致；图片选择库用的是-wechat-assets-picker，但是该组件获取的-AssetEntity-模型的-file-是异步方法"><a href="#1、为了效果和微信保持一致；图片选择库用的是-wechat-assets-picker，但是该组件获取的-AssetEntity-模型的-file-是异步方法" class="headerlink" title="1、为了效果和微信保持一致；图片选择库用的是 wechat_assets_picker，但是该组件获取的 AssetEntity 模型的 file 是异步方法"></a>1、为了效果和微信保持一致；图片选择库用的是 wechat_assets_picker，但是该组件获取的 AssetEntity 模型的 file 是异步方法</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future&lt;File?&gt; <span class="hljs-keyword">get</span> file =&gt; _getFile();<br></code></pre></td></tr></table></figure>
+
+<p>只能将其下沉到 AssetUploadButton 中进行请求，否则 file 获取时间时间会比较漫长，非常影响用户体验。上传之前的灰色显示时间就是获取 file 时间。</p>
+<h5 id="2、AssetEntity-的-file-有时会比原始图片大很多（用iPhone14模拟器测试，一张-11-m的图片，file-是-37M，originFile-是-11M）-问过-wechat-assets-picker-库作者-alex，以实际获为准；"><a href="#2、AssetEntity-的-file-有时会比原始图片大很多（用iPhone14模拟器测试，一张-11-m的图片，file-是-37M，originFile-是-11M）-问过-wechat-assets-picker-库作者-alex，以实际获为准；" class="headerlink" title="2、AssetEntity 的 file 有时会比原始图片大很多（用iPhone14模拟器测试，一张 11 m的图片，file 是 37M，originFile 是 11M）,问过 wechat_assets_picker 库作者 alex，以实际获为准；"></a>2、AssetEntity 的 file 有时会比原始图片大很多（用iPhone14模拟器测试，一张 11 m的图片，file 是 37M，originFile 是 11M）,问过 wechat_assets_picker 库作者 alex，以实际获为准；</h5><h5 id="3、因为图片过大所以添加图片压缩功能；根据多年经验，根据图片体积，压缩系数实现阶梯化排布；20m-以上的图片基本都可以压缩在-2m-以下，也没有发现图片压缩后模糊的问题（大家可以根据实际情况进行调整）；"><a href="#3、因为图片过大所以添加图片压缩功能；根据多年经验，根据图片体积，压缩系数实现阶梯化排布；20m-以上的图片基本都可以压缩在-2m-以下，也没有发现图片压缩后模糊的问题（大家可以根据实际情况进行调整）；" class="headerlink" title="3、因为图片过大所以添加图片压缩功能；根据多年经验，根据图片体积，压缩系数实现阶梯化排布；20m 以上的图片基本都可以压缩在 2m 以下，也没有发现图片压缩后模糊的问题（大家可以根据实际情况进行调整）；"></a>3、因为图片过大所以添加图片压缩功能；根据多年经验，根据图片体积，压缩系数实现阶梯化排布；20m 以上的图片基本都可以压缩在 2m 以下，也没有发现图片压缩后模糊的问题（大家可以根据实际情况进行调整）；</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">extension</span> IntFileExt <span class="hljs-keyword">on</span> <span class="hljs-built_in">int</span>&#123;<br>  <span class="hljs-comment">/// <span class="language-markdown">length 转为 MB 描述</span></span><br>  <span class="hljs-built_in">String</span> <span class="hljs-keyword">get</span> fileSize &#123;<br>    <span class="hljs-keyword">final</span> result = <span class="hljs-keyword">this</span>/(<span class="hljs-number">1024</span> *<span class="hljs-number">1024</span>);<br>    <span class="hljs-keyword">final</span> desc = <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;result.toStringAsFixed(<span class="hljs-number">2</span>)&#125;</span>MB&quot;</span>;<br>    <span class="hljs-keyword">return</span> desc;<br>  &#125;<br><br>  <span class="hljs-comment">/// <span class="language-markdown">压缩质量( )</span></span><br>  <span class="hljs-built_in">int</span> <span class="hljs-keyword">get</span> compressQuality &#123;<br>    <span class="hljs-built_in">int</span> length = <span class="hljs-keyword">this</span>;<br>    <span class="hljs-comment">// var quality = 100;</span><br>    <span class="hljs-keyword">const</span> mb = <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>;<br>    <span class="hljs-keyword">if</span> (length &gt; <span class="hljs-number">10</span> * mb) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">20</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (length &gt; <span class="hljs-number">8</span> * mb) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">30</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (length &gt; <span class="hljs-number">6</span> * mb) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">40</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (length &gt; <span class="hljs-number">4</span> * mb) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">50</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (length &gt; <span class="hljs-number">2</span> * mb) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">60</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">90</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="4、图片压缩采用的是-flutter-image-compress-库的"><a href="#4、图片压缩采用的是-flutter-image-compress-库的" class="headerlink" title="4、图片压缩采用的是 flutter_image_compress 库的"></a>4、图片压缩采用的是 flutter_image_compress 库的</h5><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini">final <span class="hljs-attr">fileNew</span> = await compressAndGetFile(file, targetPath)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>文件压缩方法，从原始文件生成一个新的目标文件；临时文件多了，缓存会变大，所有需要清理缓存，所以就有了 CacheAssetService 工具类，负责临时文件清理功能；</p>
+<h5 id="5、wechat-assets-picker-目前版本的UI在-iOS-和-andriod-手机上是不一致的；fork-了一份进行了修改：wechat-assets-picker-双端-UI-一致版"><a href="#5、wechat-assets-picker-目前版本的UI在-iOS-和-andriod-手机上是不一致的；fork-了一份进行了修改：wechat-assets-picker-双端-UI-一致版" class="headerlink" title="5、wechat_assets_picker 目前版本的UI在 iOS 和 andriod 手机上是不一致的；fork 了一份进行了修改：wechat_assets_picker 双端 UI 一致版"></a>5、wechat_assets_picker 目前版本的UI在 iOS 和 andriod 手机上是不一致的；fork 了一份进行了修改：<a href="https://link.juejin.cn/?target=https://github.com/shang1219178163/flutter_wechat_assets_picker">wechat_assets_picker 双端 UI 一致版</a></h5><h5 id="6、本来想封装成-pub-库的，但是涉及的库太多了，担心大家使用时有各种版本冲突的问题，就直接分享源码了；"><a href="#6、本来想封装成-pub-库的，但是涉及的库太多了，担心大家使用时有各种版本冲突的问题，就直接分享源码了；" class="headerlink" title="6、本来想封装成 pub 库的，但是涉及的库太多了，担心大家使用时有各种版本冲突的问题，就直接分享源码了；"></a>6、本来想封装成 pub 库的，但是涉及的库太多了，担心大家使用时有各种版本冲突的问题，就直接分享源码了；</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs 涉及第三方库">// 图片选择<br>wechat_assets_picker<br><br>// 图片压缩<br>flutter_image_compress<br><br>// 负责缓存文件清理<br>path_provider<br><br>// 图片上传<br>dio<br><br>// 网络图片显示<br>extended_image<br><br>// 网络图片预览<br>photo_view<br><br>// 网络图片保存到相册<br>image_gallery_saver<br></code></pre></td></tr></table></figure>
+
+<p><a href="https://link.juejin.cn/?target=https://github.com/shang1219178163/flutter_templet_project/blob/main/lib/basicWidget/upload/asset_upload_box_demo.dart">github</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/Flutter-Image-upload/">#Flutter Image upload</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Flutter 图片上传</div>
+      <div>https://lyc937321983.github.io/blog/2026/02/02/flutter-img-upload/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月2日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2026/05/10/java-sdkman/" title="Java 版本管理 SDKMAN">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 版本管理 SDKMAN</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2026/01/29/nuxt-pack/" title="Nuxt部署到服务器">
+                        <span class="hidden-mobile">Nuxt部署到服务器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="Git常用命令1.新建Gitee仓库123456git init git add . #.代表所有文件都添加git commit -m &quot;lyc&quot;  #引号里面是备注信息git remote add origin https:&#x2F;&#x2F;gitee.com&#x2F;RyanChaw&#x2F;cnjy-parent.git #https:&#x2F;&#x2F;gitee.com&#x2F;RyanChaw&#x2F;cnjy-parent.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-07T06:38:29.000Z">
-<meta property="article:modified_time" content="2025-10-31T09:10:27.938Z">
+<meta property="article:modified_time" content="2026-05-19T02:13:16.420Z">
 <meta property="article:author" content="liyongci">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary_large_image">
@@ -217,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2.3k 字
         
       </span>
     
@@ -228,7 +228,7 @@
         
         
         
-          16 分钟
+          19 分钟
         
       </span>
     
@@ -296,7 +296,13 @@
 
 <h3 id="11-合并分支"><a href="#11-合并分支" class="headerlink" title="11. 合并分支"></a>11. 合并分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 将 feature-branch 分支合并到当前分支（main）</span><br>git merge feature-branch<br><br><span class="hljs-comment"># 禁用快进合并（强制创建合并提交）</span><br>git merge --no-ff feature-branch<br></code></pre></td></tr></table></figure>
 <p>快进合并（Fast-Forward）：当目标分支领先于源分支时，Git直接移动指针，无额外提交。<br>–no-ff：即使可以快进也强制创建合并提交，保留分支历史（适合团队协作记录）。</p>
+<h3 id="12-reomte-查看远程仓库"><a href="#12-reomte-查看远程仓库" class="headerlink" title="12 reomte 查看远程仓库"></a>12 reomte 查看远程仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看远程仓库</span><br>git remote -v<br><br><span class="hljs-comment">#删除关联</span><br>git remote remove origin<br><br><span class="hljs-comment">#添加关联</span><br>git remote add origin [分支名称]<br><br><span class="hljs-comment">#添加多个仓库</span><br></code></pre></td></tr></table></figure>
 
+<h3 id="13、删除上一次的提交（或删除多次的提交）"><a href="#13、删除上一次的提交（或删除多次的提交）" class="headerlink" title="13、删除上一次的提交（或删除多次的提交）"></a>13、删除上一次的提交（或删除多次的提交）</h3><p>第一步：在本地删除提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 如果你只想删除最近的一次提交，可以直接执行：</span><br>git rebase -i HEAD~1<br><br><span class="hljs-comment"># 如果你想删除的提交不在最近一次，可以扩大范围（例如查看最近3次提交）：</span><br>git rebase -i HEAD~3<br><br><span class="hljs-comment"># 修改指令并保存</span><br>pick abc1234 你的上次提交说明<br><br><span class="hljs-comment"># 将你想删除的那次提交前面的 pick 改为 drop（或者直接删除这一整行）：</span><br>drop abc1234 你的上次提交说明<br><br><span class="hljs-comment"># 修改完成后，保存并退出编辑器（如果是 Vim 编辑器，按 Esc 键后输入 :wq 并回车即可）</span><br></code></pre></td></tr></table></figure>
+
+<p>第二步：强制推送到个人远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 因为你在本地修改了提交历史，远程仓库的历史和本地不再一致，所以必须使用强制推送来覆盖远程的记录</span><br>git push --force-with-lease<br></code></pre></td></tr></table></figure>
               
             </div>
             <hr/>
