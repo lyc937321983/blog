@@ -16,7 +16,7 @@ token：sXyzP9GSA68fbBKkLXpYY5Kn
 1.  npm install 
 2.  npm run server
 
-#### 使用说明
+#### 部署说明
 
 1.  xxxx
 2.  xxxx
