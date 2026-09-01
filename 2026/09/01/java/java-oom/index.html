@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="处理内存溢出和CPU 飙高针对线上系统出现的 OOM（内存溢出）或 CPU 飙高问题，排查时需要遵循“先止血、后定位、再根治”的原则。以下是完整的排查思路和定位手段： 一、 线上 OOM（内存溢出）排查思路OOM 通常表现为应用抛出 java.lang.OutOfMemoryError 异常、接口调用超时甚至进程被系统杀死10。 1. 确定 OOM 类型与现场保护  查看日志：首先检查应用日志，确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="处理内存溢出和CPU 飙高">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2026/09/01/java/java-oom/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="处理内存溢出和CPU 飙高针对线上系统出现的 OOM（内存溢出）或 CPU 飙高问题，排查时需要遵循“先止血、后定位、再根治”的原则。以下是完整的排查思路和定位手段： 一、 线上 OOM（内存溢出）排查思路OOM 通常表现为应用抛出 java.lang.OutOfMemoryError 异常、接口调用超时甚至进程被系统杀死10。 1. 确定 OOM 类型与现场保护  查看日志：首先检查应用日志，确">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-01T05:45:22.000Z">
+<meta property="article:modified_time" content="2026-09-01T05:51:19.332Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="Java 内存溢出">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>处理内存溢出和CPU 飙高 - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="处理内存溢出和CPU 飙高"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-09-01 13:45" pubdate>
+          2026年9月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">处理内存溢出和CPU 飙高</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="处理内存溢出和CPU-飙高"><a href="#处理内存溢出和CPU-飙高" class="headerlink" title="处理内存溢出和CPU 飙高"></a>处理内存溢出和CPU 飙高</h1><p>针对线上系统出现的 OOM（内存溢出）或 CPU 飙高问题，排查时需要遵循“先止血、后定位、再根治”的原则。以下是完整的排查思路和定位手段：</p>
+<h3 id="一、-线上-OOM（内存溢出）排查思路"><a href="#一、-线上-OOM（内存溢出）排查思路" class="headerlink" title="一、 线上 OOM（内存溢出）排查思路"></a><strong>一、 线上 OOM（内存溢出）排查思路</strong></h3><p>OOM 通常表现为应用抛出 <code>java.lang.OutOfMemoryError</code> 异常、接口调用超时甚至进程被系统杀死10。</p>
+<p><strong>1. 确定 OOM 类型与现场保护</strong></p>
+<ul>
+<li><strong>查看日志</strong>：首先检查应用日志，确认是哪种内存溢出，常见的有 <code>Java heap space</code>（堆内存不足）、<code>Metaspace</code>（元空间不足）、<code>Direct buffer memory</code>（直接内存溢出）等10。</li>
+<li><strong>获取 Dump 文件</strong>：如果提前配置了 <code>-XX:+HeapDumpOnOutOfMemoryError</code>，可以直接获取 OOM 发生时的内存快照（Heap Dump）；如果没有，可使用 <code>jmap -dump:format=b,file=heap.hprof &lt;pid&gt;</code> 手动抓取810。</li>
+</ul>
+<p><strong>2. 深入分析定位根因</strong></p>
+<ul>
+<li><strong>工具分析</strong>：使用 MAT (Memory Analyzer Tool)、JProfiler 或 VisualVM 等可视化工具打开 Dump 文件，定位“内存大户”（如大量未回收的对象、重复创建的大集合、未关闭的资源等）810。</li>
+<li><strong>结合代码与 GC 日志</strong>：结合 GC 日志（如配置 <code>-Xloggc</code>）和监控平台（如 Prometheus+Grafana），分析内存增长趋势。追踪内存大户对象的创建链路，定位到具体的业务代码（例如：循环中拼接大 SQL 字符串、Druid 连接池的无限制缓存、静态集合未清理等）610。</li>
+</ul>
+<p><strong>3. 解决与预防</strong></p>
+<ul>
+<li><strong>解决</strong>：根据定位结果优化代码（如重构大对象拼接逻辑、关闭或限制框架缓存大小）、调整 JVM 参数（如调大 <code>-Xmx</code> 或 <code>-XX:MaxMetaspaceSize</code>）610。</li>
+<li><strong>预防</strong>：建立内存监控与预警机制（如堆内存使用率 &gt; 80% 触发告警），并在 Code Review 环节引入 SpotBugs 等静态分析工具28。</li>
+</ul>
+<hr>
+<h3 id="二、-线上-CPU-飙高排查思路"><a href="#二、-线上-CPU-飙高排查思路" class="headerlink" title="二、 线上 CPU 飙高排查思路"></a><strong>二、 线上 CPU 飙高排查思路</strong></h3><p>CPU 飙高往往由业务逻辑问题（如死循环）、频繁 GC 或上下文切换过多引起1。排查需要分层进行：</p>
+<p><strong>1. 宏观定位：确认 CPU 消耗在何处</strong></p>
+<ul>
+<li><p>系统级排查</p>
+<p>：使用 </p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-built_in">top</span><br></code></pre></td></tr></table></figure>
+
+<p> 命令查看整体负载。重点关注 </p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haml"><span class="hljs-tag">%<span class="hljs-selector-tag">Cpu</span>(s)</span><br></code></pre></td></tr></table></figure>
+
+<p> 指标：</p>
+<ul>
+<li><code>us</code>（用户态）高：说明业务代码本身在消耗 CPU。</li>
+<li><code>sy</code>（系统态）高：说明系统调用频繁或内核处理中断繁忙。</li>
+<li><code>wa</code>（I&#x2F;O等待）高：说明 CPU 在等待磁盘响应（I&#x2F;O 瓶颈），此时并非真正的 CPU 繁忙。</li>
+<li><code>si</code>（软中断）高：说明网络流量较高或定时器触发过于频繁35。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 微观定位：锁定具体进程与线程</strong></p>
+<ul>
+<li><strong>定位高 CPU 进程</strong>：通过 <code>top -bn1 | head -20</code> 或按 <code>P</code> 键排序，找到占用最高的进程 PID35。</li>
+<li><strong>定位高 CPU 线程</strong>：使用 <code>top -H -p &lt;PID&gt;</code> 展开到线程级别，找到消耗 CPU 最高的线程 TID（注意区分进程级和线程级，避免被进程级数据欺骗）15。</li>
+<li><strong>转换线程 ID</strong>：将找到的十进制 TID 转换为十六进制（<code>printf &#39;%x\n&#39; &lt;TID&gt;</code>）1。</li>
+</ul>
+<p><strong>3. 深入分析：结合堆栈与 GC 状态</strong></p>
+<ul>
+<li><strong>分析线程堆栈</strong>：使用 <code>jstack &lt;PID&gt; | grep &#39;&lt;十六进制TID&gt;&#39; -C5</code> 导出并搜索对应线程的调用栈。重点关注处于 <code>RUNNABLE</code> 状态的线程，观察其是否长时间停留在某个特定方法中（如死循环、复杂的正则匹配）13。</li>
+<li><strong>排查频繁 GC</strong>：如果堆栈无明显异常，使用 <code>jstat -gcutil &lt;PID&gt; 1000</code> 观察 GC 频率。如果 Full GC 频繁且耗时极长，说明存在内存泄漏或大对象频繁创建，导致 GC 线程疯狂工作从而吃满 CPU110。</li>
+</ul>
+<p><strong>4. 特殊场景处理</strong></p>
+<ul>
+<li><strong>慢 SQL 导致</strong>：如果数据库 <code>mysqld</code> 进程 CPU 飙升，需通过 <code>SHOW PROCESSLIST</code> 或慢查询日志定位全表扫描、未命中索引的 SQL，紧急情况下可 <code>KILL</code> 掉慢查询9。</li>
+<li><strong>内核&#x2F;网络问题</strong>：若 <code>sy</code> 或 <code>si</code> 极高，可使用 <code>vmstat</code> 检查上下文切换（<code>cs</code>），或使用 <code>perf</code>、<code>strace</code> 等工具深入分析内核态消耗37。</li>
+</ul>
+<p><strong>总结</strong>：面对线上故障，第一步永远是<strong>固定现场</strong>（保存 Dump、导出 jstack 和 top 快照），避免重启服务导致线索丢失7。然后按照“系统指标 -&gt; 进程&#x2F;线程 -&gt; 代码&#x2F;GC”的链路逐步收敛，最终精准定位问题。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/Java-%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/">#Java 内存溢出</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>处理内存溢出和CPU 飙高</div>
+      <div>https://lyc937321983.github.io/blog/2026/09/01/java/java-oom/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年9月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2026/09/01/java/java-%E8%AE%BE%E8%AE%A1%E5%8D%83%E4%B8%87%E7%BA%A7%20QPS%20%E7%9A%84%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/" title="设计千万级 QPS 的秒杀系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">设计千万级 QPS 的秒杀系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2026/09/01/java/java-docker%E9%83%A8%E7%BD%B2java%E9%A1%B9%E7%9B%AE/" title="Docker容器部署Java项目完整流程">
+                        <span class="hidden-mobile">Docker容器部署Java项目完整流程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

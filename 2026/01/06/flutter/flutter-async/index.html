@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyongci">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Dart异步编程APIDart 中的异步编程API，主要是通过 Future 和 Stream 两个API来实现的 1.1. FutureDart中的 Future 代表 一个异步任务，定义一个异步任务的代码示例如下： 123456Future&lt;String&gt; fetchData() &#123;  &#x2F;&#x2F; 休眠3s模拟执行耗时操作  return Future.delayed(cons">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 异步编程API">
+<meta property="og:url" content="https://lyc937321983.github.io/blog/2026/01/06/flutter/flutter-async/index.html">
+<meta property="og:site_name" content="liyongci">
+<meta property="og:description" content="Dart异步编程APIDart 中的异步编程API，主要是通过 Future 和 Stream 两个API来实现的 1.1. FutureDart中的 Future 代表 一个异步任务，定义一个异步任务的代码示例如下： 123456Future&lt;String&gt; fetchData() &#123;  &#x2F;&#x2F; 休眠3s模拟执行耗时操作  return Future.delayed(cons">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-06T02:30:23.000Z">
+<meta property="article:modified_time" content="2026-05-19T02:13:16.417Z">
+<meta property="article:author" content="liyongci">
+<meta property="article:tag" content="Flutter async">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Flutter 异步编程API - liyongci</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lyc937321983.github.io","root":"/blog/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Li Yongci</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Flutter 异步编程API"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-06 10:30" pubdate>
+          2026年1月6日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          64 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Flutter 异步编程API</h1>
+            
+            <div class="markdown-body">
+              
+              <h2 id="Dart异步编程API"><a href="#Dart异步编程API" class="headerlink" title="Dart异步编程API"></a>Dart异步编程API</h2><p>Dart 中的异步编程API，主要是通过 <strong>Future</strong> 和 <strong>Stream</strong> 两个API来实现的</p>
+<h3 id="1-1-Future"><a href="#1-1-Future" class="headerlink" title="1.1. Future"></a>1.1. Future</h3><p>Dart中的 <strong>Future</strong> 代表 <strong>一个异步任务</strong>，定义一个异步任务的代码示例如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future&lt;<span class="hljs-built_in">String</span>&gt; fetchData() &#123;<br>  <span class="hljs-comment">// 休眠3s模拟执行耗时操作</span><br>  <span class="hljs-keyword">return</span> Future.delayed(<span class="hljs-keyword">const</span> <span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">3</span>), () &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello Flutter!&quot;</span>;<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-1-1-async-await"><a href="#1-1-1-async-await" class="headerlink" title="1.1.1. async + await"></a>1.1.1. async + await</h4><p>两个关键字提供了一种 <strong>类似同步代码的方式来编写异步操作</strong>：</p>
+<ul>
+<li><strong>async</strong> → 用于声明一个异步函数；</li>
+<li><strong>await</strong> → 用于等待一个异步操作的结果；</li>
+</ul>
+<p>调用上述异步任务的代码示例如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future&lt;<span class="hljs-keyword">void</span>&gt; printData() <span class="hljs-keyword">async</span> &#123;<br>  <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> fetchData();<br>  <span class="hljs-built_in">print</span>(result);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>另外，建议对异步操作中可能出现的错误进行处理，直接使用 <strong>try-catch</strong> 关键字进行异常捕获：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future&lt;<span class="hljs-keyword">void</span>&gt; printData() <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> fetchData();<br>      <span class="hljs-built_in">print</span>(result);<br>    &#125;  <span class="hljs-keyword">on</span> IntegerDivisionByZeroException <span class="hljs-keyword">catch</span> (e) &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;除0异常&quot;</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br>      <span class="hljs-built_in">print</span>(e);<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;异常与否最终都要执行的代码块&quot;</span>);<br>    &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>对了，还有一点要注意：<strong>使用await会等待，直到异步操作完成才继续往下执行代码</strong>，比如这样的代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 定义三个异步请求</span><br>Future&lt;<span class="hljs-built_in">String</span>&gt; fetchUserOrder1() =&gt; Future.delayed(<span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">1</span>), () =&gt; <span class="hljs-string">&#x27;Order 1&#x27;</span>);<br><br>Future&lt;<span class="hljs-built_in">String</span>&gt; fetchUserOrder2() =&gt; Future.delayed(<span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">2</span>), () =&gt; <span class="hljs-string">&#x27;Order 2&#x27;</span>);<br><br>Future&lt;<span class="hljs-built_in">String</span>&gt; fetchUserOrder3() =&gt; Future.delayed(<span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">3</span>), () =&gt; <span class="hljs-string">&#x27;Order 3&#x27;</span>);<br><br>Future&lt;<span class="hljs-keyword">void</span>&gt; doTasks() <span class="hljs-keyword">async</span> &#123;<br>	<span class="hljs-keyword">var</span> startTime = <span class="hljs-built_in">DateTime</span>.now().second;<br>  <span class="hljs-keyword">await</span> fetchUserOrder1();<br>  <span class="hljs-keyword">await</span> fetchUserOrder2();<br>  <span class="hljs-keyword">await</span> fetchUserOrder3();<br>  <span class="hljs-keyword">var</span> endTime = <span class="hljs-built_in">DateTime</span>.now().second;<br>  <span class="hljs-built_in">print</span>(endTime - startTime);	<span class="hljs-comment">// 输出：6</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>因为等待，所以总的运行时间为：1+2+3&#x3D;6s，如果想三个请求同时执行，可以改下写法：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future&lt;<span class="hljs-keyword">void</span>&gt; doTasks() <span class="hljs-keyword">async</span> &#123;<br>  <span class="hljs-keyword">var</span> startTime = <span class="hljs-built_in">DateTime</span>.now().second;<br>  <span class="hljs-keyword">var</span> order1 = fetchUserOrder1();<br>  <span class="hljs-keyword">var</span> order2 = fetchUserOrder2();<br>  <span class="hljs-keyword">var</span> order3 = fetchUserOrder3();<br>  <span class="hljs-keyword">await</span> order1;<br>  <span class="hljs-keyword">await</span> order2;<br>  <span class="hljs-keyword">await</span> order3;<br>  <span class="hljs-keyword">var</span> endTime = <span class="hljs-built_in">DateTime</span>.now().second;<br>  <span class="hljs-built_in">print</span>(endTime - startTime);	<span class="hljs-comment">// 输出：3</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>也可以用下下面提到的Future.wait()方法来实现多个耗时任务并行。</p>
+<h4 id="1-1-2-then-catchError-whenComplete"><a href="#1-1-2-then-catchError-whenComplete" class="headerlink" title="1.1.2. then() + catchError() + whenComplete()"></a>1.1.2. then() + catchError() + whenComplete()</h4><p>这三个方法是Future的一个API，它允许你在Future <strong>成功完成时</strong>、<strong>异常结束时</strong>、<strong>任务完成时(无论成败)</strong> 时执行一个回调参数，使用代码示例如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">void</span> printData() &#123;<br>  fetchData().then((result) &#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;获取异步结果并输出：<span class="hljs-subst">$result</span>&quot;</span>);<br>  &#125;).catchError((error) &#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;捕获异常：<span class="hljs-subst">$error</span>&quot;</span>);<br>  &#125;).whenComplete(() &#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;无论是否捕获异常，都会执行的代码块&quot;</span>);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Future 的 then() 方法代码如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">Future&lt;R&gt; then&lt;R&gt;(FutureOr&lt;R&gt; onValue(T value), &#123;<span class="hljs-built_in">Function?</span> onError&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>返回一个Future，所以在处理连续请求时，可以 <strong>连续追加多个then</strong> 来规避回调地狱，伪代码如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart">fetchData()<br>    .then((value) =&gt; <span class="hljs-string">&quot;写入数据库&quot;</span>)<br>    .then((value) =&gt; <span class="hljs-string">&quot;刷新UI&quot;</span>)<br>    .then((value) =&gt; <span class="hljs-string">&quot;埋点上报&quot;</span>)<br>    .catchError((error, stackTrace) =&gt; <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;stackTrace&quot;</span>));<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-Stream-流"><a href="#2-2-Stream-流" class="headerlink" title="2.2. Stream (流)"></a>2.2. Stream (流)</h3><p><strong>Future</strong> 代表 <strong>一个异步任务</strong>，<strong>Stream</strong> 则代表 <strong>一个异步任务序列</strong>，即 <strong>一连串的异步任务</strong>。你可以监听Stream来获取它的结果 (数据和错误)，也可以在Stream完成前对它进行暂停或停止监听，它有两种类型：</p>
+<ul>
+<li><strong>Single-subscription</strong>：<strong>单订阅流</strong>，只能被一个监听器监听；</li>
+<li><strong>Broadcast</strong>：<strong>广播流</strong>，能被多个监听器同时监听；</li>
+</ul>
+<h4 id="2-2-1-创建Stream的几种方法"><a href="#2-2-1-创建Stream的几种方法" class="headerlink" title="2.2.1. 创建Stream的几种方法"></a>2.2.1. 创建Stream的几种方法</h4><p>① 使用 <strong>Stream的构造方法创建</strong></p>
+<ul>
+<li><strong>Stream.fromFuture()：</strong> 将一个Future转化为Stream流；</li>
+<li><strong>Stream.fromFutures()</strong> ：将一个Future列表转换为Stream流；</li>
+<li><strong>Stream.fromIterable()</strong> ：将一个Iterable (如List或Set) 转换成 Stream流；</li>
+<li><strong>Stream.periodic()</strong> ：创建一个周期性发出事件的Stream流；</li>
+<li><strong>Stream.empty()</strong> ：创建一个空的流，不包含任何事件；</li>
+<li><strong>Stream.value()</strong> ：创建一个单一值的流，流中只有一个事件；</li>
+<li><strong>Stream.error()</strong> ：创建一个包含错误事件的流；</li>
+<li><strong>Stream.multi()</strong> ：允许你使用一个事件生成器函数来控制流的发送，用于创建具有复杂行为的流；</li>
+</ul>
+<p>简单代码示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dart"> Future&lt;<span class="hljs-built_in">String</span>&gt; fetchAsyncData() <span class="hljs-keyword">async</span> &#123;<br>  <span class="hljs-keyword">await</span> Future.delayed(<span class="hljs-keyword">const</span> <span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">2</span>));<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Future Fetched data&#x27;</span>;<br>&#125;<br><br><span class="hljs-keyword">void</span> testStream() &#123;<br>  Stream.fromIterable([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]).listen((event) =&gt; <span class="hljs-built_in">print</span>(event)); <span class="hljs-comment">// 输出：1、2、3、4、5</span><br>  Stream.periodic(<span class="hljs-keyword">const</span> <span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">1</span>), (computationCount) =&gt; computationCount)<br>      .take(<span class="hljs-number">5</span>)<br>      .listen((event) =&gt; <span class="hljs-built_in">print</span>(event)); <span class="hljs-comment">// 输出(间隔1s)：0、1、2、3、4</span><br>  Stream.fromFuture(fetchAsyncData()).listen((event) =&gt; <span class="hljs-built_in">print</span>(event));  <span class="hljs-comment">// 输出：Future Fetched data</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>② 使用 <strong>async</strong>* + <strong>yield</strong> 或 <strong>yield</strong>* 创建</p>
+<p>注意这个 <strong>async</strong>* 是有个*星号的哈，不是 <strong>async</strong> ！它用于标记一个 <strong>异步生成器函数</strong> (返回Stream对象的函数)，可以在等待异步操作完成的同时产生多个值。然后是给 <strong>Stream监听器传递值</strong> 的两种方式：</p>
+<ul>
+<li><strong>yield</strong>：每次调用yield时都会向Stream中添加一个值，函数执行到yield语句时会暂停，直到Stream监听器装备好接收下一个值才继续执行，这允许你构建一个可以产生多个值的函数，且这些值不是立即生成的，而是随着消费者的接收能力逐一生成。</li>
+<li><strong>yield</strong>* ：将一个 Stream 的所有值插入到另一个 Stream 中，当生成器函数遇到yield*时，它会等待并传递所有来自另一个 Stream 的值，直到那个 Stream 完成。</li>
+</ul>
+<p>简单代码示例如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs dart"> <span class="hljs-comment">// 定义一个异步生成器函数，它使用yield来产生数字1到3</span><br>Stream&lt;<span class="hljs-built_in">int</span>&gt; numberStream() <span class="hljs-keyword">async</span>* &#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++) &#123;<br>    <span class="hljs-keyword">yield</span> i; <span class="hljs-comment">// 向 Stream 发送值 i</span><br>    <span class="hljs-keyword">await</span> Future.delayed(<span class="hljs-built_in">Duration</span>(seconds: <span class="hljs-number">1</span>)); <span class="hljs-comment">// 模拟异步等待</span><br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 另一个异步生成器函数使用yield*来传递numberStream生成的所有值</span><br>Stream&lt;<span class="hljs-built_in">int</span>&gt; replicatedNumberStream() <span class="hljs-keyword">async</span>* &#123;<br>  <span class="hljs-keyword">yield</span>* numberStream(); <span class="hljs-comment">// 将 numberStream 的所有值传递给当前 Stream</span><br>&#125;<br><br><span class="hljs-keyword">void</span> main() <span class="hljs-keyword">async</span> &#123;<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Start listening to numberStream&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> number <span class="hljs-keyword">in</span> numberStream()) &#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Got a number from numberStream: <span class="hljs-subst">$number</span>&#x27;</span>);<br>  &#125;<br><br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Start listening to replicatedNumberStream&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> number <span class="hljs-keyword">in</span> replicatedNumberStream()) &#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Got a number from replicatedNumberStream: <span class="hljs-subst">$number</span>&#x27;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 输出结果：</span><br><span class="hljs-comment">// Start listening to numberStream</span><br><span class="hljs-comment">// Got a number from numberStream: 1</span><br><span class="hljs-comment">// Got a number from numberStream: 2</span><br><span class="hljs-comment">// Got a number from numberStream: 3</span><br><span class="hljs-comment">// Start listening to replicatedNumberStream</span><br><span class="hljs-comment">// Got a number from replicatedNumberStream: 1</span><br><span class="hljs-comment">// Got a number from replicatedNumberStream: 2</span><br><span class="hljs-comment">// Got a number from replicatedNumberStream: 3</span><br></code></pre></td></tr></table></figure>
+
+<p>③ 使用 <strong>StreamController</strong> 创建</p>
+<p>这种方式创建和使用Stream流更加灵活，先明确四个角色：</p>
+<ul>
+<li><strong>Stream</strong>：<strong>数据源</strong>，可以被监听，单订阅流只能有一个监听器，而广播流可以有多个监听器；</li>
+<li><strong>StreamController</strong>：<strong>Stream流的控制器</strong>，可以在Stream上发送数据、错误和完成事件、也可以检查Stream是否暂停、是否有订阅者，以及在其它任何发生改变时获取到回调。提供了两个工厂方法来创建实例：<strong>StreamController()</strong> 和 <strong>StreamController.broadcast()</strong> ，分别对应单订阅流和广播流。</li>
+<li><strong>StreamSink</strong>：<strong>添加Stream事件的抽象类</strong>，用于添加数据、错误和关闭事件到Stream上，StreamController 实现了此接口，因此它也可以作为一个StreamSink使用。</li>
+<li><strong>StreamSubscription</strong>：<strong>Stream的监听对象</strong>，它可以监听Stream上的数据、错误和完成事件，也可以暂停、恢复和取消订阅。当你调用Stream的 <strong>listen()</strong> 方法时，会返回一个 StreamSubscription 对象，可以使用它来控制订阅。</li>
+</ul>
+<p>简单代码示例如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;dart:async&#x27;</span>;<br><br><span class="hljs-keyword">void</span> main() &#123;<br>  <span class="hljs-comment">// 创建一个单订阅流的 StreamController</span><br>  <span class="hljs-comment">// 如果想创建广播流可以用 StreamController.broadcast()</span><br>  <span class="hljs-keyword">var</span> controller = StreamController&lt;<span class="hljs-built_in">int</span>&gt;();<br><br>  <span class="hljs-comment">// 订阅Stream</span><br>  controller.stream.listen(<br>    (data) &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Received data: <span class="hljs-subst">$data</span>&#x27;</span>);<br>    &#125;,<br>    onDone: () &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Stream is closed&#x27;</span>);<br>    &#125;,<br>    onError: (error) &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Error occurred: <span class="hljs-subst">$error</span>&#x27;</span>);<br>    &#125;,<br>  );<br><br>  <span class="hljs-comment">// 往Stream中添加数据</span><br>  controller.sink.add(<span class="hljs-number">1</span>);<br>  controller.sink.add(<span class="hljs-number">2</span>);<br>  controller.sink.addError(<span class="hljs-string">&#x27;Something went wrong&#x27;</span>);<br>  controller.sink.add(<span class="hljs-number">3</span>);<br><br>  <span class="hljs-comment">// 关闭StreamController时，会向Stream发送关闭事件</span><br>  <span class="hljs-comment">// 需要在确保不再发送数据的情况下执行此操作，以防止内存泄露和资源浪费</span><br>  controller.close();<br>&#125;<br><br><span class="hljs-comment">// 输出结果：</span><br><span class="hljs-comment">// Received data: 1</span><br><span class="hljs-comment">// Received data: 2</span><br><span class="hljs-comment">// Error occurred: Something went wrong</span><br><span class="hljs-comment">// Received data: 3</span><br><span class="hljs-comment">// Stream is closed</span><br></code></pre></td></tr></table></figure>
+
+<p>没有定义StreamSubscription变量兜住listen()的返回值，然后调用cancel() 取消订阅不会<strong>内存泄露</strong> 吗？</p>
+<blockquote>
+<p>答：不会。cancel() 方法一般在监听器不需要接收数据，但Stream还未结束时使用。当调用StreamController的close() 方法时，该控制器上的Stream会结束，一旦Stream结束，它会自动发送一个完成事件给所有监听器，并关闭Stream。这种情况下，监听器就不需要显式调用 cancel() 来取消订阅，因为Stream已经完成。</p>
+</blockquote>
+<p>另外，构造参数中还支持传入一个bool类型的 <strong>sync参数</strong> (默认false) 决定是否创建一个同步类型的StreamController，即事件添加和监听处于同一个Event Loop中，不太建议设置为true，可能导致潜在的堆栈溢出错误。</p>
+<h3 id="2-3-Isolate-隔离"><a href="#2-3-Isolate-隔离" class="headerlink" title="2.3. Isolate (隔离)"></a>2.3. Isolate (隔离)</h3><p>在执行 <strong>计算密集型耗时任务</strong> 的场景，创建新的isolate来处理耗时任务，避免堵塞主isolate，任务执行完毕后通过端口通知主isolate。</p>
+<p>先补充下这四个角色的描述吧：</p>
+<ul>
+<li><strong>Isolate</strong>：<strong>独立的Dart执行上下文</strong>，可以通过 spwan() 或 spawnUri() 来创建一个新的 isolate；</li>
+<li><strong>ReceivePort</strong> &amp; <strong>SendPort</strong>：收发其它Isolate消息的端口，可以通过 sendPort属性获取一个SendPort对象，用于发送消息给对应的ReceiverPort；</li>
+<li><strong>Capability</strong>：isolate的唯一标识，用于控制isolate的暂停和恢复；</li>
+</ul>
+<p>再写个简单代码示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">void</span> doCPUTask() <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-comment">// 创建一个ReceivePort，用来接收来自新Isolate的消息</span><br>    <span class="hljs-keyword">final</span> receivePort = ReceivePort();<br><br>    <span class="hljs-comment">// 创建并启动一个新的Isolate，它将并行执行累加操作</span><br>    <span class="hljs-keyword">final</span> isolate = <span class="hljs-keyword">await</span> Isolate.spawn((sendPort) &#123;<br>      <span class="hljs-built_in">int</span> sum = <span class="hljs-number">0</span>;<br>      <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000000000</span>; i++) &#123;<br>        sum += i;<br>      &#125;<br>      <span class="hljs-comment">// 计算完毕，通过Port发送结果回主Isolate</span><br>      sendPort.send(sum);<br>      sendPort.send(<span class="hljs-string">&#x27;Hello&#x27;</span>);<br>      sendPort.send(<span class="hljs-string">&#x27;World&#x27;</span>);<br>      <span class="hljs-comment">// 发送一个错误消息给子Isolate</span><br>      sendPort.send(Error());<br>      sendPort.send(<span class="hljs-string">&#x27;exit&#x27;</span>);<br>    &#125;, receivePort.sendPort);<br><br>    <span class="hljs-comment">// 监听ReceivePort的信息</span><br>    receivePort.listen((message) &#123;<br>      <span class="hljs-comment">// 打印接收到的消息</span><br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;接收到消息: <span class="hljs-subst">$message</span>&#x27;</span>);<br>      <span class="hljs-comment">// 如果接收到的消息是&#x27;exit&#x27;，则关闭ReceivePort并杀死子Isolate</span><br>      <span class="hljs-keyword">if</span> (message == <span class="hljs-string">&#x27;exit&#x27;</span>) &#123;<br>        receivePort.close();<br>        isolate.kill();<br>      &#125;<br>    &#125;, onError: (error, stackTrace) &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;处理错误信息：<span class="hljs-subst">$error</span>&#125;&quot;</span>);<br>    &#125;, onDone: () &#123;<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;ReceivePort 关闭&quot;</span>);<br>    &#125;);<br>  &#125;<br></code></pre></td></tr></table></figure>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/Flutter-async/">#Flutter async</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Flutter 异步编程API</div>
+      <div>https://lyc937321983.github.io/blog/2026/01/06/flutter/flutter-async/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyongci</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2026/01/23/flutter/flutter-json/" title="Flutter json 序列化">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Flutter json 序列化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2025/12/31/flutter/flutter-provider/" title="Flutter 状态共享-Provider">
+                        <span class="hidden-mobile">Flutter 状态共享-Provider</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://unpkg.com/valine@1.4.18/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"enable":true,"appId":"ikSRtRd5Vl7WWto2wP6TxeTR-gzGzoHsz","appKey":"8wQuPPL51zNiwysVTkN0lTgy","path":"window.location.pathname","placeholder":"欢迎各位大佬发言","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://gitee.com" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://gitee.com/a937321983/blog" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

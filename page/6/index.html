@@ -223,15 +223,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/07/08/js-npmRunTime/" target="_self">
-          npm run xxx 的时候发生了什么？
+        <a href="/blog/2022/11/09/js/js-promiseMethod/" target="_self">
+          javascript Promise常用方法
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/07/08/js-npmRunTime/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/11/09/js/js-promiseMethod/" target="_self">
         <div>
           
-          运行 npm run xxx 的时候发生了什么？1.npm run serve的时候，发生了什么？​		首先会去项目的package.json文件里找scripts 里找对应的xxx，然后执行 xxx的命令，例如启动vue项目 npm run serve的时候，实际上就是执行了vue-cli-service serve 这条命令 12345678&#123;  &quot;name&quot;:
+          Promise常用方法一、前言恰逢 Promise 也有四个很像的静态三兄弟(Promise.all、Promise.allSettled、Promise.race、Promise.any)，它们接受的参数类型相同，但各自逻辑处理不同，它们具体会有什么区别那？别急，下面等小包慢慢道来。 在文章的开始，小包先给大家提出几个问题:  Promise.all 与 Promise.allSettled 有
         </div>
       </a>
 
@@ -239,8 +239,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-08 09:38" pubdate>
-              2022-07-08
+            <time datetime="2022-11-09 11:37" pubdate>
+              2022-11-09
             </time>
           </div>
         
@@ -270,7 +270,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/npm-run-serve/">#npm run serve</a>
+              <a href="/blog/tags/promise-method/">#promise-method</a>
             
           </div>
         
@@ -284,15 +284,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/07/01/mock-crud/" target="_self">
-          Mock.js CRUD
+        <a href="/blog/2022/11/04/js/js-overwritePromise/" target="_self">
+          javascript手写Promise
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/07/01/mock-crud/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/11/04/js/js-overwritePromise/" target="_self">
         <div>
           
-          mock.js注解实现增删改查CRUD注:CRUD即:增Create、查Retrive、删Delete、改Update 12&#x2F;&#x2F; cdn引入文件 ：&#x2F;&#x2F; &lt;script src&#x3D;&quot;http:&#x2F;&#x2F;mockjs.com&#x2F;dist&#x2F;mock.js&quot;&gt;&lt;&#x2F;script&gt;    1、创建一个对象123456789101112var arr &#x3D;  [		&#123;
+          javascript手写Promise方法1.Promise.resolve简要回顾 Promise.resolve(value) 方法返回一个以给定值解析后的Promise 对象。 如果这个值是一个 promise ，那么将返回这个 promise ； 如果这个值是thenable（即带有&quot;then&quot; 方法），返回的promise会“跟随”这个thenable的对象，采用它的
         </div>
       </a>
 
@@ -300,130 +300,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-01 11:50" pubdate>
-              2022-07-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/mock/" class="category-chain-item">mock</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/mock-crud/">#mock-crud</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2022/07/01/mock-fastMock/" target="_self">
-          Mock.js语法
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2022/07/01/mock-fastMock/" target="_self">
-        <div>
-          
-          Mock.js语法1.基础随机内容的生成1234567891011121314151617&#123;  &quot;string|1-10&quot;: &quot;&#x3D;&quot;, &#x2F;&#x2F; 随机生成1到10个等号  &quot;string2|3&quot;: &quot;&#x3D;&quot;, &#x2F;&#x2F; 随机生成2个或者三个等号  &quot;number|+1&quot;: 0, &#x2F;&#x2F; 从0开始自增
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-01 10:28" pubdate>
-              2022-07-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/mock/" class="category-chain-item">mock</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/mock/">#mock</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2022/07/01/js-fibonacci/" target="_self">
-          fibonacci函数
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2022/07/01/js-fibonacci/" target="_self">
-        <div>
-          
-          js 记忆函数12345678910111213141516171819202122232425262728293031&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;meta http-equiv&#x3D;&quot;X-U
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-01 09:38" pubdate>
-              2022-07-01
+            <time datetime="2022-11-04 17:37" pubdate>
+              2022-11-04
             </time>
           </div>
         
@@ -453,7 +331,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/fibonacci/">#fibonacci</a>
+              <a href="/blog/tags/overwrite-promise/">#overwrite-promise</a>
             
           </div>
         
@@ -467,15 +345,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/06/20/vue-select/" target="_self">
-          v-select懒加载
+        <a href="/blog/2022/11/04/vue/vue-nextTick/" target="_self">
+          Vue中的$nextTick是怎么实现的
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/06/20/vue-select/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/11/04/vue/vue-nextTick/" target="_self">
         <div>
           
-          v-select懒加载1.标签代码12345678910&lt;template&gt;    &lt;el-select placeholder&#x3D;&quot;请选择&quot; v-model&#x3D;&quot;selectedCode&quot; @change&#x3D;&quot;changeSelected&quot;    :filter-method&#x3D;&quot;filterMethodHandle
+          Vue中的$nextTick是怎么实现的1.说明vue官方对nextTick的说明： ​			https:&#x2F;&#x2F;v2.cn.vuejs.org&#x2F;v2&#x2F;api&#x2F;#vm-nextTick 2.简单示例先看一个简单的问题： 123456789101112131415161718&lt;template&gt;  &lt;div @click&#x3D;&quot;handleClick&quot; ref&#x3D;&amp;quo
         </div>
       </a>
 
@@ -483,8 +361,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-20 16:15" pubdate>
-              2022-06-20
+            <time datetime="2022-11-04 14:37" pubdate>
+              2022-11-04
             </time>
           </div>
         
@@ -514,7 +392,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/v-select%E6%87%92%E5%8A%A0%E8%BD%BD/">#v-select懒加载</a>
+              <a href="/blog/tags/nextTick/">#nextTick</a>
             
           </div>
         
@@ -528,15 +406,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/06/10/chrome/" target="_self">
-          谷歌浏览器高级调试技巧
+        <a href="/blog/2022/11/04/interview/interview-20221104/" target="_self">
+          前端面试题常问2
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/06/10/chrome/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/11/04/interview/interview-20221104/" target="_self">
         <div>
           
-          谷歌浏览器高级调试技巧1.一键重新发起请求12341. 选中&#96;Network&#96;2. 点击&#96;Fetch&#x2F;XHR&#96;3. 选择要重新发送的请求4. 右键选择&#96;Replay XHR&#96;   2.在控制台快速发起请求123451. 选中&#96;Network&#96;2. 点击&#96;Fetch&#x2F;XHR&#96;3. 选择&#96;Copy as fetch&#96;4. 控制台粘贴代码5. 修改参数，回车搞定    3. 复制JavaScript变量
+          面试中整理的面试题一、某地产的面试1、机试12345671、把一个url拆解成origin、文件名、hash拆解成示例的格式。2、两个数组合并成一个数组，并进行算法优化。3、设置值的时候是数字，输出的时候变成百分号的格式。4、首屏优化的方案，分别从代码、网络和缓存说一下。5、如果一次性增加100万个用户访问项目，前端角度你会怎么优化。6、分别用es5和es6的方式解决一个继承问题复制代码  2、现
         </div>
       </a>
 
@@ -544,8 +422,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-10 09:38" pubdate>
-              2022-06-10
+            <time datetime="2022-11-04 10:51" pubdate>
+              2022-11-04
             </time>
           </div>
         
@@ -560,7 +438,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/browser/" class="category-chain-item">browser</a>
+  <a href="/blog/categories/interview/" class="category-chain-item">interview</a>
   
   
 
@@ -575,7 +453,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8/">#谷歌浏览器</a>
+              <a href="/blog/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
             
           </div>
         
@@ -589,15 +467,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/06/01/react-class-function%EF%BC%88component%EF%BC%89/" target="_self">
-          React函数组件和类组件
+        <a href="/blog/2022/11/03/js/js-reduce/" target="_self">
+          javascript手写reduce函数
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/06/01/react-class-function%EF%BC%88component%EF%BC%89/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/11/03/js/js-reduce/" target="_self">
         <div>
           
-          React-函数组件和类组件类组件何谓类组件（Class Component) 所谓类组件，就是基于 ES6 Class 这种写法，通过继承 React.Component 得来的 React 组件。以下是一个典型的类组件： 123456789101112131415161718192021222324252627class DemoClass extends React.Component &amp;#
+          javascript手写reduce函数1. 前言文章会从三个方面应对这道面试题：认识 reduce、使用 reduce、实现 reduce。 阅读本文，你将学到： 1231. 认识&#96;reduce&#96;函数；2. &#96;reduce&#96;函数常见使用场景；3. 从0到1实现一个&#96;reduce&#96;函数；  2. 认识 reducereduce()方法对数组中每个元素执行一个由您提供的函数（升序执行），将其结果汇总
         </div>
       </a>
 
@@ -605,8 +483,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-01 14:28" pubdate>
-              2022-06-01
+            <time datetime="2022-11-03 10:37" pubdate>
+              2022-11-03
             </time>
           </div>
         
@@ -621,7 +499,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/react/" class="category-chain-item">react</a>
+  <a href="/blog/categories/js/" class="category-chain-item">js</a>
   
   
 
@@ -636,7 +514,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E5%92%8C%E7%B1%BB%E7%BB%84%E4%BB%B6/">#函数组件和类组件</a>
+              <a href="/blog/tags/reduce/">#reduce</a>
             
           </div>
         
@@ -650,15 +528,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/03/16/react-command-two/" target="_self">
-          react常用的两个Hook
+        <a href="/blog/2022/09/08/interview/interview-20220908/" target="_self">
+          前端面试题常问1
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/03/16/react-command-two/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/09/08/interview/interview-20220908/" target="_self">
         <div>
           
-          React最常用的两个Hook一.useState代码中： React.useState(0)相当于class组件中的this.state添加一个属性值 variable相当于class组件中的this.state. variable的值 setVariable可以用来修改variable的值，可以相当于class组件中的this.setState 123456789101112import Re
+          20220908前端面试题中国电信集成  vue生命周期 webpack打包机制 v-if v-show 如何实现一个深拷贝 敏捷开发的思维模式  牧原股份一面  讲一下react hooks内部实现原理 微前端中微任务注入权限如何控制 讲一下宏任务和微任务 讲一下为什么用微前端，qiankun的特性是什么，有没有看过single-spa的内部实现方式 需要去南阳出差，接受吗  数字郑州一面  浏
         </div>
       </a>
 
@@ -666,8 +544,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-16 15:12" pubdate>
-              2022-03-16
+            <time datetime="2022-09-08 10:51" pubdate>
+              2022-09-08
             </time>
           </div>
         
@@ -682,7 +560,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/react/" class="category-chain-item">react</a>
+  <a href="/blog/categories/interview/" class="category-chain-item">interview</a>
   
   
 
@@ -697,7 +575,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/react%E5%B8%B8%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAHook/">#react常用的两个Hook</a>
+              <a href="/blog/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">#面试题</a>
             
           </div>
         
@@ -711,15 +589,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/03/16/linux-basic/" target="_self">
-          linux 常用命令
+        <a href="/blog/2022/08/08/js/js-ArrayDeleteRepetition/" target="_self">
+          javascript对象数组去重
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/03/16/linux-basic/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/08/08/js/js-ArrayDeleteRepetition/" target="_self">
         <div>
           
-          Linux常用命令一.目录操作命令2.1 目录切换 cd命令：cd 目录 12345cd &#x2F;        切换到根目录cd &#x2F;usr        切换到根目录下的usr目录cd ..&#x2F;        切换到上一级目录 或者  cd ..cd ~        切换到home目录cd -        切换到上次访问的目录  2.2 目录查看 ls [-al]命令：ls [-al] 1234ls
+          javascript 对象数组去重1.使用set和map结合1234567891011let jsonArray &#x3D; [    &#123; id: 1, name: &#x27;John&#x27; &#125;,    &#123; id: 2, name: &#x27;Mary&#x27; &#125;,    &#123; id: 3, name: &#x27;Bob&#x27; &amp;#12
         </div>
       </a>
 
@@ -727,8 +605,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-16 11:38" pubdate>
-              2022-03-16
+            <time datetime="2022-08-08 11:28" pubdate>
+              2022-08-08
             </time>
           </div>
         
@@ -743,7 +621,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/common/" class="category-chain-item">common</a>
+  <a href="/blog/categories/js/" class="category-chain-item">js</a>
   
   
 
@@ -758,7 +636,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/linux/">#linux</a>
+              <a href="/blog/tags/%E5%8E%BB%E9%87%8D/">#去重</a>
             
           </div>
         
@@ -772,15 +650,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2022/03/03/react-redux/" target="_self">
-          react-redux使用
+        <a href="/blog/2022/07/12/ts/ts-basic/" target="_self">
+          TypeScript-基础
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2022/03/03/react-redux/" target="_self">
+      <a class="index-excerpt" href="/blog/2022/07/12/ts/ts-basic/" target="_self">
         <div>
           
-          react-redux使用1. 前言 A Predictable State Container for JS Apps（JS 应用程序的可预测状态容器）  2. redux简介 redux是react全家桶的一员，它试图为 React 应用提供「可预测化的状态管理」机制。 Redux是将整个应用状态存储到到一个地方，称为store 里面保存一棵状态树(state tree) 组件可以派发(dis
+          TypeScript-基础1、常用类型1.1 交叉类型交叉类型就是通过 &amp; 符号，将多个类型合并为一个类型。 1234567891011121314interface T1 &#123;  name: string;&#125;interface T2 &#123;  age: number;&#125;type T3 &#x3D; T2 &amp; T1const a: T3 &#x3D; &#123;
         </div>
       </a>
 
@@ -788,8 +666,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-03 10:38" pubdate>
-              2022-03-03
+            <time datetime="2022-07-12 11:20" pubdate>
+              2022-07-12
             </time>
           </div>
         
@@ -804,7 +682,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/react/" class="category-chain-item">react</a>
+  <a href="/blog/categories/ts/" class="category-chain-item">ts</a>
   
   
 
@@ -819,7 +697,129 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/redux/">#redux</a>
+              <a href="/blog/tags/ts-basic/">#ts-basic</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2022/07/08/vue/vue-mixin/" target="_self">
+          Vue混入mixin
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2022/07/08/vue/vue-mixin/" target="_self">
+        <div>
+          
+          Vue混入mixin1、什么是混入Vue官方：  混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。  自悟：  将组件的公共逻辑或者配置提取出来，哪个组件需要用到时，直接将提取的这部分混入到组件内部即可。这样既可以减少代码冗余度，也可以让后期维护起来更加容
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-08 17:25" pubdate>
+              2022-07-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/vue/" class="category-chain-item">vue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/mixin/">#mixin</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2022/07/08/vue/vue-directive/" target="_self">
+          Vue自定义指令
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2022/07/08/vue/vue-directive/" target="_self">
+        <div>
+          
+          Vue自定义指令一、vue自定义指令API1.钩子函数 bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。 inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。 update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-08 16:25" pubdate>
+              2022-07-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/vue/" class="category-chain-item">vue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/">#自定义指令</a>
             
           </div>
         
@@ -831,7 +831,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/blog/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/#board">4</a><a class="page-number" href="/blog/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/#board">7</a><a class="page-number" href="/blog/page/8/#board">8</a><a class="page-number" href="/blog/page/9/#board">9</a><a class="extend next" rel="next" href="/blog/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/blog/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/#board">4</a><a class="page-number" href="/blog/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/#board">7</a><a class="page-number" href="/blog/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/#board">10</a><a class="extend next" rel="next" href="/blog/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -223,15 +223,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2026/05/19/java-maven_config/" target="_self">
-          Java Maven配置
+        <a href="/blog/2026/09/01/browser/%E7%94%B3%E8%AF%B7%20SSL%20%E8%AF%81%E4%B9%A6/" target="_self">
+          申请 SSL 证书
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2026/05/19/java-maven_config/" target="_self">
+      <a class="index-excerpt" href="/blog/2026/09/01/browser/%E7%94%B3%E8%AF%B7%20SSL%20%E8%AF%81%E4%B9%A6/" target="_self">
         <div>
           
-          Maven配置Maven是配合着idea一起使用，下载依赖速度慢就去网上找个镜像配置一下，但总会遇到莫名其妙的问题，比如镜像源不生效、Error reading file pom.xml等等。今天详细讲解一下maven配置文件settings.xml的配置方法。 小知识maven的配置文件存在于两个地方，一个是用户目录下的.m2目录：${user.home}&#x2F;.m2&#x2F;；另一个是maven程序目录下
+          申请 SSL 证书🔒 服务器配置 SSL 证书完整指南在服务器上配置 SSL 证书，整体流程可以分为 准备 → 申请证书 → 部署配置 → 验证优化 四个阶段。以下是详细步骤：  一、配置前准备 域名解析：确保域名已通过 A 记录解析到香港服务器的 IP 地址 端口放行：检查服务器防火墙和云服务商安全组，确保 443 端口（HTTPS 默认端口）已开放 服务器环境：确认 Nginx&#x2F;A
         </div>
       </a>
 
@@ -239,8 +239,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-19 09:50" pubdate>
-              2026-05-19
+            <time datetime="2026-09-01 14:20" pubdate>
+              2026-09-01
             </time>
           </div>
         
@@ -255,7 +255,434 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/Maven/" class="category-chain-item">Maven</a>
+  <a href="/blog/categories/browser/" class="category-chain-item">browser</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/http-SSL/">#http SSL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/java/java-%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" target="_self">
+          Java 百万级数据同步
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/java/java-%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" target="_self">
+        <div>
+          
+          百万级数据同步百万级数据同步中台的核心方案为“全量分片批量 + 增量CDC实时”双轨策略，配合消息队列削峰、幂等去重与监控告警，可将同步耗时从小时级降至分钟级并保障数据一致性。 具体落地需按以下六个步骤执行： 1. 同步策略选型根据数据量级与时效要求，采用“全量 + 增量”双轨策略：  全量同步：适用于首次初始化或系统迁移。100万条数据不能一次性加载（否则容易OOM），需按主键范围分片，每批 1
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 14:12" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/Java-data-sync/">#Java data sync</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/java/java-%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB/" target="_self">
+          Java 验证码识别方案
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/java/java-%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB/" target="_self">
+        <div>
+          
+          验证码识别方案针对Java识别简单数字+字母验证码的需求，以下是几个免费且识别率较高的方案，按推荐优先级排列：  🥇 方案一：ddddocr（强烈推荐）ddddocr 是一款专门针对验证码识别优化的开源库，在2026年7月的评测中，其 QPS 最高且零网络延迟，对数字、字母混合、扭曲字符和背景干扰的验证码表现优异。  特点：专为验证码场景设计，识别率高，本地运行无网络延迟  Java 集成方式
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 14:04" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/Java-ORC/">#Java ORC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/common/nginx/" target="_self">
+          nginx常用命令
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/common/nginx/" target="_self">
+        <div>
+          
+          nginx常用命令以下是 Nginx 的常用命令整理，涵盖日常运维中最核心的操作：  🚀 服务启停表格    功能 命令 说明    启动 sudo nginx 或 sudo systemctl start nginx 启动 Nginx 服务   优雅停止 sudo nginx -s quit 等待请求处理完再退出，生产推荐   立即停止 sudo nginx -s stop 直接终止，可能中断
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 13:50" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/common/" class="category-chain-item">common</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/nginx/">#nginx</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/common/docker/" target="_self">
+          docker常用命令
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/common/docker/" target="_self">
+        <div>
+          
+          docker常用命令以下是 Docker 日常开发中最常用的命令速查，按使用场景分类整理： 📌 基础信息123docker --version          # 查看版本docker info               # 查看系统信息（镜像数、容器数等）docker help               # 查看帮助    🖼️ 镜像操作123456789docker pull ngi
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 13:49" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/common/" class="category-chain-item">common</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/docker/">#docker</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/java/jvm-%E8%B0%83%E4%BC%98/" target="_self">
+          深入浅出聊 JVM 调优
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/java/jvm-%E8%B0%83%E4%BC%98/" target="_self">
+        <div>
+          
+          深入浅出聊 JVM 调优前言大家对 JVM 调优肯定不陌生，而且我们肯定听身边的小伙伴说过：在面试的时候，有的面试官就会抓住 JVM 调优这一个点不放手，会问很多关于 JVM 调优的问题，给我都问懵了 虽然面试官会将其作为一个面试的重点，但是大部分小伙伴在实际的开发过程中都很少优化过 JVM，所以也就不太了解关于 JVM 调优的知识。今天就和大家深入浅出聊聊 JVM，把我所掌握的知识跟大家分享一下
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 13:49" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/JVM-%E8%B0%83%E4%BC%98/">#JVM 调优</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/java/java-%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B/" target="_self">
+          谈谈如何解决 RabbitMQ 消息丢失与消息积压
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/java/java-%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B/" target="_self">
+        <div>
+          
+          谈谈如何解决 RabbitMQ 消息丢失与消息积压前言目前企业中最常用到的消息队列就是 RabbitMQ（主要是因为它在中小企业普及更早，经受的考验也更久，带来了一大批“回头客”），所以掌握 RabbitMQ 的相关技能就显得是比较重要了。我们在使用 RabbitMQ 的过程中比较常见的问题就是消息丢失、消息积压等等，所以此类问题也就成为了面试官们老生常谈的问题了… 今天就和大家分享一下我在工作过
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 13:48" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/blog/tags/Java-RabbitMQ-%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1/">#Java RabbitMQ 消息丢失</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/blog/2026/09/01/java/java-%E8%AE%BE%E8%AE%A1%E5%8D%83%E4%B8%87%E7%BA%A7%20QPS%20%E7%9A%84%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/" target="_self">
+          设计千万级 QPS 的秒杀系统
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/blog/2026/09/01/java/java-%E8%AE%BE%E8%AE%A1%E5%8D%83%E4%B8%87%E7%BA%A7%20QPS%20%E7%9A%84%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/" target="_self">
+        <div>
+          
+          设计千万级 QPS 的秒杀系统核心挑战在于应对瞬时高并发、资源竞争激烈以及严格的数据一致性要求，以下是系统性的架构设计方案： 一、 库存扣减方案：Redis 预扣减 + 消息队列异步同步在千万级 QPS 场景下，传统的数据库锁（悲观锁或乐观锁）会成为严重的性能瓶颈。业界主流且高效的方案是**“Redis 预扣减 + 消息队列异步同步”**，通过无锁高并发实现极致的吞吐量：  活动前预热：将商品库存
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 13:47" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
   
   
 
@@ -284,15 +711,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2026/05/11/linux-volta/" target="_self">
-          nvm 迁移到 Volta
+        <a href="/blog/2026/09/01/java/java-oom/" target="_self">
+          处理内存溢出和CPU 飙高
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2026/05/11/linux-volta/" target="_self">
+      <a class="index-excerpt" href="/blog/2026/09/01/java/java-oom/" target="_self">
         <div>
           
-          nvm 迁移到 Volta从 nvm 迁移到 Volta：让 Node 版本跟着项目自动切换做前端开发时，多个项目使用不同 Node.js 版本几乎是常态。 比如有的老项目还停留在 Node 14.x，有的项目依赖 Node 16.x，新项目又可能要求 Node 22+。如果每次进入项目都要手动切换版本，不仅麻烦，还很容易忘。 我之前一直使用的是 nvm，它能解决多版本安装的问题，但版本切换依赖手
+          处理内存溢出和CPU 飙高针对线上系统出现的 OOM（内存溢出）或 CPU 飙高问题，排查时需要遵循“先止血、后定位、再根治”的原则。以下是完整的排查思路和定位手段： 一、 线上 OOM（内存溢出）排查思路OOM 通常表现为应用抛出 java.lang.OutOfMemoryError 异常、接口调用超时甚至进程被系统杀死10。 1. 确定 OOM 类型与现场保护  查看日志：首先检查应用日志，确
         </div>
       </a>
 
@@ -300,8 +727,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-11 09:58" pubdate>
-              2026-05-11
+            <time datetime="2026-09-01 13:45" pubdate>
+              2026-09-01
             </time>
           </div>
         
@@ -316,7 +743,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
   
   
 
@@ -331,7 +758,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/blog/tags/Volta/">#Volta</a>
+              <a href="/blog/tags/Java-%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/">#Java 内存溢出</a>
             
           </div>
         
@@ -345,15 +772,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/blog/2026/05/10/java-sdkman/" target="_self">
-          Java 版本管理 SDKMAN
+        <a href="/blog/2026/09/01/java/java-docker%E9%83%A8%E7%BD%B2java%E9%A1%B9%E7%9B%AE/" target="_self">
+          Docker容器部署Java项目完整流程
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/blog/2026/05/10/java-sdkman/" target="_self">
+      <a class="index-excerpt" href="/blog/2026/09/01/java/java-docker%E9%83%A8%E7%BD%B2java%E9%A1%B9%E7%9B%AE/" target="_self">
         <div>
           
-          Java 版本管理 SDKMAN! 安装与使用指南SDKMAN! 是一个用于管理多个 SDK 版本的工具，支持 Java、Maven、Kotlin、Scala、Groovy 等多种 JVM 语言和工具。  一、安装 SDKMAN!1. 系统要求 Unix 系统（macOS、Linux）或 Windows（需要 WSL&#x2F;Git Bash&#x2F;Cygwin）  已安装 curl 和 z
+          Docker容器部署Java项目完整流程在服务器Docker容器中部署Java项目，整体流程可概括为：本地打包 → 上传服务器 → 编写Dockerfile → 构建镜像 → 运行容器 → 验证访问。以下是详细的操作步骤和注意事项。  📦 一、本地打包Java项目使用Maven或Gradle将项目打包为可执行的JAR文件： 1234# Maven打包（跳过测试）mvn clean package
         </div>
       </a>
 
@@ -361,8 +788,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-10 09:38" pubdate>
-              2026-05-10
+            <time datetime="2026-09-01 13:44" pubdate>
+              2026-09-01
             </time>
           </div>
         
@@ -377,7 +804,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/SDKMAN/" class="category-chain-item">SDKMAN</a>
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
   
   
 
@@ -393,433 +820,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/blog/tags/Java/">#Java</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2026/02/02/flutter-img-upload/" target="_self">
-          Flutter 图片上传
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2026/02/02/flutter-img-upload/" target="_self">
-        <div>
-          
-          Flutter  图片上传一、使用示例1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F;&#x2F; 没有默认数据&#x2F;&#x2F; var selectedModels &#x3D; &lt;AssetUploadModel&gt;[];&#x2F;&#x2F;&#x2F; 有默认数据var selectedModels &#x3D; [  &quot;https:&#x2F;&#x2F;yl-prescript
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-02-02 16:52" pubdate>
-              2026-02-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/Flutter-Image-upload/">#Flutter Image upload</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2026/01/29/nuxt-pack/" target="_self">
-          Nuxt部署到服务器
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2026/01/29/nuxt-pack/" target="_self">
-        <div>
-          
-          Nuxt部署到服务器一.打包项目文件：1.首先使用yarn或者npm，pnpm等包管理工具在项目终端构建项目。 1yarn run build  执行构建命令，并输出一个指定的目录，我这里是.ouput文件 2.压缩打包构建输出目录 1tar -cvf nuxt3-test.tar .output  该命令将.output文件压缩为nuxt-test.tar名字的文件 二. 上传压缩文件到服务器1
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-01-29 11:09" pubdate>
-              2026-01-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/nuxt/" class="category-chain-item">nuxt</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/Nuxt%E9%83%A8%E7%BD%B2/">#Nuxt部署</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2026/01/23/flutter-json/" target="_self">
-          Flutter json 序列化
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2026/01/23/flutter-json/" target="_self">
-        <div>
-          
-          1. json_serializable 库1.1. 添加依赖它由三个部分组成：  json_annotation → 定义注解。 json_serializable → 使用这些注解来生成代码。 build_runner → 执行生成代码的任务。  添加库依赖的方式二选一： 1234567891011121314# 方式一：终端直接键入下述命令安装flutter pub add json_ann
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-01-23 14:10" pubdate>
-              2026-01-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/json-%E5%BA%8F%E5%88%97%E5%8C%96/">#json 序列化</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2026/01/06/flutter-async/" target="_self">
-          Flutter 异步编程API
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2026/01/06/flutter-async/" target="_self">
-        <div>
-          
-          Dart异步编程APIDart 中的异步编程API，主要是通过 Future 和 Stream 两个API来实现的 1.1. FutureDart中的 Future 代表 一个异步任务，定义一个异步任务的代码示例如下： 123456Future&lt;String&gt; fetchData() &#123;  &#x2F;&#x2F; 休眠3s模拟执行耗时操作  return Future.delayed(cons
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-01-06 10:30" pubdate>
-              2026-01-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/Flutter-async/">#Flutter async</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2025/12/31/flutter-provider/" target="_self">
-          Flutter 状态共享-Provider
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2025/12/31/flutter-provider/" target="_self">
-        <div>
-          
-          状态共享-Provider前言状态 (State) 可以理解为应用的当前情况或配置，它包含了用于可能与之交互的所有信息，状态管理 就是对这些状态的变化进行管理，以确保用户界面(UI) 能够适时地反映出这些变化。Flutter中的状态管理一般分为两类：  局部状态：与单一Widget相关的状态，通常情况下无需与应用中的其它部分分享，如：一个CheckBox是否勾选就是一个局部状态，可以通过 Stat
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-12-31 14:35" pubdate>
-              2025-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/Flutter-Provider/">#Flutter Provider</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2025/12/31/flutter-eventBus/" target="_self">
-          Flutter 事件总线（event bus）
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2025/12/31/flutter-eventBus/" target="_self">
-        <div>
-          
-          事件总线（event bus）一、手写EventBus我们经常会需要一个广播机制，用以跨页面事件通知，比如一个需要登录的 App 中，页面会关注用户登录或注销事件，来进行一些状态更新。这时候，一个事件总线便会非常有用，事件总线通常实现了订阅者模式，订阅者模式包含发布者和订阅者两种角色，可以通过事件总线来触发事件和监听事件，本节我们实现一个简单的全局事件总线，我们使用单例模式，代码如下： 12345
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-12-31 10:30" pubdate>
-              2025-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/Flutter-event-bus/">#Flutter event bus</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/blog/2025/12/30/flutter-ui/" target="_self">
-          Flutter UI 基础组件
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/blog/2025/12/30/flutter-ui/" target="_self">
-        <div>
-          
-          Flutter UI基础1. Widget的四个直接子类Android中的UI组件都是继承 View 或 ViewGroup，而在Flutter中的Widget，很少直接继承Widget，而是继承它的四个直接子类：  StatelessWidget 和 StatefulWidget 就不用说了，无状态 和 有状态. ProxyWidget，直译 代理组件，就定义了一个子控件，然后通过构造函数传入，
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-12-30 10:35" pubdate>
-              2025-12-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/Flutter/" class="category-chain-item">Flutter</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/blog/tags/Flutter-widget/">#Flutter widget</a>
             
           </div>
         
@@ -831,7 +831,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/#board">2</a><a class="page-number" href="/blog/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/#board">9</a><a class="extend next" rel="next" href="/blog/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/#board">2</a><a class="page-number" href="/blog/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/#board">10</a><a class="extend next" rel="next" href="/blog/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
