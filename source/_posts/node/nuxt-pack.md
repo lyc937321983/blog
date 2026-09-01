@@ -4,7 +4,7 @@ date: 2026-01-29 11:09:56
 tags: Nuxt部署
 comment: 'valine'
 categories: 
-- nuxt
+- node
 ---
 
 # Nuxt部署到服务器

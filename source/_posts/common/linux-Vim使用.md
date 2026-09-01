@@ -4,7 +4,7 @@ date: 2025-08-21 09:28:22
 tags: Vim
 comment: 'valine'
 categories: 
-- Linux
+- common
 ---
 
 # Linux 必学：Vim工具使用方法          

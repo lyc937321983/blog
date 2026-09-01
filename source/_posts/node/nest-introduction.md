@@ -4,7 +4,7 @@ date: 2024-08-19 19:27:22
 tags: nest的第一个项目
 comment: 'valine'
 categories: 
-- nest
+- node
 
 ---
 # nest.js入门

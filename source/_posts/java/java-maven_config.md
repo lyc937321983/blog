@@ -1,10 +1,10 @@
 ---
 title: Java Maven配置
-date: 2026-05-19 09:50:22
-tags: Java
+date: 2026-05-19 09:50:08
+tags: Java Maven
 comment: 'valine'
 categories: 
-- Maven
+- Java
 ---
 
 # Maven配置

@@ -1,10 +1,10 @@
 ---
 title: Java 版本管理 SDKMAN
 date: 2026-05-10 09:38:22
-tags: Java
+tags: Java SDKMAN
 comment: 'valine'
 categories: 
-- SDKMAN
+- Java
 ---
 
 # Java 版本管理 SDKMAN! 安装与使用指南

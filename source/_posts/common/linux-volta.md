@@ -4,7 +4,7 @@ date: 2026-05-11 09:58:22
 tags: Volta
 comment: 'valine'
 categories: 
-- Linux
+- common
 ---
 
 ## nvm 迁移到 Volta
